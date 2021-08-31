@@ -1,3 +1,4 @@
+"""EX01_cashier."""
 a = int(input("Enter a sum: "))
 b = a % 50
 c = b % 20
