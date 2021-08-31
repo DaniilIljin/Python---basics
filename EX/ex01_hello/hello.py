@@ -1,4 +1,4 @@
-"""EX01"""
+"""EX01 """
 name = input("What is your name? ")
 arv1 = int(input(f"Hello, {name}! Enter a random number: "))
 arv2 = int(input("Great! Now enter a second random number: "))
