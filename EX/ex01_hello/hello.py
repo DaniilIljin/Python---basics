@@ -15,5 +15,5 @@ print(f"Roses are {a},\n"
 
 a = input("Enter a greeting: ")
 b = input("Enter a recipient: ")
-c = int(input("How many times to repeat: "))
+c = int(input("How many times to repeat:  "))
 print((a + " " + " " + b + "!" + " ")*c)
