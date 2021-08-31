@@ -1,9 +1,9 @@
-"""EX01 """
+"""EX01_"""
 name = input("What is your name? ")
 arv1 = int(input(f"Hello, {name}! Enter a random number: "))
 arv2 = int(input("Great! Now enter a second random number: "))
 arv3 = arv1 + arv2
-print(f" {arv1} + {arv2} is {arv3}")
+print(f"{arv1} + {arv2} is {arv3}")
 
 print("Help us to finish the poem!")
 a = input("Colour of roses? ")
