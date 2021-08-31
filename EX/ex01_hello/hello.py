@@ -1,4 +1,4 @@
-"""EX01_tehtud"""
+"""EX01_tehtud."""
 name = input("What is your name? ")
 arv1 = int(input(f"Hello, {name}! Enter a random number: "))
 arv2 = int(input("Great! Now enter a second random number: "))
@@ -17,4 +17,4 @@ print(f"Roses are {a},\n"
 a = input("Enter a greeting: ")
 b = input("Enter a recipient: ")
 c = int(input("How many times to repeat: "))
-print((a + " " + " " + b + "!" + " ") * c)
+print((a + " " + b + "!" + " ") * c)
