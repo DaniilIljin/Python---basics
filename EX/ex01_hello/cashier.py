@@ -5,4 +5,6 @@ remnant2 = remnant1 % 20
 remnant3 = remnant2 % 10
 remnant4 = remnant3 % 5
 # In the answer I will find the integer after each division and sum them up (greedy algorithm)
-print(f'Amount of coins needed: {(entered_amount_of_money_in_cents // 50) + (remnant1 // 20) + (remnant2 // 10) + (remnant3 // 5) + (remnant4 // 1)}')
+coins = (entered_amount_of_money_in_cents // 50) + (remnant1 // 20) + (remnant2 // 10) + (remnant3 // 5) + \
+        (remnant4 // 1)
+print(f'Amount of coins needed: {coins}')
