@@ -100,6 +100,7 @@ def surface(a, b):
 def volume(a, b, c):
     """Add the missing parameters to calculate the volume. Calculate and return the value of volume."""
     vol = a * b * c
+    return vol
 
 
 # if __name__ == '__main__':
