@@ -31,8 +31,8 @@ def average(x, y, z, o):
     in the function (x, y, z = 1, 2, 3). Calculate and return the average.
 
     Examples:
-    1. average(0, 0, 0, 4) === 4
-    2. average(1, 2, 3, 4) == 7.5
+    1. average(0, 0, 0, 5) == 2,5
+    2. average(1, 2, 3, 4) == 75
     3. average(5, 0, 5, 1) == 6 .
     """
     average_number = (x + y * 2 + z * 3 + o * 4) / 4
