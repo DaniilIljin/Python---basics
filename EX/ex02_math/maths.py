@@ -1,7 +1,7 @@
 """Math."""
 
 
-def ects(eap, weeks):
+def ects(eap: int, weeks: int):
     """
     Implement a function to know how many hours are needed per week if each ECTS is 26 hours.
 
@@ -13,9 +13,12 @@ def ects(eap, weeks):
     2. ects(1, 1) == 26
     3. ects(1, 0) == "Impossible!".
     """
-    hours = (eap * 26) / weeks
-    if (0 <= hours <= 7 * 24) and (weeks > 0):
-        return hours
+    if weeks > 0:
+        hours = (eap * 26) / weeks
+        if 0 <= hours <= 7 * 24:
+            return hours
+        else:
+            return "Impossible!"
     else:
         return "Impossible!"
 
