@@ -1,5 +1,4 @@
 """Math."""
-from typing import Union, Any
 
 
 def ects(eap, weeks):
@@ -19,7 +18,6 @@ def ects(eap, weeks):
         return "Impossible!"
 
 
-
 def average(x, y, z, o):
     """
     Implement a function that has 4 numeric parameters. Each parameter must be multiplied by number of its position
@@ -33,10 +31,11 @@ def average(x, y, z, o):
     average_number = (x + y * 2 + z * 3 + o * 4) / 4
     return average_number
 
+
 def clock(days, hours, minutes, seconds):
     """
-    Implement a function that has 4 numeric parameters. The values are: days, hours, minutes, seconds. Calculate how many
-    minutes are in total and return the value.
+    Implement a function that has 4 numeric parameters. The values are: days, hours, minutes, seconds. Calculate how
+    many minutes are in total and return the value.
 
     Examples:
     1. clock(1, 24, 60, 60) === 2941
@@ -45,5 +44,3 @@ def clock(days, hours, minutes, seconds):
     """
     total_minutes = days * 24 * 60 + hours * 60 + minutes + seconds / 60
     return total_minutes
-
-
