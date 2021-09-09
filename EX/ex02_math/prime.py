@@ -16,10 +16,10 @@ def is_prime_number(number: int) -> bool:
         for i in range(2, number):
             if number % i == 0:
                 return False
-            else:
-                return True
+        return True
     else:
         return False
+print(is_prime_number(169))
 # if __name__ == '__main__':
 #     print(is_prime_number(2))  # -> True
 #     print(is_prime_number(89))  # -> True1
