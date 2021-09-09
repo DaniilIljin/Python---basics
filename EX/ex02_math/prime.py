@@ -9,6 +9,7 @@ def is_prime_number(number: int) -> bool:
     1. If number is a prime number then return boolean True
     2. If number is not a prime number then return boolean False
 
+
     :param number: the number for check.
     :return: boolean True if number is a prime number or False if number is not a prime number.
     """
