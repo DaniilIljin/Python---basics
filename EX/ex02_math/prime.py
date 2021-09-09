@@ -19,6 +19,8 @@ def is_prime_number(number: int) -> bool:
         return True
     else:
         return False
+
+
 print(is_prime_number(169))
 # if __name__ == '__main__':
 #     print(is_prime_number(2))  # -> True
