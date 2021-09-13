@@ -28,7 +28,7 @@ def encode(message: str, shift: int) -> str:
     for c in message:
         if c.isalpha():
             if ord(c) + shift > 122:
-                encoded_message += chr(ord(c) + (ord(c) + shift - 96) % 26)
+                encoded_message += chr(96 + (ord(c) + shift - 96) % 26)
             else:
                 encoded_message += chr(ord(c) + shift)
         else:
