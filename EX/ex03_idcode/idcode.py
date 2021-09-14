@@ -80,7 +80,7 @@ def is_valid_birth_number(birth_number: int):
     :param birth_number: int
     :return: boolean
     """
-    if 0 <= birth_number <= 999:
+    if 1 <= birth_number <= 999:
         return True
     else:
         return False
