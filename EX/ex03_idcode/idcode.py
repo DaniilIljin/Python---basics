@@ -80,7 +80,14 @@ def is_valid_birth_number(birth_number: int):
     :param birth_number: int
     :return: boolean
     """
-    if 1<= birth_number <= 999:
+    if 0 <= birth_number <= 999:
+        return True
+    else:
+        return False
+
+
+def is_leap_year(year: int) -> bool:
+    if year % 4 == 0:
         return True
     else:
         return False
@@ -110,7 +117,16 @@ def get_full_year(gender_number: int, year_number: int) -> int:
     :param year_number: int
     :return: int
     """
-    pass
+    year = 0
+    if 1 <= gender_number <= 6 and 1 <= year_number <=99:
+        if gender_number == 1 or gender_number == 2:
+            year += 1800
+        elif gender_number == 4 or gender_number == 3:
+            year += 1900
+        else:
+            year += 2000
+    year += year_number
+    return year
 
 
 def is_valid_control_number(id_code: str) -> bool:
