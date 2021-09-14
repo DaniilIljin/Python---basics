@@ -87,7 +87,7 @@ def is_valid_birth_number(birth_number: int):
 
 
 def is_leap_year(year: int) -> bool:
-    if year % 4 == 0:
+    if year % 4 == 0 and  year % 100 == 0:
         return True
     else:
         return False
