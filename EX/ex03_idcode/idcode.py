@@ -107,7 +107,22 @@ def get_birth_place(birth_number: int) -> str:
     :param birth_number: int
     :return: str
     """
-    pass
+    if 1 <= birth_number <= 10:
+        return "Kuressaare"
+    elif 11 <= birth_number <= 19:
+        return "Tartu"
+    elif 21 <= birth_number <= 220 or 471 <= birth_number <= 710:
+        return "Tallinn"
+    elif 221 <= birth_number <= 270:
+        return "Kohtla-Järve"
+    elif 371 <= birth_number <= 420:
+        return "Narva"
+    elif 421 <= birth_number <= 470:
+        return "Pärnu"
+    elif 711 <= birth_number <= 999:
+        return "undefined"
+    else:
+        return "Wrong input!"
 
 
 def get_full_year(gender_number: int, year_number: int) -> int:
