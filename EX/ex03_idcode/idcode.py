@@ -54,7 +54,7 @@ def is_valid_year_number(year_number: int) -> bool:
     :param year_number: int
     :return: boolean
     """
-    if 1 <= year_number <= 99:
+    if 0 <= year_number <= 99:
         return True
     else:
         return False
@@ -80,7 +80,7 @@ def is_valid_birth_number(birth_number: int):
     :param birth_number: int
     :return: boolean
     """
-    if 0 <= birth_number <= 999:
+    if 1<= birth_number <= 999:
         return True
     else:
         return False
