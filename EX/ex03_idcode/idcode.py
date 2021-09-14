@@ -109,7 +109,7 @@ def get_birth_place(birth_number: int) -> str:
     """
     if 1 <= birth_number <= 10:
         return "Kuressaare"
-    elif 11 <= birth_number <= 19:
+    elif 11 <= birth_number <= 20:
         return "Tartu"
     elif 21 <= birth_number <= 220 or 471 <= birth_number <= 710:
         return "Tallinn"
