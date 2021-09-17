@@ -157,7 +157,30 @@ def is_valid_control_number(id_code: str) -> bool:
     :param id_code: string
     :return: boolean
     """
-    pass
+    if id_code.isdigit() and len(id_code) == 11:
+        numbers = list(id_code)
+        dont_needed = numbers.pop(-1)
+        first_round = 1 * int(numbers[0]) + 2 * int(numbers[1]) + 3 * int(numbers[2]) + 4 * int(numbers[3]) \
+         + 5 * int(numbers[4]) + 6 * int(numbers[5]) + 7 * int(numbers[6]) + 8 * int(numbers[7]) \
+         + 9 * int(numbers[8]) + 1 * int(numbers[9])
+        valid_number = first_round % 11
+        if 10 > valid_number == int(id_code[10]):
+            return True
+        elif valid_number >= 10:
+            second_round = 3 * int(numbers[0]) + 4 * int(numbers[1]) + 5 * int(numbers[2]) + 6 * int(numbers[3]) \
+            + 7 * int(numbers[4]) + 8 * int(numbers[5]) + 9 * int(numbers[6]) + 1 * int(numbers[7]) \
+            + 2 * int(numbers[8]) + 3 * int(numbers[9])
+            valid_number2 = second_round % 11
+            if 10 > valid_number2 == int(id_code[10]):
+                return True
+            elif valid_number2 >= 10 and int(id_code[10]) == 0:
+                return True
+            else:
+                return False
+        else:
+            return False
+    else:
+        return False
 
 
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
@@ -172,7 +195,21 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
     :param day_number: int
     :return: boolean
     """
-    pass
+    months_with_31_days = [1, 3, 5, 7, 8, 10, 12]
+    months_with_30_days = [4, 6, 9, 11]
+    if month_number in months_with_30_days and 1 <= day_number <= 30:
+        return True
+    elif month_number in months_with_31_days and 1 <= day_number <= 31:
+        return True
+    elif month_number == 2:
+        if is_leap_year(get_full_year(gender_number, year_number)) and 1 <= day_number <= 29:
+            return True
+        if not is_leap_year(get_full_year(gender_number, year_number)) and 1 <= day_number <= 28:
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
 def is_id_valid(id_code: str) -> bool:
@@ -253,9 +290,7 @@ if __name__ == '__main__':
     print(is_valid_day_number(4, 5, 12, 25))  # -> True
     print(is_valid_day_number(3, 10, 8, 32))  # -> False
     print("\nFebruary check:")
-    print(
-        is_valid_day_number(4, 96, 2,
-                            30))  # -> False (February cannot contain more than 29 days in any circumstances)
+    print(is_valid_day_number(4, 96, 2, 30))  # -> False (February cannot contain more than 29 days in any circumstances)
     print(is_valid_day_number(4, 99, 2, 29))  # -> False (February contains 29 days only during leap year)
     print(is_valid_day_number(4, 8, 2, 29))  # -> True
     print("\nMonth contains 30 or 31 days check:")
