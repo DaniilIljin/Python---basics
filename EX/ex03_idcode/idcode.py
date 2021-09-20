@@ -86,6 +86,7 @@ def is_valid_birth_number(birth_number: int):
 
 
 def is_leap_year(year: int) -> bool:
+    """Define that if this year is a leap year."""
     if year % 4 != 0:
         return False
     elif year % 100 != 0:
@@ -157,8 +158,7 @@ def is_valid_control_number(id_code: str) -> bool:
     :return: boolean
     """
     if id_code.isdigit() and len(id_code) == 11:
-        numbers = list(id_code)
-        dont_needed = numbers.pop(-1)
+        numbers = list(id_code).pop(-1)
         first_round = 1 * int(numbers[0]) + 2 * int(numbers[1]) + 3 * int(numbers[2]) + 4 * int(numbers[3]) \
                       + 5 * int(numbers[4]) + 6 * int(numbers[5]) + 7 * int(numbers[6]) + 8 * int(numbers[7]) \
                       + 9 * int(numbers[8]) + 1 * int(numbers[9])
