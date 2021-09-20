@@ -235,7 +235,6 @@ def is_id_valid(id_code: str) -> bool:
     else:
         return False
 
-print(is_id_valid("40002290121"))
 
 def get_data_from_id(id_code: str) -> str:
     """
