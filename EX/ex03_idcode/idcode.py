@@ -245,6 +245,7 @@ def get_data_from_id(id_code: str) -> str:
     else:
         return 'Given invalid ID code!'
 
+
 if __name__ == '__main__':
     print("\nFind ID code:")
     print(find_id_code(""))  # -> "Not enough numbers!"
