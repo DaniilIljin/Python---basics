@@ -137,7 +137,7 @@ def get_full_year(gender_number: int, year_number: int) -> int:
     :return: int
     """
     year = 0
-    if 1 <= gender_number <= 6 and 1 <= year_number <= 99:
+    if 1 <= gender_number <= 6 and 0 <= year_number <= 99:
         if gender_number == 1 or gender_number == 2:
             year += 1800
         elif gender_number == 4 or gender_number == 3:
