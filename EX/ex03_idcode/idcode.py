@@ -220,10 +220,13 @@ def is_id_valid(id_code: str) -> bool:
     :param id_code: str
     :return: boolean
     """
-    if is_valid_control_number(id_code):
-        return True
-    else:
-        return False
+    gender = int(id_code[0])
+    month = (int(id_code[3]) * 10 + int(id_code[4]))
+    day = int(id_code[5]) * 10 + int(id_code[6])
+    year = get_full_year(int(id_code[0]), int(id_code[1]) * 10 + int(id_code[2]))
+    location = int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9])
+    return is_valid_day_number(gender, year, month, day) and is_valid_control_number(id_code) \
+           and is_valid_year_number(year) and is_valid_month_number(month) and is_valid_birth_number(location)
 
 
 def get_data_from_id(id_code: str) -> str:
@@ -235,13 +238,13 @@ def get_data_from_id(id_code: str) -> str:
     :param id_code: str
     :return: str
     """
-    if is_valid_control_number(id_code):
+    if is_id_valid(id_code):
         gender = get_gender(int(id_code[0]))
         month = int(id_code[3]) * 10 + int(id_code[4])
         day = int(id_code[5]) * 10 + int(id_code[6])
-        year = get_full_year(int(id_code[0]), (int(id_code[1]) * 10 + int(id_code[2])))
+        year = get_full_year(int(id_code[0]), int(id_code[1]) * 10 + int(id_code[2]))
         location = get_birth_place(int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9]))
-        return f'This is a {gender} born on {day:02}.{month:02}.{year}. in {location}.'
+        return f'This is a {gender} born on {day:02}.{month:02}.{year:04}. in {location}.'
     else:
         return 'Given invalid ID code!'
 
