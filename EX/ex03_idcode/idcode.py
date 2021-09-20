@@ -252,7 +252,7 @@ def get_data_from_id(id_code: str) -> str:
         day = int(id_code[5]) * 10 + int(id_code[6])
         year = get_full_year(int(id_code[0]), int(id_code[1]) * 10 + int(id_code[2]))
         location = get_birth_place(int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9]))
-        return f'This is a {gender} born on {day:02}.{month:02}.{year:04}. in {location}.'
+        return f'This is a {gender} born on {day:02}.{month:02}.{year:04} in {location}.'
     else:
         return 'Given invalid ID code!'
 
