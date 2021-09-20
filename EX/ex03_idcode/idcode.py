@@ -160,15 +160,15 @@ def is_valid_control_number(id_code: str) -> bool:
     if id_code.isdigit() and len(id_code) == 11:
         numbers = list(id_code[:10])
         first_round = 1 * int(numbers[0]) + 2 * int(numbers[1]) + 3 * int(numbers[2]) + 4 * int(numbers[3]) \
-                      + 5 * int(numbers[4]) + 6 * int(numbers[5]) + 7 * int(numbers[6]) + 8 * int(numbers[7]) \
-                      + 9 * int(numbers[8]) + 1 * int(numbers[9])
+        + 5 * int(numbers[4]) + 6 * int(numbers[5]) + 7 * int(numbers[6]) + 8 * int(numbers[7]) \
+        + 9 * int(numbers[8]) + 1 * int(numbers[9])
         valid_number = first_round % 11
         if 10 > valid_number == int(id_code[10]):
             return True
         elif valid_number >= 10:
             second_round = 3 * int(numbers[0]) + 4 * int(numbers[1]) + 5 * int(numbers[2]) + 6 * int(numbers[3]) \
-                           + 7 * int(numbers[4]) + 8 * int(numbers[5]) + 9 * int(numbers[6]) + 1 * int(numbers[7]) \
-                           + 2 * int(numbers[8]) + 3 * int(numbers[9])
+            + 7 * int(numbers[4]) + 8 * int(numbers[5]) + 9 * int(numbers[6]) + 1 * int(numbers[7]) \
+            + 2 * int(numbers[8]) + 3 * int(numbers[9])
             valid_number2 = second_round % 11
             if 10 > valid_number2 == int(id_code[10]):
                 return True
