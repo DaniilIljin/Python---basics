@@ -223,7 +223,7 @@ def is_id_valid(id_code: str) -> bool:
     gender = int(id_code[0])
     month = (int(id_code[3]) * 10 + int(id_code[4]))
     day = int(id_code[5]) * 10 + int(id_code[6])
-    year = get_full_year(int(id_code[0]), int(id_code[1]) * 10 + int(id_code[2]))
+    year = int(id_code[1]) * 10 + int(id_code[2])
     location = int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9])
     return is_valid_day_number(gender, year, month, day) and is_valid_control_number(id_code) \
            and is_valid_year_number(year) and is_valid_month_number(month) and is_valid_birth_number(location)
@@ -251,7 +251,7 @@ def get_data_from_id(id_code: str) -> str:
 
 if __name__ == '__main__':
     print("\nFind ID code:")
-    print(find_id_code(""))  # -> "Not enough numbers!"
+    print(find_id_code(""))  # -> "Not enough numbers!"t
     print(find_id_code("123456789123456789"))  # -> "Too many numbers!"
     print(find_id_code("ID code is: 49403136526"))  # -> "49403136526"
     print(find_id_code("efs4  9   #4aw0h 3r 1a36g5j2!!6-"))  # -> "49403136526"
