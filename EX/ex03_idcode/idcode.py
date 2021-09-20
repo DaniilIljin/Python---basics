@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """ID code."""
 
 
@@ -14,18 +13,18 @@ def find_id_code(text: str) -> str:
     :param text: string
     :return: string
     """
-    id = ""
+    id_code = ""
     count = 0
     for character in text:
         if character.isdigit():
-            id += character
+            id_code += character
             count += 1
     if count > 11:
         return "Too many numbers!"
     elif count < 11:
         return "Not enough numbers!"
     else:
-        return id
+        return id_code
 
 
 def is_valid_gender_number(numb: int) -> bool:
@@ -94,7 +93,7 @@ def is_leap_year(year: int) -> bool:
     elif year % 400 != 0:
         return False
     else:
-        return  True
+        return True
 
 
 def get_birth_place(birth_number: int) -> str:
@@ -137,7 +136,7 @@ def get_full_year(gender_number: int, year_number: int) -> int:
     :return: int
     """
     year = 0
-    if 1 <= gender_number <= 6 and 1 <= year_number <=99:
+    if 1 <= gender_number <= 6 and 1 <= year_number <= 99:
         if gender_number == 1 or gender_number == 2:
             year += 1800
         elif gender_number == 4 or gender_number == 3:
@@ -161,15 +160,15 @@ def is_valid_control_number(id_code: str) -> bool:
         numbers = list(id_code)
         dont_needed = numbers.pop(-1)
         first_round = 1 * int(numbers[0]) + 2 * int(numbers[1]) + 3 * int(numbers[2]) + 4 * int(numbers[3]) \
-         + 5 * int(numbers[4]) + 6 * int(numbers[5]) + 7 * int(numbers[6]) + 8 * int(numbers[7]) \
-         + 9 * int(numbers[8]) + 1 * int(numbers[9])
+                      + 5 * int(numbers[4]) + 6 * int(numbers[5]) + 7 * int(numbers[6]) + 8 * int(numbers[7]) \
+                      + 9 * int(numbers[8]) + 1 * int(numbers[9])
         valid_number = first_round % 11
         if 10 > valid_number == int(id_code[10]):
             return True
         elif valid_number >= 10:
             second_round = 3 * int(numbers[0]) + 4 * int(numbers[1]) + 5 * int(numbers[2]) + 6 * int(numbers[3]) \
-            + 7 * int(numbers[4]) + 8 * int(numbers[5]) + 9 * int(numbers[6]) + 1 * int(numbers[7]) \
-            + 2 * int(numbers[8]) + 3 * int(numbers[9])
+                           + 7 * int(numbers[4]) + 8 * int(numbers[5]) + 9 * int(numbers[6]) + 1 * int(numbers[7]) \
+                           + 2 * int(numbers[8]) + 3 * int(numbers[9])
             valid_number2 = second_round % 11
             if 10 > valid_number2 == int(id_code[10]):
                 return True
@@ -221,7 +220,10 @@ def is_id_valid(id_code: str) -> bool:
     :param id_code: str
     :return: boolean
     """
-    pass
+    if is_valid_control_number(id_code):
+        return True
+    else:
+        return False
 
 
 def get_data_from_id(id_code: str) -> str:
@@ -233,8 +235,15 @@ def get_data_from_id(id_code: str) -> str:
     :param id_code: str
     :return: str
     """
-    pass
-
+    if is_valid_control_number(id_code):
+        gender = get_gender(int(id_code[0]))
+        month = int(id_code[3]) * 10 + int(id_code[4])
+        day = int(id_code[5]) * 10 + int(id_code[6])
+        year = get_full_year(int(id_code[0]), (int(id_code[1]) * 10 + int(id_code[2])))
+        location = get_birth_place(int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9]))
+        return f'This is a {gender} born on {day:02}.{month:02}.{year}. in {location}.'
+    else:
+        return 'Given invalid ID code!'
 
 if __name__ == '__main__':
     print("\nFind ID code:")
@@ -290,7 +299,8 @@ if __name__ == '__main__':
     print(is_valid_day_number(4, 5, 12, 25))  # -> True
     print(is_valid_day_number(3, 10, 8, 32))  # -> False
     print("\nFebruary check:")
-    print(is_valid_day_number(4, 96, 2, 30))  # -> False (February cannot contain more than 29 days in any circumstances)
+    print(
+        is_valid_day_number(4, 96, 2, 30))  # -> False (February cannot contain more than 29 days in any circumstances)
     print(is_valid_day_number(4, 99, 2, 29))  # -> False (February contains 29 days only during leap year)
     print(is_valid_day_number(4, 8, 2, 29))  # -> True
     print("\nMonth contains 30 or 31 days check:")
@@ -309,8 +319,3 @@ if __name__ == '__main__':
     # print("\nTest now your own ID code:")
     # personal_id = input()  # type your own id in command prompt
     # print(is_id_valid(personal_id))  # -> True
-
-
-
-
-
