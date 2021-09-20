@@ -231,7 +231,7 @@ def is_id_valid(id_code: str) -> bool:
 
 def get_data_from_id(id_code: str) -> str:
     """
-    Get possible information about the person.
+    Get possible information about the  person.
 
     Use given ID code and return a short message.
     Follow the template - This is a <gender> born on <DD.MM.YYYY> in <location>.
