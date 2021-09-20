@@ -239,14 +239,16 @@ def get_data_from_id(id_code: str) -> str:
     :param id_code: str
     :return: str
     """
-    id_code = find_id_code(id_code)
-    if is_id_valid(find_id_code(id_code)):
-        gender = get_gender(int(id_code[0]))
-        month = int(id_code[3]) * 10 + int(id_code[4])
-        day = int(id_code[5]) * 10 + int(id_code[6])
-        year = get_full_year(int(id_code[0]), int(id_code[1]) * 10 + int(id_code[2]))
-        location = get_birth_place(int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9]))
-        return f'This is a {gender} born on {day:02}.{month:02}.{year:04}. in {location}.'
+    if find_id_code(id_code).isdigit():
+        if is_id_valid(find_id_code(id_code)):
+            gender = get_gender(int(id_code[0]))
+            month = int(id_code[3]) * 10 + int(id_code[4])
+            day = int(id_code[5]) * 10 + int(id_code[6])
+            year = get_full_year(int(id_code[0]), int(id_code[1]) * 10 + int(id_code[2]))
+            location = get_birth_place(int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9]))
+            return f'This is a {gender} born on {day:02}.{month:02}.{year:04}. in {location}.'
+        else:
+            return 'Given invalid ID code!'
     else:
         return 'Given invalid ID code!'
 
