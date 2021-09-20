@@ -220,17 +220,21 @@ def is_id_valid(id_code: str) -> bool:
     :param id_code: str
     :return: boolean
     """
-    gender = int(id_code[0])
-    month = int(id_code[3]) * 10 + int(id_code[4])
-    day = int(id_code[5]) * 10 + int(id_code[6])
-    year = int(id_code[1]) * 10 + int(id_code[2])
-    location = int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9])
-    if is_valid_day_number(gender, year, month, day) and is_valid_control_number(id_code) \
-           and is_valid_year_number(year) and is_valid_month_number(month) and is_valid_birth_number(location)\
-            and is_valid_gender_number(gender) and find_id_code(id_code).isdigit():
-        return True
+    if find_id_code(id_code) == id_code:
+        gender = int(id_code[0])
+        month = int(id_code[3]) * 10 + int(id_code[4])
+        day = int(id_code[5]) * 10 + int(id_code[6])
+        year = int(id_code[1]) * 10 + int(id_code[2])
+        location = int(id_code[7]) * 100 + int(id_code[8]) * 10 + int(id_code[9])
+        if is_valid_day_number(gender, year, month, day) and is_valid_control_number(id_code) \
+                and is_valid_year_number(year) and is_valid_month_number(month) and is_valid_birth_number(location) \
+                and is_valid_gender_number(gender):
+            return True
+        else:
+            return False
     else:
         return False
+
 
 
 def get_data_from_id(id_code: str) -> str:
