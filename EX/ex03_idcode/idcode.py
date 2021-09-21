@@ -197,9 +197,9 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
     months_with_31_days = [1, 3, 5, 7, 8, 10, 12]
     months_with_30_days = [4, 6, 9, 11]
     return (month_number in months_with_30_days and 1 <= day_number <= 30) \
-     or (month_number in months_with_31_days and 1 <= day_number <= 31) \
-     or (month_number == 2 and is_leap_year(get_full_year(gender_number, year_number)) and 1 <= day_number <= 29) \
-     or (month_number == 2 and not is_leap_year(get_full_year(gender_number, year_number)) and 1 <= day_number <= 28)
+        or (month_number in months_with_31_days and 1 <= day_number <= 31) \
+        or (month_number == 2 and is_leap_year(get_full_year(gender_number, year_number)) and 1 <= day_number <= 29) \
+        or (month_number == 2 and not is_leap_year(get_full_year(gender_number, year_number)) and 1 <= day_number <= 28)
 
 
 def is_id_valid(id_code: str) -> bool:
