@@ -75,7 +75,14 @@ def is_valid_birth_number(birth_number: int):
 
 def is_leap_year(year: int) -> bool:
     """Define that if this year is a leap year."""
-    return year % 4 != 0 or year % 100 != 0 or year % 400 != 0
+    if year % 4 != 0:
+        return False
+    elif year % 100 != 0:
+        return True
+    elif year % 400 != 0:
+        return False
+    else:
+        return True
 
 
 def get_birth_place(birth_number: int) -> str:
