@@ -29,10 +29,7 @@ def find_id_code(text: str) -> str:
 
 def is_valid_gender_number(numb: int) -> bool:
     """description."""
-    if 6 >= numb >= 1:
-        return True
-    else:
-        return False
+    return 6 >= numb >= 1
 
 
 def get_gender(numb: int):
@@ -53,10 +50,7 @@ def is_valid_year_number(year_number: int) -> bool:
     :param year_number: int
     :return: boolean
     """
-    if 0 <= year_number <= 99:
-        return True
-    else:
-        return False
+    return 0 <= year_number <= 99
 
 
 def is_valid_month_number(month_number: int) -> bool:
@@ -66,10 +60,7 @@ def is_valid_month_number(month_number: int) -> bool:
     :param month_number: int
     :return: boolean
     """
-    if 1 <= month_number <= 12:
-        return True
-    else:
-        return False
+    return 1 <= month_number <= 12
 
 
 def is_valid_birth_number(birth_number: int):
@@ -79,22 +70,12 @@ def is_valid_birth_number(birth_number: int):
     :param birth_number: int
     :return: boolean
     """
-    if 1 <= birth_number <= 999:
-        return True
-    else:
-        return False
+    return 1 <= birth_number <= 999
 
 
 def is_leap_year(year: int) -> bool:
     """Define that if this year is a leap year."""
-    if year % 4 != 0:
-        return False
-    elif year % 100 != 0:
-        return True
-    elif year % 400 != 0:
-        return False
-    else:
-        return True
+    return year % 4 != 0 or year % 100 != 0 or year % 400 != 0
 
 
 def get_birth_place(birth_number: int) -> str:
