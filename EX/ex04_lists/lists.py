@@ -61,10 +61,13 @@ def generate_combined_list_unique(inputs: list) -> list:
     for i in new_list:
         if new_list.count(i) > 1:
             if type(i) is int:
+                data_type_dictionary['int'].pop(data_type_dictionary['int'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['int'])
             elif type(i) is float:
+                data_type_dictionary['float'].pop(data_type_dictionary['float'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['float'])
             elif type(i) is str:
+                data_type_dictionary['string'].pop(data_type_dictionary['string'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['string'])
     return new_list
 
@@ -83,18 +86,25 @@ def generate_combined_list_unique_advanced(inputs: list) -> list:
     for i in new_list:
         if new_list.count(i) > 1:
             if type(i) is int:
+                data_type_dictionary['int'].pop(data_type_dictionary['int'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['int'])
             elif type(i) is float:
+                data_type_dictionary['float'].pop(data_type_dictionary['float'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['float'])
             elif type(i) is str:
+                data_type_dictionary['string'].pop(data_type_dictionary['string'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['string'])
             elif type(i) is tuple:
+                data_type_dictionary['tuple'].pop(data_type_dictionary['tuple'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['tuple'])
             elif type(i) is dict:
+                data_type_dictionary['dict'].pop(data_type_dictionary['dict'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['dict'])
             elif type(i) is set:
+                data_type_dictionary['set'].pop(data_type_dictionary['set'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['set'])
             elif type(i) is bool:
+                data_type_dictionary['bool'].pop(data_type_dictionary['bool'].index(i))
                 new_list[new_list.index(i)] = random.choice(data_type_dictionary['bool'])
     return new_list
 
