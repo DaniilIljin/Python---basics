@@ -3,7 +3,6 @@
 import string
 import random
 
-letters = string.ascii_letters
 data_type_dictionary = {
     'string': list(string.ascii_letters),
     'int': list(range(0, 1000)),
