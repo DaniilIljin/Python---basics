@@ -19,8 +19,13 @@ def workday_count(days):
     """
     weeks = days//7
     remained_work_days = days % 7
+    if remained_work_days > 5:
+        remained_work_days = 5
     work_days = weeks * 5
     return work_days + remained_work_days
+
+
+print(workday_count(6))
 
 
 def sorta_sum(a: int, b: int) -> int:
