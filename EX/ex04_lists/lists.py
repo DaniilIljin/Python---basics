@@ -59,8 +59,6 @@ def generate_combined_list_unique_advanced(inputs: list) -> list:
 
 
 if __name__ == '__main__':
-    The given outputs are only some of possible outputs, for example for (3, 'string')
-    in the first part an output of ["kass", "koer", "kana"] would also work.
 
     # Part 1
     print(generate_list(2, 'set'))  # [set(), set()]
