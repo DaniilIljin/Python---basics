@@ -121,7 +121,7 @@ def divisions(numbers: list) -> int:
         divisor_numbers = numbers
         divisor_numbers.remove(element1)
         for element2 in divisor_numbers:
-            if element1 // element2 == 0:
+            if element1 % element2 == 0:
                 count += 1
     return count
 
