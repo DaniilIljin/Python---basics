@@ -123,6 +123,6 @@ def divisions(numbers: list) -> int:
     count = 0
     for element1 in divisible_numbers:
         for element2 in divisor_numbers:
-            if element1 // element2:
+            if element1 // element2 == 0:
                 count += 1
     return count
