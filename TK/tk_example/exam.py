@@ -116,7 +116,6 @@ def divisions(numbers: list) -> int:
     divisions([5, 7, 1]) => 2 (The pairs are {5, 1} and {7, 1})
 
 
-
     :param numbers: List of integers
     :return: Amount of pairs
     """
