@@ -17,7 +17,7 @@ def workday_count(days):
     :param days: given number of days
     :return: workdays in given days
     """
-    weeks = days//7
+    weeks = days // 7
     remained_work_days = days % 7
     if remained_work_days > 5:
         remained_work_days = 5
@@ -118,4 +118,11 @@ def divisions(numbers: list) -> int:
     :param numbers: List of integers
     :return: Amount of pairs
     """
-    return 0
+    divisible_numbers = numbers
+    divisor_numbers = numbers
+    count = 0
+    for element1 in divisible_numbers:
+        for element2 in divisor_numbers:
+            if element1 // element2:
+                count += 1
+    return count
