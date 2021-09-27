@@ -126,4 +126,4 @@ def divisions(numbers: list) -> int:
     return count
 
 
-print(divisions([3, 14, 12, 6]))
+print(divisions([5, 7, 1]))
