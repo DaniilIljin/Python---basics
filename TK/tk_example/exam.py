@@ -124,6 +124,3 @@ def divisions(numbers: list) -> int:
             if element1 % element2 == 0:
                 count += 1
     return count
-
-
-print(divisions([5, 7, 1]))
