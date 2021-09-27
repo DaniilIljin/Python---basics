@@ -25,9 +25,6 @@ def workday_count(days):
     return work_days + remained_work_days
 
 
-print(workday_count(6))
-
-
 def sorta_sum(a: int, b: int) -> int:
     """
     Given 2 ints, a and b, return their sum.
