@@ -7,7 +7,7 @@ def generate_list(amount: int, data_type: str) -> list:
     for element in range(amount):
         if data_type == 'string':
             new_list.append(str(element))
-        elif data_type =='int':
+        elif data_type == 'int':
             new_list.append(element)
         elif data_type == 'float':
             new_list.append(element * 0.5)
