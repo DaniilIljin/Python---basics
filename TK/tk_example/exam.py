@@ -87,11 +87,11 @@ def last_indices_elements_sum(nums):
     """
     element1 = nums[-1]
     element2 = nums[-2]
-    if nums[element1] > len(nums):
+    if element1 > len(nums):
         element1 = 0
     else:
         element1 = nums[element1]
-    if nums[element2] > len(nums):
+    if element2 > len(nums):
         element2 = 0
     else:
         element2 = nums[element2]
