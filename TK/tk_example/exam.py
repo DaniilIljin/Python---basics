@@ -116,11 +116,14 @@ def divisions(numbers: list) -> int:
     :param numbers: List of integers
     :return: Amount of pairs
     """
-    divisible_numbers = numbers
-    divisor_numbers = numbers
     count = 0
-    for element1 in divisible_numbers:
+    for element1 in numbers:
+        divisor_numbers = numbers
+        divisor_numbers.remove(element1)
         for element2 in divisor_numbers:
             if element1 // element2 == 0:
                 count += 1
     return count
+
+
+print(divisions([3, 14, 12, 6]))
