@@ -32,7 +32,19 @@ def generate_combined_list(inputs: list) -> list:
     For each element of 'inputs', it must be true that the returned list contains
     at least 'amount' of elements of type 'data_type'.
     """
-
+    new_list = []
+    data_type_amount_dict = {}
+    for element in inputs:
+        data_type = element[1]
+        amount = element[0]
+        if data_type in data_type_amount_dict:
+            if data_type_amount_dict[data_type] < amount:
+                data_type_amount_dict[data_type] = amount
+        else:
+            data_type_amount_dict[data_type] = amount
+    for key, value in data_type_amount_dict.items():
+        new_list.extend(generate_list(value, key))
+    return new_list
 
 
 def generate_combined_list_unique(inputs: list) -> list:
