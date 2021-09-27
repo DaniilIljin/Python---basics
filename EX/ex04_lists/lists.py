@@ -19,6 +19,8 @@ def generate_list(amount: int, data_type: str) -> list:
             new_list.append(dict(element=element))
         elif data_type == 'float':
             new_list.append(element)
+        elif data_type == 'set':
+            new_list.append({element})
     return new_list
 
 
