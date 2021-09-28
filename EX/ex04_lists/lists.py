@@ -57,8 +57,7 @@ def generate_combined_list_unique(inputs: list) -> list:
     Data types used in this function are 'int', 'float' and 'str' (string).
     The returned list can contain only unique elements.
     """
-    new_list = generate_combined_list(inputs)
-    return new_list
+    return generate_combined_list(inputs)
 
 
 def generate_combined_list_unique_advanced(inputs: list) -> list:
@@ -71,8 +70,7 @@ def generate_combined_list_unique_advanced(inputs: list) -> list:
     All the data types from the first function are used here.
     The returned list can contain only unique elements.
     """
-    new_list = generate_combined_list(inputs)
-    return new_list
+    return generate_combined_list(inputs)
 
 
 if __name__ == '__main__':
