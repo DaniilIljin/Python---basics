@@ -117,11 +117,11 @@ def divisions(numbers: list) -> int:
     :return: Amount of pairs
     """
     count = 0
-    for element1 in numbers:
+    divisible_elements = numbers
+    for element1 in divisible_elements:
         divisor_numbers = numbers
         divisor_numbers.remove(element1)
         for element2 in divisor_numbers:
             if element1 % element2 == 0 or element2 % element1 == 0:
                 count += 1
     return count
-
