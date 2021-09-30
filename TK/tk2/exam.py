@@ -53,9 +53,6 @@ def caught_speeding(speed, is_birthday):
             return 2
 
 
-print(caught_speeding(350, True))
-
-
 def without_end(s):
     """
     Given a string, return a version without the first and last char, so "Hello" yields "ell".
