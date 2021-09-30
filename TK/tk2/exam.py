@@ -37,12 +37,12 @@ def caught_speeding(speed, is_birthday):
     :param is_birthday: Whether it is your birthday (boolean).
     :return: Which category speeding ticket you would get (0, 1, 2).
     """
-    if is_birthday is True:
+    if is_birthday:
         if speed <= 300:
             return 0
-        elif 305 <= speed <= 400:
+        elif 301 <= speed <= 400:
             return 1
-        elif speed >= 405:
+        elif speed >= 401:
             return 2
     else:
         if speed <= 60:
