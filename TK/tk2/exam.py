@@ -40,9 +40,9 @@ def caught_speeding(speed, is_birthday):
     if is_birthday is True:
         if speed <= 300:
             return 0
-        elif 301 <= speed <= 400:
+        elif 305 <= speed <= 400:
             return 1
-        elif speed >= 401:
+        elif speed >= 405:
             return 2
     else:
         if speed <= 60:
@@ -111,3 +111,5 @@ def count_clumps(nums: list) -> int:
         if element == nums[nums.index(element) + 1]:
             count += 1
     return count
+
+print(count_clumps([1, 1, 2, 1, 1]))
