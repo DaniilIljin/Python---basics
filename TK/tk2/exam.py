@@ -1,5 +1,6 @@
 """TK 2."""
 
+
 def rotate_left3(nums):
     """
     Given an array of ints length 3, return an array with the elements "rotated left" so [1, 2, 3] yields [2, 3, 1].
@@ -106,14 +107,4 @@ def count_clumps(nums: list) -> int:
     :param nums: List of integers.
     :return: Number of clumps.
     """
-
-    # count = 0
-    # for element1 in nums:
-    #     nums[nums.index(element1)] = str(element1)
-    # new_nums = ''.join(nums)
-    # for element in new_nums:
-    #     if element != new_nums[new_nums.index(element) + 1]:
-    #         new_nums[new_nums.index(element):new_nums.index(element)].split(' ')
-    # return new_nums
-
-print(count_clumps([1, 1, 2, 1, 1]))
+    pass
