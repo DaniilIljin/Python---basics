@@ -66,7 +66,9 @@ def without_end(s):
     :param s: String
     :return: String without first and last char.
     """
-    pass
+    s = s.pop(0)
+    s = s.pop(-1)
+    return s
 
 
 def min_index_value(nums: list) -> int:
@@ -83,7 +85,12 @@ def min_index_value(nums: list) -> int:
     :param nums: List of non-negative integers.
     :return: Minimum value of two elements at positions of the first and the last element value.
     """
-    pass
+    a = nums[0]
+    b = nums[-1]
+    if len(nums) > a > -len(nums) and len(nums) > b > -len(nums):
+        return min([a, b])
+    else:
+        return -1
 
 
 def count_clumps(nums: list) -> int:
@@ -99,4 +106,4 @@ def count_clumps(nums: list) -> int:
     :param nums: List of integers.
     :return: Number of clumps.
     """
-    pass
+
