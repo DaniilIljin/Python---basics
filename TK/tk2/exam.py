@@ -69,7 +69,7 @@ def without_end(s):
     :param s: String
     :return: String without first and last char.
     """
-    s = s + s[0]
+    s = s[:-1]
     s = s[1:]
     return s
 
