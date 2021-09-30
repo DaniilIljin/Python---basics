@@ -38,11 +38,11 @@ def caught_speeding(speed, is_birthday):
     :return: Which category speeding ticket you would get (0, 1, 2).
     """
     if is_birthday:
-        if speed <= 300:
+        if speed <= 65:
             return 0
-        elif 301 <= speed <= 400:
+        elif 66 <= speed <= 85:
             return 1
-        elif speed >= 401:
+        elif speed >= 86:
             return 2
     else:
         if speed <= 60:
@@ -107,9 +107,12 @@ def count_clumps(nums: list) -> int:
     :return: Number of clumps.
     """
     count = 0
-    for element in nums:
-        if element == nums[nums.index(element) + 1]:
-            count += 1
-    return count
+    for element1 in nums:
+        nums[nums.index(element1)] = str(element1)
+    new_nums = ''.join(nums)
+    for element in new_nums:
+        if element != new_nums[new_nums.index(element) + 1]:
+            new_nums[new_nums.index(element):new_nums.index(element)] = ' '
+    return new_nums
 
 print(count_clumps([1, 1, 2, 1, 1]))
