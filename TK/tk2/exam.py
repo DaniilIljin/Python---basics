@@ -90,7 +90,7 @@ def min_index_value(nums: list) -> int:
     """
     a = nums[0]
     b = nums[-1]
-    if len(nums) > a > -len(nums) and len(nums) > b > -len(nums):
+    if len(nums) +1 > a > -len(nums) - 1 and len(nums) + 1 > b > -len(nums) -1:
         return min([a, b])
     else:
         return -1
