@@ -40,14 +40,14 @@ def caught_speeding(speed, is_birthday):
     if is_birthday is True:
         if speed <= 300:
             return 0
-        elif 300 < speed <= 400:
+        elif 301 <= speed <= 400:
             return 1
         elif speed >= 401:
             return 2
     else:
         if speed <= 60:
             return 0
-        elif 60 < speed <= 80:
+        elif 61 <= speed <= 80:
             return 1
         elif speed >= 81:
             return 2
