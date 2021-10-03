@@ -41,6 +41,7 @@ def create_dictionary(data: str) -> dict:
             new_dict[key] = [value]
     for element1 in new_dict:
         new_dict[element1] = list(set(new_dict[element1]))
+    sort_dictionary(new_dict)
     return new_dict
 
 
@@ -51,7 +52,7 @@ def create_dictionary_with_hobbies(data: str) -> dict:
     :param data: given string from database
     :return: dictionary, where keys are hobbies and values are lists of people. Values are sorted alphabetically
     """
-    pass
+    return create_dictionary(data)
 
 
 def find_people_with_most_hobbies(data: str) -> list:
