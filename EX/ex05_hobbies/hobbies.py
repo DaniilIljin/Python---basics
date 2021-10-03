@@ -36,11 +36,12 @@ def create_dictionary(data: str) -> dict:
     for element in list_of_people_with_hobby:
         key, value = element.split(':')
         if key in new_dict:
-            new_dict[key] = new_dict[key] + [value]
+            if value in new_dict[key]:
+                continue
+            else:
+                new_dict[key] = new_dict[key] + [value]
         else:
             new_dict[key] = [value]
-    for element1 in new_dict:
-        new_dict[element1] = list(set(new_dict[element1]))
     return new_dict
 
 
