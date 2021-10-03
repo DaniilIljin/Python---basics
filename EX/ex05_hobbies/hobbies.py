@@ -17,9 +17,8 @@ def sort_dictionary(dic: dict) -> dict:
     """
     new_dict = {}
     list_of_keys = dic.keys()
-    sorted_list_of_keys = sorted(list_of_keys)
-    for element in sorted_list_of_keys:
-        new_dict[element] = dic[element]
+    for element in list_of_keys:
+        new_dict[element] = sorted(dic[element])
     return new_dict
 
 
@@ -32,7 +31,17 @@ def create_dictionary(data: str) -> dict:
     :param data: given string from database
     :return: dictionary where keys are people and values are lists of hobbies
     """
-    pass
+    new_dict = {}
+    list_of_people_with_hobby = data.split('\n')
+    for element in list_of_people_with_hobby:
+        key, value = element.split(':')
+        if key in new_dict:
+            new_dict[key] = new_dict[key] + [value]
+        else:
+            new_dict[key] = [value]
+    for element1 in new_dict:
+        new_dict[element1] = list(set(new_dict[element1]))
+    return new_dict
 
 
 def create_dictionary_with_hobbies(data: str) -> dict:
