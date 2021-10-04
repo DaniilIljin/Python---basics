@@ -105,7 +105,7 @@ def find_people_with_least_hobbies(data: str) -> list:
 
 
 def creating_dict_of_popularity(data):
-    """This function create a dict of popularity for next tasks"""
+    """It is a function create a dict of popularity for next tasks."""
     new_dict = create_dictionary(data)
     list_of_values = new_dict.values()
     all_hobbies = []
