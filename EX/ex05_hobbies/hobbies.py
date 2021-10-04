@@ -168,7 +168,18 @@ def sort_names_and_hobbies(data: str) -> tuple:
     and the second element is an ordered tuple of hobbies (ordered alphabetically).
     All those person-tuples are ordered by the name of the person and are inside a tuple.
     """
-    pass
+    new_dict = create_dictionary(data)
+    sorted_new_dict = {}
+    for element in new_dict:
+        sorted_new_dict[element] = sorted(new_dict[element])
+    one_big_list = []
+    for element in sorted_new_dict:
+        one_big_list.append(list(element))
+    one_big_list = sorted(one_big_list)
+    for element in one_big_list:
+        element.append(tuple(sorted_new_dict[element]))
+        element = tuple(element)
+    return tuple(one_big_list)
 
 
 if __name__ == '__main__':
