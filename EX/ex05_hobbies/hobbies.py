@@ -1,5 +1,6 @@
 """Hobbies."""
 
+
 def sort_dictionary(dic: dict) -> dict:
     """
     Sort dictionary values alphabetically.
