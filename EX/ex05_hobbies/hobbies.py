@@ -103,20 +103,14 @@ def find_people_with_least_hobbies(data: str) -> list:
     return sorted(list_of_names)
 
 
-def find_most_popular_hobbies(data: str) -> list:
-    """
-    Find the most popular hobbies.
-
-    :param data: given string from database
-    :return: list of most popular hobbies. Sorted alphabetically.
-    """
+def creating_dict_of_popularity(data):
+    """This function create a dict of popularity for next tasks"""
     new_dict = create_dictionary(data)
     list_of_values = new_dict.values()
     all_hobbies = []
     for element in list_of_values:
         all_hobbies = all_hobbies + element
     set_of_all_hobbies = set(all_hobbies)
-
     dict_of_popularity = {}
     for element in set_of_all_hobbies:
         count = 0
@@ -124,6 +118,17 @@ def find_most_popular_hobbies(data: str) -> list:
             if element in value:
                 count += 1
         dict_of_popularity[element] = count
+    return dict_of_popularity
+
+
+def find_most_popular_hobbies(data: str) -> list:
+    """
+    Find the most popular hobbies.
+
+    :param data: given string from database
+    :return: list of most popular hobbies. Sorted alphabetically.
+    """
+    dict_of_popularity = creating_dict_of_popularity(data)
     the_most_popular = max(dict_of_popularity.values())
     list_of_hobbies = []
     for element in dict_of_popularity:
@@ -139,20 +144,7 @@ def find_least_popular_hobbies(data: str) -> list:
     :param data: given string from database
     :return: list of least popular hobbies. Sorted alphabetically.
     """
-    new_dict = create_dictionary(data)
-    list_of_values = new_dict.values()
-    all_hobbies = []
-    for element in list_of_values:
-        all_hobbies = all_hobbies + element
-    set_of_all_hobbies = set(all_hobbies)
-
-    dict_of_popularity = {}
-    for element in set_of_all_hobbies:
-        count = 0
-        for value in list_of_values:
-            if element in value:
-                count += 1
-        dict_of_popularity[element] = count
+    dict_of_popularity = creating_dict_of_popularity(data)
     the_least_popular = min(dict_of_popularity.values())
     list_of_hobbies = []
     for element in dict_of_popularity:
