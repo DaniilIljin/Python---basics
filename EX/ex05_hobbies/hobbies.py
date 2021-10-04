@@ -80,7 +80,7 @@ def find_people_with_most_hobbies(data: str) -> list:
     for name in new_dict:
         if len(new_dict[name]) == max_of_hobbies:
             list_of_names.append(name)
-    return list_of_names
+    return sorted(list_of_names)
 
 
 def find_people_with_least_hobbies(data: str) -> list:
@@ -90,7 +90,17 @@ def find_people_with_least_hobbies(data: str) -> list:
     :param data: given string from database
     :return: list of people with least hobbies. Sorted alphabetically.
     """
-    pass
+    new_dict = create_dictionary(data)
+    list_of_values = new_dict.values()
+    list_of_length = []
+    for element in list_of_values:
+        list_of_length.append(len(element))
+    min_of_hobbies = min(list_of_length)
+    list_of_names = []
+    for name in new_dict:
+        if len(new_dict[name]) == min_of_hobbies:
+            list_of_names.append(name)
+    return sorted(list_of_names)
 
 
 def find_most_popular_hobbies(data: str) -> list:
@@ -100,7 +110,26 @@ def find_most_popular_hobbies(data: str) -> list:
     :param data: given string from database
     :return: list of most popular hobbies. Sorted alphabetically.
     """
-    pass
+    new_dict = create_dictionary(data)
+    list_of_values = new_dict.values()
+    all_hobbies = []
+    for element in list_of_values:
+        all_hobbies = all_hobbies + element
+    set_of_all_hobbies = set(all_hobbies)
+
+    dict_of_popularity = {}
+    for element in set_of_all_hobbies:
+        count = 0
+        for value in list_of_values:
+            if element in value:
+                count += 1
+        dict_of_popularity[element] = count
+    the_most_popular = max(dict_of_popularity.values())
+    list_of_hobbies = []
+    for element in dict_of_popularity:
+        if dict_of_popularity[element] == the_most_popular:
+            list_of_hobbies.append(element)
+    return sorted(list_of_hobbies)
 
 
 def find_least_popular_hobbies(data: str) -> list:
@@ -110,7 +139,26 @@ def find_least_popular_hobbies(data: str) -> list:
     :param data: given string from database
     :return: list of least popular hobbies. Sorted alphabetically.
     """
-    pass
+    new_dict = create_dictionary(data)
+    list_of_values = new_dict.values()
+    all_hobbies = []
+    for element in list_of_values:
+        all_hobbies = all_hobbies + element
+    set_of_all_hobbies = set(all_hobbies)
+
+    dict_of_popularity = {}
+    for element in set_of_all_hobbies:
+        count = 0
+        for value in list_of_values:
+            if element in value:
+                count += 1
+        dict_of_popularity[element] = count
+    the_least_popular = min(dict_of_popularity.values())
+    list_of_hobbies = []
+    for element in dict_of_popularity:
+        if dict_of_popularity[element] == the_least_popular:
+            list_of_hobbies.append(element)
+    return sorted(list_of_hobbies)
 
 
 def sort_names_and_hobbies(data: str) -> tuple:
