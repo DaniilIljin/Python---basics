@@ -168,17 +168,13 @@ def sort_names_and_hobbies(data: str) -> tuple:
     and the second element is an ordered tuple of hobbies (ordered alphabetically).
     All those person-tuples are ordered by the name of the person and are inside a tuple.
     """
-    new_dict = create_dictionary(data)
-    sorted_new_dict = {}
-    for element in new_dict:
-        sorted_new_dict[element] = sorted(new_dict[element])
+    new_dict = sort_dictionary(create_dictionary(data))
     one_big_list = []
-    for element in sorted_new_dict:
-        one_big_list.append(list(element))
+    for element in new_dict:
+        one_big_list.append(element)
     one_big_list = sorted(one_big_list)
     for element in one_big_list:
-        element.append(tuple(sorted_new_dict[element]))
-        element = tuple(element)
+        one_big_list[one_big_list.index(element)] = (element, tuple(new_dict[element]))
     return tuple(one_big_list)
 
 
@@ -206,5 +202,4 @@ if __name__ == '__main__':
     assert sort_result[-1] == ('Wendy', ('fishing', 'fitness', 'football', 'gaming', 'photography', 'puzzles', 'shopping', 'sport', 'theatre'))
     # if you see this line below, then everything seems to be ok!
     print("sorting works!")
-
     # print(sort_names_and_hobbies(sample_data))
