@@ -70,7 +70,17 @@ def find_people_with_most_hobbies(data: str) -> list:
     :param data: given string from database
     :return: list of people with most hobbies. Sorted alphabetically.
     """
-    pass
+    new_dict = create_dictionary(data)
+    list_of_values = new_dict.values()
+    list_of_length = []
+    for element in list_of_values:
+        list_of_length.append(len(element))
+    max_of_hobbies = max(list_of_length)
+    list_of_names = []
+    for name in new_dict:
+        if len(new_dict[name]) == max_of_hobbies:
+            list_of_names.append(name)
+    return list_of_names
 
 
 def find_people_with_least_hobbies(data: str) -> list:
