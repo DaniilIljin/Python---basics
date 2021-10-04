@@ -203,4 +203,4 @@ if __name__ == '__main__':
     assert sort_result[-1] == ('Wendy', ('fishing', 'fitness', 'football', 'gaming', 'photography', 'puzzles', 'shopping', 'sport', 'theatre'))
     # if you see this line below, then everything seems to be ok!
     print("sorting works!")
-    # print(sort_names_and_hobbies(sample_data))
+    #    print(sort_names_and_hobbies(sample_data))
