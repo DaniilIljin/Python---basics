@@ -52,8 +52,15 @@ def create_dictionary_with_hobbies(data: str) -> dict:
     :param data: given string from database
     :return: dictionary, where keys are hobbies and values are lists of people. Values are sorted alphabetically
     """
+    new_dict_of_hobbies = {}
     new_dict = create_dictionary(data)
-    return sort_dictionary(new_dict)
+    for key, value in new_dict.items():
+        for element in value:
+            if element in new_dict_of_hobbies:
+                new_dict_of_hobbies[element] = new_dict_of_hobbies[element] + [key]
+            else:
+                new_dict_of_hobbies[element] = [key]
+    return sort_dictionary(new_dict_of_hobbies)
 
 
 def find_people_with_most_hobbies(data: str) -> list:
