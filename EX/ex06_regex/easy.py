@@ -31,13 +31,7 @@ def find_words_with_vowels(text: str) -> list:
     :param text: given string to find words from
     :return: list of words that start with a vowel found in given string
     """
-    words = find_words(text)
-    list_of_vowels = ['A', 'U', 'Ä', 'Ö', 'Õ', 'Ü', 'O', 'I', 'E']
-    start_with_vowel = []
-    for element in words:
-        if element[0] in list_of_vowels:
-            start_with_vowel.append(element)
-    return start_with_vowel
+    return re.findall("[AUOIEÖÜÕÄ][a-zöüõä]+", text)
 
 
 def find_sentences(text: str) -> list:
@@ -53,7 +47,7 @@ def find_sentences(text: str) -> list:
     :param text: given string to find sentences from
     :return: list of sentences found in given string
     """
-    pass
+    return re.findall()
 
 
 def find_words_from_sentence(sentence: str) -> list:
