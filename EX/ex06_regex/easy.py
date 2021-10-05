@@ -50,7 +50,6 @@ def find_sentences(text: str) -> list:
     return re.findall(r"[A-Z][\w\s\d\-,:;]+[.!?]+", text)
 
 
-
 def find_words_from_sentence(sentence: str) -> list:
     """
     Given a sentence, return all words in that sentence.
