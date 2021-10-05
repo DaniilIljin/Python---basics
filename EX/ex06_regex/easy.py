@@ -64,7 +64,7 @@ def find_words_from_sentence(sentence: str) -> list:
     :param sentence: given sentence to find words from
     :return: list of words found in given sentence
     """
-    pass
+    return re.findall(r'\b[\w\d]+\b', sentence)
 
 
 def find_words_from_sentences_only(text: str) -> list:
