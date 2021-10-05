@@ -15,7 +15,7 @@ def find_words(text: str) -> list:
     :param text: given string to find words from
     :return: list of words found in given string
     """
-    return re.findall("[A-ZÖÜÕÄ][a-zöüõä]+", text)
+    return re.findall(r"[A-ZÖÜÕÄ][a-zöüõä]+", text)
 
 
 def find_words_with_vowels(text: str) -> list:
@@ -98,7 +98,7 @@ def find_years(text: str) -> list:
     :param text: given string to find years from
     :return: list of years (integers) found in given string
     """
-    pass
+    return re.findall(r'\b\d{4}\b', text)
 
 
 def find_phone_numbers(text: str) -> dict:
