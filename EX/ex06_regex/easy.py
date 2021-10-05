@@ -1,4 +1,4 @@
-"""Regex, yay!"""
+"""Regex, yay!."""
 import re
 
 
@@ -47,7 +47,7 @@ def find_sentences(text: str) -> list:
     :param text: given string to find sentences from
     :return: list of sentences found in given string
     """
-    return re.findall("[A-Z][\w|\s|\d|-]+[!|.|?]+", text)
+    return re.findall("[A-Z][\w|\s|\d|\-]+[!|.|?]+", text)
 
 
 def find_words_from_sentence(sentence: str) -> list:
