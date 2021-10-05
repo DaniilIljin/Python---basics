@@ -79,7 +79,7 @@ def find_words_from_sentences_only(text: str) -> list:
     """
     list_of_words = []
     for element in find_sentences(text):
-        list_of_words = list_of_words + find_words(element)
+        list_of_words = list_of_words + find_words_from_sentence(element)
     return list_of_words
 
 
