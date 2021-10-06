@@ -101,7 +101,7 @@ def find_years(text: str) -> list:
     list_of_int = []
     list_of_str = re.findall(r'(?<!\d)\d{4}(?!\d)', text)
     for element in list_of_str:
-        list_of_int.append(str(element))
+        list_of_int.append(int(element))
     return list_of_int
 
 
