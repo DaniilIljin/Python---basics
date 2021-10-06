@@ -98,7 +98,7 @@ def find_years(text: str) -> list:
     :param text: given string to find years from
     :return: list of years (integers) found in given string
     """
-    return re.findall(r'(\D|^)\d{4}\D', text)
+    return re.findall(r'(?<!\d)\d{4}(?!\d)', text)
 
 
 def find_phone_numbers(text: str) -> dict:
