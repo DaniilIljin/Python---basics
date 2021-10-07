@@ -123,7 +123,21 @@ def find_phone_numbers(text: str) -> dict:
     :param text: given string to find phone numbers from
     :return: dict containing the numbers
     """
-    pass
+    phone_numbers = re.findall(r"(\+\d{3}|\+\d{3} |(?<!\d))(\d{7,8})", text)
+    dict_of_numbers = {}
+    for element in phone_numbers:
+        cod = element[0]
+        number = element[1]
+        if cod in dict_of_numbers:
+            dict_of_numbers[cod].append(number)
+        else:
+            if cod == '':
+                dict_of_numbers[cod] = [number]
+            elif cod[-1] == ' ':
+                dict_of_numbers[cod[:-1]] = [number]
+            else:
+                dict_of_numbers[cod] = [number]
+    return dict_of_numbers
 
 
 if __name__ == '__main__':
