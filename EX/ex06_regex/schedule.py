@@ -4,7 +4,7 @@ import re
 
 def create_schedule_file(input_filename: str, output_filename: str) -> None:
     """Create schedule file from the given input file."""
-    pass
+
 
 
 def create_schedule_string(input_string: str) -> str:
@@ -127,7 +127,7 @@ def sort_time(time: list) -> list:
 
 
 def create_a_table(text: str) -> str:
-    """O."""
+    """O ."""
     final_dict = change_value_to_string(text)
     new_list = []
     for element in final_dict.values():
@@ -137,9 +137,9 @@ def create_a_table(text: str) -> str:
     else:
         second_side_maximum_length = 0,
     table = ''
-    line_with_minuses = '-' * 13 + '-' * second_side_maximum_length[0] + '--\n'
+    line_with_minuses = '-' * 14 + '-' * second_side_maximum_length[0] + '--\n'
     table += line_with_minuses
-    second_line = '|' + "{:>9}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
+    second_line = '|' + "{:>10}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
     table += second_line + line_with_minuses
     list_of_am = []
     list_of_pm = []
@@ -153,9 +153,9 @@ def create_a_table(text: str) -> str:
     all_time = sorted_list_of_am + sorted_list_of_pm
     for element1 in all_time:
         if element1[0] == '0':
-            table +=f'|{element1[1:]:>{10}}| {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+            table +=f'|{element1[1:]:>{10}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
         else:
-            table += f'|{element1:>{10}}| {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+            table += f'|{element1:>{10}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
     table += line_with_minuses
     return table
 
