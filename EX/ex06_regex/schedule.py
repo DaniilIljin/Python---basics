@@ -137,11 +137,6 @@ def create_a_table(text: str) -> str:
             second_side_maximum_length = max(new_list),
         else:
             second_side_maximum_length = 5,
-        table = ''
-        line_with_minuses = '-' * 13 + '-' * second_side_maximum_length[0] + '--\n'
-        table += line_with_minuses
-        second_line = '|' + "{:>9}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
-        table += second_line + line_with_minuses
         list_of_am = []
         list_of_pm = []
         for element2 in final_dict.keys():
@@ -152,12 +147,35 @@ def create_a_table(text: str) -> str:
         sorted_list_of_am = sort_time(list_of_am)
         sorted_list_of_pm = sort_time(list_of_pm)
         all_time = sorted_list_of_am + sorted_list_of_pm
-        for element1 in all_time:
-            if element1[0] == '0':
-                table += f'|{element1[1:]:>{9}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
-            else:
-                table += f'|{element1:>{9}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
-        table += line_with_minuses
+        lengths = []
+        for element4 in all_time:
+            lengths.append(len(element4))
+        if max(lengths) == 7:
+            table = ''
+            line_with_minuses = '-' * 12 + '-' * second_side_maximum_length[0] + '--\n'
+            table += line_with_minuses
+            second_line = '|' + "{:>8}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
+            table += second_line + line_with_minuses
+            all_time = sorted_list_of_am + sorted_list_of_pm
+            for element1 in all_time:
+                if element1[0] == '0':
+                    table += f'|{element1[1:]:>{8}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+                else:
+                    table += f'|{element1:>{8}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+            table += line_with_minuses
+        else:
+            table = ''
+            line_with_minuses = '-' * 13 + '-' * second_side_maximum_length[0] + '--\n'
+            table += line_with_minuses
+            second_line = '|' + "{:>9}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
+            table += second_line + line_with_minuses
+            all_time = sorted_list_of_am + sorted_list_of_pm
+            for element1 in all_time:
+                if element1[0] == '0':
+                    table += f'|{element1[1:]:>{9}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+                else:
+                    table += f'|{element1:>{9}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+            table += line_with_minuses
     else:
         table = "------------------\n|  time | items  |\n------------------\n| No items found |\n------------------"
     return table
