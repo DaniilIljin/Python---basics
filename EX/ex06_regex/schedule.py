@@ -129,38 +129,41 @@ def sort_time(time: list) -> list:
 def create_a_table(text: str) -> str:
     """O ."""
     final_dict = change_value_to_string(text)
-    new_list = []
-    for element in final_dict.values():
-        new_list.append(len(element))
-    if len(new_list) > 0:
-        second_side_maximum_length = max(new_list),
+    if final_dict != {}:
+        new_list = []
+        for element in final_dict.values():
+            new_list.append(len(element))
+        if len(new_list) > 0:
+            second_side_maximum_length = max(new_list),
+        else:
+            second_side_maximum_length = 0,
+        table = ''
+        line_with_minuses = '-' * 14 + '-' * second_side_maximum_length[0] + '--\n'
+        table += line_with_minuses
+        second_line = '|' + "{:>10}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
+        table += second_line + line_with_minuses
+        list_of_am = []
+        list_of_pm = []
+        for element2 in final_dict.keys():
+            if element2[-2:] == 'AM':
+                list_of_am.append(element2)
+            else:
+                list_of_pm.append(element2)
+        sorted_list_of_am = sort_time(list_of_am)
+        sorted_list_of_pm = sort_time(list_of_pm)
+        all_time = sorted_list_of_am + sorted_list_of_pm
+        for element1 in all_time:
+            if element1[0] == '0':
+                table += f'|{element1[1:]:>{10}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+            else:
+                table += f'|{element1:>{10}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+        table += line_with_minuses
     else:
-        second_side_maximum_length = 0,
-    table = ''
-    line_with_minuses = '-' * 14 + '-' * second_side_maximum_length[0] + '--\n'
-    table += line_with_minuses
-    second_line = '|' + "{:>10}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
-    table += second_line + line_with_minuses
-    list_of_am = []
-    list_of_pm = []
-    for element2 in final_dict.keys():
-        if element2[-2:] == 'AM':
-            list_of_am.append(element2)
-        else:
-            list_of_pm.append(element2)
-    sorted_list_of_am = sort_time(list_of_am)
-    sorted_list_of_pm = sort_time(list_of_pm)
-    all_time = sorted_list_of_am + sorted_list_of_pm
-    for element1 in all_time:
-        if element1[0] == '0':
-            table +=f'|{element1[1:]:>{10}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
-        else:
-            table += f'|{element1:>{10}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
-    table += line_with_minuses
+        table = "------------------\n|  time | items  |\n------------------\n| No items found |\n------------------"
     return table
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("wat 9:00 teine tekst 11:0 jah ei 10:00 pikktekst "))
+    print(create_schedule_string("9:0011:010:00"))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
 
