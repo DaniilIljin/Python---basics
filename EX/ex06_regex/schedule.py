@@ -15,7 +15,7 @@ def create_schedule_string(input_string: str) -> str:
 def get_info_for_table(t: str) -> list:
     """O."""
     list_of_info = []
-    m = re.finditer(r'(([0-2]\d)\D([0-5]\d)|((?<!\d)\d)\D([0-5]\d)|([0-2]\d)\D(\d)|((?<!\d)\d)\D(\d)) +(([A-Za-z]+)|([^A-Za-z]))', t)
+    m = re.finditer(r'(([0-2][0-4])\D([0-5]\d)|((?<!\d)\d)\D([0-5]\d)|([0-2]\d)\D(\d)|((?<!\d)\d)\D(\d)) +(([A-Za-z]+)|([^A-Za-z]))', t)
     for match in m:
         if None not in [match.group(2), match.group(3), match.group(11)]:
             list_of_info.append([match.group(2), match.group(3), match.group(11)])
@@ -47,30 +47,29 @@ def normalize_data(text: str) -> list:
         item = element[2]
         if item != 'No items found':
             item = item.lower()
-        if 0 <= int(hours) <= 24:
-            if 0 < int(hours) < 12:
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
-            elif 12 < int(hours) < 24:
-                hours = str(int(hours) % 12)
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' PM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
-            elif hours == '12':
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' PM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
-            elif hours == '24' and int(minutes) == 0:
-                hours = '12'
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
-            elif int(hours) == 0:
-                hours = '12'
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
+        if 0 < int(hours) < 12:
+            time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
+            updated_element.append([time, item])
+            normalized_data_list.extend(updated_element)
+        elif 12 < int(hours) < 24:
+            hours = str(int(hours) % 12)
+            time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' PM'
+            updated_element.append([time, item])
+            normalized_data_list.extend(updated_element)
+        elif hours == '12':
+            time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' PM'
+            updated_element.append([time, item])
+            normalized_data_list.extend(updated_element)
+        elif hours == '24' and int(minutes) == 0:
+            hours = '12'
+            time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
+            updated_element.append([time, item])
+            normalized_data_list.extend(updated_element)
+        elif int(hours) == 0:
+            hours = '12'
+            time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
+            updated_element.append([time, item])
+            normalized_data_list.extend(updated_element)
     return normalized_data_list
 
 
@@ -183,6 +182,6 @@ def create_a_table(text: str) -> str:
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("9:00 a 1:0 b 25:00 cgs"))
+    print(create_schedule_string("9:00 a 1:0 b 0:10 cgs"))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
 
