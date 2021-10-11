@@ -132,7 +132,10 @@ def create_a_table(text: str) -> str:
     new_list = []
     for element in final_dict.values():
         new_list.append(len(element))
-    second_side_maximum_length = max(new_list),
+    if len(new_list) > 0:
+        second_side_maximum_length = max(new_list),
+    else:
+        second_side_maximum_length = 0,
     table = ''
     line_with_minuses = '-' * 13 + '-' * second_side_maximum_length[0] + '--\n'
     table += line_with_minuses
