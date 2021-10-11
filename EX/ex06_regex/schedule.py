@@ -15,7 +15,7 @@ def create_schedule_string(input_string: str) -> str:
 def get_info_for_table(t: str) -> list:
     """O."""
     list_of_info = []
-    m = re.finditer(r'(([0-2][0-4])\D([0-5]\d)|((?<!\d)\d)\D([0-5]\d)|([0-2]\d)\D(\d)|((?<!\d)\d)\D(\d)) +(([A-Za-z]+)|([^A-Za-z]))', t)
+    m = re.finditer(r'(([0-2]\d)\D([0-5]\d)|(\d)\D([0-5]\d)|([0-2]\d)\D(\d)|(\d)\D(\d)) +(([A-Za-z]+)|([^A-Za-z]))', t)
     for match in m:
         if None not in [match.group(2), match.group(3), match.group(11)]:
             list_of_info.append([match.group(2), match.group(3), match.group(11)])
@@ -183,6 +183,6 @@ def create_a_table(text: str) -> str:
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("9:00 a 1:0 b 26:00 cgs"))
+    print(create_schedule_string("9:00 a 1:0 b 15:03 cgs"))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
 
