@@ -149,8 +149,9 @@ def create_a_table(text: str) -> str:
         all_time = sorted_list_of_am + sorted_list_of_pm
         lengths = []
         for element4 in all_time:
-            lengths.append(len(element4))
-        if max(lengths) == 7:
+            if element4[0] == '0':
+                lengths.append(element4)
+        if len(lengths) == len(all_time):
             table = ''
             line_with_minuses = '-' * 12 + '-' * second_side_maximum_length[0] + '--\n'
             table += line_with_minuses
@@ -182,6 +183,6 @@ def create_a_table(text: str) -> str:
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("9:00 a 11:0 b 10:00 cgs"))
+    print(create_schedule_string("9:00 a 1:0 b 9:00 cgs"))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
 
