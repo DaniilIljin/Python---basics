@@ -133,14 +133,14 @@ def create_a_table(text: str) -> str:
         new_list = []
         for element in final_dict.values():
             new_list.append(len(element))
-        if len(new_list) > 0:
+        if max(new_list) > 5:
             second_side_maximum_length = max(new_list),
         else:
-            second_side_maximum_length = 0,
+            second_side_maximum_length = 5,
         table = ''
-        line_with_minuses = '-' * 14 + '-' * second_side_maximum_length[0] + '--\n'
+        line_with_minuses = '-' * 13 + '-' * second_side_maximum_length[0] + '--\n'
         table += line_with_minuses
-        second_line = '|' + "{:>10}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
+        second_line = '|' + "{:>9}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
         table += second_line + line_with_minuses
         list_of_am = []
         list_of_pm = []
@@ -154,9 +154,9 @@ def create_a_table(text: str) -> str:
         all_time = sorted_list_of_am + sorted_list_of_pm
         for element1 in all_time:
             if element1[0] == '0':
-                table += f'|{element1[1:]:>{10}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+                table += f'|{element1[1:]:>{9}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
             else:
-                table += f'|{element1:>{10}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+                table += f'|{element1:>{9}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
         table += line_with_minuses
     else:
         table = "------------------\n|  time | items  |\n------------------\n| No items found |\n------------------"
@@ -164,6 +164,6 @@ def create_a_table(text: str) -> str:
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("9:0011:010:00"))
+    print(create_schedule_string("9:00 a 11:0 b 10:00 cgs"))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
 
