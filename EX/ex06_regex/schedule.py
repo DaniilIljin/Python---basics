@@ -7,7 +7,7 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
 
 
 def get_info_for_table(t: str) -> list:
-    """O."""
+    """To find all needed data."""
     list_of_info = []
     matches = re.finditer(r'( |(?<=\n))([0-2]\d\D[0-5]\d|(?<!\d)\d\D[0-5]\d|[0-2]\d\D\d|(?<!\d)\d\D\d) +([A-Za-z]+)', t)
     for match in matches:
@@ -16,7 +16,7 @@ def get_info_for_table(t: str) -> list:
 
 
 def normalize_data(t: str) -> list:
-    """O."""
+    """To sort the data and normalize it."""
     normalized_data_list = []
     all_data = get_info_for_table(t)
     for element in all_data:
@@ -48,7 +48,7 @@ def normalize_data(t: str) -> list:
 
 
 def create_sorted_dict(t: str) -> dict:
-    """O."""
+    """To create a dictionary with normalized time and string."""
     new_dict = {}
     needed_list = normalize_data(t)
     for element in needed_list:
@@ -71,7 +71,7 @@ def create_sorted_dict(t: str) -> dict:
 
 
 def sort_time(time: list) -> list:
-    """O."""
+    """To sort time for table."""
     sorted_list_of_time = []
     list_of_twelve = []
     list_of_one_hour_digit = []
@@ -90,7 +90,7 @@ def sort_time(time: list) -> list:
 
 
 def find_max_length_for_table(my_dict: dict) -> int:
-    """O."""
+    """To find max length of table."""
     list_of_lengths = []
     for element in my_dict.values():
         list_of_lengths.append(len(element))
