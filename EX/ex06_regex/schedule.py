@@ -9,7 +9,7 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
 def get_info_for_table(t: str) -> list:
     """O."""
     list_of_info = []
-    matches = re.finditer(r'( |(?<=\n))([0-2]\d\D[0-5]\d|(?<!\d)\d\D[0-5]\d|[0-2]\d\D\d|(?<!\d)\d\D\d) +([A-Za-z])', t)
+    matches = re.finditer(r'( |(?<=\n))([0-2]\d\D[0-5]\d|(?<!\d)\d\D[0-5]\d|[0-2]\d\D\d|(?<!\d)\d\D\d) +([A-Za-z]+)', t)
     for match in matches:
         list_of_info.append([match.group(2), match.group(3)])
     return list_of_info
