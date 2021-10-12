@@ -63,7 +63,7 @@ def create_sorted_dict(t: str) -> dict:
             new_dict[key] = [value]
 
     for key in new_dict:
-        new_dict[key] = sorted(list(set(new_dict[key])))
+        new_dict[key] = list(set(new_dict[key]))
 
     changed_dict = {}
     for key in new_dict:
