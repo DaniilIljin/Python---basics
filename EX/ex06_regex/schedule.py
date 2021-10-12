@@ -55,13 +55,10 @@ def create_sorted_dict(t: str) -> dict:
         key = element[0]
         value = element[1]
         if key in new_dict:
-            new_dict[key] = new_dict[key] + [value]
+            if value not in new_dict[key]:
+                new_dict[key] = new_dict[key] + [value]
         else:
             new_dict[key] = [value]
-    for key1 in new_dict:
-        for key2 in new_dict[key1]:
-            while new_dict[key1].count(key2) > 1:
-                new_dict[key1].remove(key2)
     changed_dict = {}
     for key in new_dict:
         changed_dict[key] = ''
@@ -92,19 +89,25 @@ def sort_time(time: list) -> list:
     return sorted_list_of_time
 
 
+def find_max_length_for_table(my_dict: dict) -> int:
+    """O."""
+    list_of_lengths = []
+    for element in my_dict.values():
+        list_of_lengths.append(len(element))
+    if max(list_of_lengths) > 5:
+        maximum_length = max(list_of_lengths)
+    else:
+        maximum_length = 5
+    return maximum_length
+
+
 def create_schedule_string(input_string: str) -> str:
     """Create schedule string from the given input string."""
     my_dict = create_sorted_dict(input_string)
     if my_dict == {}:
         table = "------------------\n|  time | items  |\n------------------\n| No items found |\n------------------"
     else:
-        list_of_lenghts = []
-        for element in my_dict.values():
-            list_of_lenghts.append(len(element))
-        if max(list_of_lenghts) > 5:
-            maximum_length = max(list_of_lenghts)
-        else:
-            maximum_length = 5
+        maximum_length = find_max_length_for_table(my_dict)
         list_of_am = []
         list_of_pm = []
         for element2 in my_dict.keys():
@@ -148,5 +151,5 @@ def create_schedule_string(input_string: str) -> str:
 
 
 if __name__ == '__main__':
-    print(create_schedule_string(""" 0m00 o"""))
+    print(create_schedule_string(""" 12n34 uy 12o34 fg 12n34 uy"""))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
