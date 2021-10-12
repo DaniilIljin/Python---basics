@@ -16,6 +16,7 @@ def get_info_for_table(t: str) -> list:
 
 
 def normalize_data(t: str) -> list:
+    """O."""
     normalized_data_list = []
     all_data = get_info_for_table(t)
     for element in all_data:
@@ -26,7 +27,7 @@ def normalize_data(t: str) -> list:
             updated_element = []
             item = item.lower()
             if 0 < int(hours) < 12:
-                new_time = hours + ':' + '{:02d}'.format(int(minutes)) + ' AM'
+                new_time = str(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
                 updated_element.extend([new_time, item])
                 normalized_data_list.append(updated_element)
             elif 12 < int(hours) < 24:
@@ -52,6 +53,7 @@ def normalize_data(t: str) -> list:
 
 
 def create_sorted_dict(t: str) -> dict:
+    """O."""
     new_dict = {}
     needed_list = normalize_data(t)
     for element in needed_list:
@@ -61,13 +63,10 @@ def create_sorted_dict(t: str) -> dict:
             new_dict[key] = new_dict[key] + [value]
         else:
             new_dict[key] = [value]
-
     for key1 in new_dict:
         for key2 in new_dict[key1]:
             while new_dict[key1].count(key2) > 1:
                 new_dict[key1].remove(key2)
-
-
     changed_dict = {}
     for key in new_dict:
         changed_dict[key] = ''
@@ -80,16 +79,21 @@ def create_sorted_dict(t: str) -> dict:
 
 
 def sort_time(time: list) -> list:
+    """O."""
     sorted_list_of_time = []
     list_of_twelve = []
-    list_of_others = []
+    list_of_one_hour_digit = []
+    list_of_two_hour_digit = []
     for element1 in time:
         if element1[:2] == '12':
             list_of_twelve.append(element1)
+        elif len(element1.split(':')[0]) == 2:
+            list_of_two_hour_digit.append(element1)
         else:
-            list_of_others.append(element1)
+            list_of_one_hour_digit.append(element1)
     sorted_list_of_time.extend(sorted(list_of_twelve))
-    sorted_list_of_time.extend(sorted(list_of_others))
+    sorted_list_of_time.extend(sorted(list_of_one_hour_digit))
+    sorted_list_of_time.extend(sorted(list_of_two_hour_digit))
     return sorted_list_of_time
 
 
@@ -106,7 +110,6 @@ def create_schedule_string(input_string: str) -> str:
             maximum_length = max(list_of_lenghts),
         else:
             maximum_length = 5,
-
         list_of_am = []
         list_of_pm = []
         for element2 in my_dict.keys():
