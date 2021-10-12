@@ -62,8 +62,11 @@ def create_sorted_dict(t: str) -> dict:
         else:
             new_dict[key] = [value]
 
-    for key in new_dict:
-        new_dict[key] = list(set(new_dict[key]))
+    for key1 in new_dict:
+        for key2 in new_dict[key1]:
+            while new_dict[key1].count(key2) > 1:
+                new_dict[key1].remove(key2)
+
 
     changed_dict = {}
     for key in new_dict:
