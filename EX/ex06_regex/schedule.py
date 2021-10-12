@@ -6,109 +6,73 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
     """Create schedule file from the given input file."""
 
 
-
-def create_schedule_string(input_string: str) -> str:
-    """Create schedule string from the given input string."""
-    return create_a_table(input_string)
-
-
 def get_info_for_table(t: str) -> list:
     """O."""
     list_of_info = []
-    m = re.finditer(r'(([0-2]\d)\D([0-5]\d)|(\d)\D([0-5]\d)|([0-2]\d)\D(\d)|(\d)\D(\d)) +(([A-Za-z]+)|([^A-Za-z]))', t)
-    for match in m:
-        if None not in [match.group(2), match.group(3), match.group(11)]:
-            list_of_info.append([match.group(2), match.group(3), match.group(11)])
-        elif None not in [match.group(4), match.group(5), match.group(11)]:
-            list_of_info.append([match.group(4), match.group(5), match.group(11)])
-        elif None not in [match.group(6), match.group(7), match.group(11)]:
-            list_of_info.append([match.group(6), match.group(7), match.group(11)])
-        elif None not in [match.group(8), match.group(9), match.group(11)]:
-            list_of_info.append([match.group(8), match.group(9), match.group(11)])
-        elif None not in [match.group(2), match.group(3), match.group(12)]:
-            list_of_info.append([match.group(2), match.group(3), 'No items found'])
-        elif None not in [match.group(4), match.group(5), match.group(12)]:
-            list_of_info.append([match.group(4), match.group(5), 'No items found'])
-        elif None not in [match.group(6), match.group(7), match.group(12)]:
-            list_of_info.append([match.group(6), match.group(7), 'No items found'])
-        elif None not in [match.group(8), match.group(9), match.group(12)]:
-            list_of_info.append([match.group(8), match.group(9), 'No items found'])
+    matches = re.finditer(r'( |(?<=\n))([0-2]\d\D[0-5]\d|(?<!\d)\d\D[0-5]\d|[0-2]\d\D\d|(?<!\d)\d\D\d) +([A-Za-z])', t)
+    for match in matches:
+        list_of_info.append([match.group(2), match.group(3)])
     return list_of_info
 
 
-def normalize_data(text: str) -> list:
-    """O."""
-    info = get_info_for_table(text)
+def normalize_data(t: str) -> list:
     normalized_data_list = []
-    for element in info:
-        updated_element = []
-        hours = element[0]
-        minutes = element[1]
-        item = element[2]
-        if item != 'No items found':
-            item = item.lower()
+    all_data = get_info_for_table(t)
+    for element in all_data:
+        time = element[0]
+        item = element[1]
+        hours, minutes = re.split(r'\D', time)
         if 0 <= int(hours) <= 24:
+            updated_element = []
+            item = item.lower()
             if 0 < int(hours) < 12:
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
+                new_time = hours + ':' + '{:02d}'.format(int(minutes)) + ' AM'
+                updated_element.extend([new_time, item])
+                normalized_data_list.append(updated_element)
             elif 12 < int(hours) < 24:
                 hours = str(int(hours) % 12)
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' PM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
+                new_time = hours + ':' + '{:02d}'.format(int(minutes)) + ' PM'
+                updated_element.extend([new_time, item])
+                normalized_data_list.append(updated_element)
             elif hours == '12':
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' PM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
+                new_time = hours + ':' + '{:02d}'.format(int(minutes)) + ' PM'
+                updated_element.extend([new_time, item])
+                normalized_data_list.append(updated_element)
             elif hours == '24' and int(minutes) == 0:
                 hours = '12'
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
+                new_time = hours + ':' + '{:02d}'.format(int(minutes)) + ' AM'
+                updated_element.extend([new_time, item])
+                normalized_data_list.append(updated_element)
             elif int(hours) == 0:
                 hours = '12'
-                time = '{:02d}'.format(int(hours)) + ':' + '{:02d}'.format(int(minutes)) + ' AM'
-                updated_element.append([time, item])
-                normalized_data_list.extend(updated_element)
+                new_time = hours + ':' + '{:02d}'.format(int(minutes)) + ' AM'
+                updated_element.extend([new_time, item])
+                normalized_data_list.append(updated_element)
     return normalized_data_list
 
 
-def creating_dictionary(text: str) -> dict:
-    """O."""
-    data = normalize_data(text)
+def create_sorted_dict(t: str) -> dict:
     new_dict = {}
-    for element in data:
-        time = element[0]
-        item = element[1]
-        if time in new_dict:
-            new_dict[time] = new_dict[time] + [item]
+    needed_list = normalize_data(t)
+    for element in needed_list:
+        key = element[0]
+        value = element[1]
+        if key in new_dict:
+            new_dict[key] = new_dict[key] + [value]
         else:
-            new_dict[time] = [item]
-    return new_dict
+            new_dict[key] = [value]
 
+    for key in new_dict:
+        new_dict[key] = sorted(list(set(new_dict[key])))
 
-def sort_dictionary(text: str) -> dict:
-    """O."""
-    new_dict = creating_dictionary(text)
-    for element in new_dict:
-        new_dict[element] = sorted(list(set(new_dict[element])))
-    return new_dict
-
-
-def change_value_to_string(text: str) -> dict:
-    new_dict = sort_dictionary(text)
     changed_dict = {}
-    for element in new_dict:
-        if new_dict[element] != ['No items found']:
-            changed_dict[element] = ''
-            for element1 in new_dict[element]:
-                if element1 != new_dict[element][-1]:
-                    changed_dict[element] = changed_dict[element] + f'{element1}, '
-                else:
-                    changed_dict[element] = changed_dict[element] + str(element1)
-        else:
-            changed_dict[element] = 'No items found'
+    for key in new_dict:
+        changed_dict[key] = ''
+        for element in new_dict[key]:
+            if element != new_dict[key][-1]:
+                changed_dict[key] += f'{element}, '
+            else:
+                changed_dict[key] += str(element)
     return changed_dict
 
 
@@ -126,20 +90,23 @@ def sort_time(time: list) -> list:
     return sorted_list_of_time
 
 
-def create_a_table(text: str) -> str:
-    """O ."""
-    final_dict = change_value_to_string(text)
-    if final_dict != {}:
-        new_list = []
-        for element in final_dict.values():
-            new_list.append(len(element))
-        if max(new_list) > 5:
-            second_side_maximum_length = max(new_list),
+def create_schedule_string(input_string: str) -> str:
+    """Create schedule string from the given input string."""
+    my_dict = create_sorted_dict(input_string)
+    if my_dict == {}:
+        table = "------------------\n|  time | items  |\n------------------\n| No items found |\n------------------"
+    else:
+        list_of_lenghts = []
+        for element in my_dict.values():
+            list_of_lenghts.append(len(element))
+        if max(list_of_lenghts) > 5:
+            maximum_length = max(list_of_lenghts),
         else:
-            second_side_maximum_length = 5,
+            maximum_length = 5,
+
         list_of_am = []
         list_of_pm = []
-        for element2 in final_dict.keys():
+        for element2 in my_dict.keys():
             if element2[-2:] == 'AM':
                 list_of_am.append(element2)
             else:
@@ -149,36 +116,33 @@ def create_a_table(text: str) -> str:
         all_time = sorted_list_of_am + sorted_list_of_pm
         lengths = []
         for element4 in all_time:
-            if element4[0] == '0':
-                lengths.append(element4)
-        if len(lengths) == len(all_time):
+            lengths.append(len(element4))
+        if max(lengths) == 7:
             table = ''
-            line_with_minuses = '-' * 12 + '-' * second_side_maximum_length[0] + '--\n'
+            line_with_minuses = '-' * 12 + '-' * maximum_length[0] + '--\n'
             table += line_with_minuses
-            second_line = '|' + "{:>8}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
+            second_line = '|' + "{:>8}".format("time") + ' | items' + ' ' * (maximum_length[0] - 5) + ' |\n'
             table += second_line + line_with_minuses
             all_time = sorted_list_of_am + sorted_list_of_pm
             for element1 in all_time:
                 if element1[0] == '0':
-                    table += f'|{element1[1:]:>{8}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+                    table += f'|{element1[1:]:>{8}} | {my_dict[element1]:{maximum_length[0]}} |\n'
                 else:
-                    table += f'|{element1:>{8}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+                    table += f'|{element1:>{8}} | {my_dict[element1]:{maximum_length[0]}} |\n'
             table += line_with_minuses
         else:
             table = ''
-            line_with_minuses = '-' * 13 + '-' * second_side_maximum_length[0] + '--\n'
+            line_with_minuses = '-' * 13 + '-' * maximum_length[0] + '--\n'
             table += line_with_minuses
-            second_line = '|' + "{:>9}".format("time") + ' | items' + ' ' * (second_side_maximum_length[0] - 5) + ' |\n'
+            second_line = '|' + "{:>9}".format("time") + ' | items' + ' ' * (maximum_length[0] - 5) + ' |\n'
             table += second_line + line_with_minuses
             all_time = sorted_list_of_am + sorted_list_of_pm
             for element1 in all_time:
                 if element1[0] == '0':
-                    table += f'|{element1[1:]:>{9}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+                    table += f'|{element1[1:]:>{9}} | {my_dict[element1]:{maximum_length[0]}} |\n'
                 else:
-                    table += f'|{element1:>{9}} | {final_dict[element1]:{second_side_maximum_length[0]}} |\n'
+                    table += f'|{element1:>{9}} | {my_dict[element1]:{maximum_length[0]}} |\n'
             table += line_with_minuses
-    else:
-        table = "------------------\n|  time | items  |\n------------------\n| No items found |\n------------------"
     return table
 
 
@@ -214,22 +178,3 @@ if __name__ == '__main__':
     5:6
 """))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
-
-  # -----------------------------------
-  #   |     time | items                |
-  #   -----------------------------------
-  #   | 12:00 AM | aliquam, porta       |
-  #   | 12:12 AM | parturient           |
-  #   |  1:02 AM | goodone              |
-  #   |  7:01 AM | libero               |
-  #   |  8:01 AM | lorem                |
-  #   |  8:08 AM | integer              |
-  #   | 10:00 AM | a                    |
-  #   | 11:00 AM | lorem                |
-  #   |  3:00 PM | nocomma              |
-  #   |  6:19 PM | a, purus, donec, yes |
-  #   |  9:59 PM | nopoint              |
-  #   | 10:00 PM | commaisalsook        |
-  #   | 11:59 PM | canuseminusthere     |
-  #   -----------------------------------
-
