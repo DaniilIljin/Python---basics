@@ -194,7 +194,7 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
             new_dict[name1].append(town1)
         else:
             special_list.append([name1, town1, '-'])
-    one_big_list = []
+    one_big_list = [['name', 'town', 'date']]
     for element2 in list_of_all_data[0]:
         if len(new_dict[element2[0]]) == 2:
             one_big_list.append([element2[0], new_dict[element2[0]][1], new_dict[element2[0]][0]])
