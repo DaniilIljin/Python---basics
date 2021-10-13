@@ -173,3 +173,29 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
     :param csv_output: Output CSV-file with names, towns and dates.
     :return: None
     """
+    new_dict = {}
+    list_of_all_data = []
+    for file in [dates_file, towns_file]:
+        with open(file) as csv_file:
+            new_list = []
+            csv_reader = csv.reader(csv_file, delimiter=':')
+            for row in csv_reader:
+                new_list.append(row)
+            list_of_all_data.append(new_list)
+    for element in list_of_all_data[0]:
+        name = element[0]
+        date = element[1]
+        new_dict[name] = [date]
+    special_list = []
+    for element1 in list_of_all_data[1]:
+        name = element1[0]
+        town = element1[1]
+        if name in new_dict:
+            new_dict[name].append(town)
+        else:
+            special_list.append([name, town, ''])
+    one_big_list = []
+    for element2 in list_of_all_data[0]:
+        one_big_list.append([element2, new_dict[element2][1], new_dict[element2][0]])
+    one_big_list.extend(special_list)
+    write_csv_file(csv_output, one_big_list)
