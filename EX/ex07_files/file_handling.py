@@ -184,18 +184,24 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
             list_of_all_data.append(new_list)
     for element in list_of_all_data[0]:
         name = element[0]
-        date = element[1]
+        if element[1] == '':
+            date = '-'
+        else:
+            date = element[1]
         new_dict[name] = [date]
     special_list = []
     for element1 in list_of_all_data[1]:
-        name = element1[0]
-        town = element1[1]
-        if name in new_dict:
-            new_dict[name].append(town)
+        name1 = element1[0]
+        if element1[1] == '':
+            town1 = '-'
         else:
-            special_list.append([name, town, ''])
+            town1 = element1[1]
+        if name1 in new_dict:
+            new_dict[name1].append(town1)
+        else:
+            special_list.append([name1, town1, '-'])
     one_big_list = []
     for element2 in list_of_all_data[0]:
-        one_big_list.append([element2, new_dict[element2][1], new_dict[element2][0]])
+        one_big_list.append([element2[0], new_dict[element2[0]][1], new_dict[element2[0]][0]])
     one_big_list.extend(special_list)
     write_csv_file(csv_output, one_big_list)
