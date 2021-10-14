@@ -207,6 +207,7 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
 def read_csv_file_into_list_of_dicts(filename: str) -> list:
     """
     Read csv file into list of dictionaries.
+
     Header line will be used for dict keys.
 
     Each line after header line will result in a dict inside the result list.
@@ -288,23 +289,20 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     """
     the_big_one = []
     list_of_all_keys = []
-    for dictionary in data:
-        list_of_all_keys.extend(dictionary.keys())
-    header = list(set(list_of_all_keys))
-    the_big_one.append(header)
-    for dictionary1 in data:
-        new_list = []
-        for element1 in header:
-            if element1 in dictionary1:
-                new_list.append(dictionary1[element1])
-            else:
-                new_list.append('')
-        the_big_one.append(new_list)
-    with open(filename, 'w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=",")
-        for row in the_big_one:
-            csv_writer.writerow(row)
-write_list_of_dicts_to_csv_file('text.txt', [
-      {"name": "john", "age": "12"},
-      {"name": "mary", "town": "London"}
-    ])
+    if data:
+        for dictionary in data:
+            list_of_all_keys.extend(dictionary.keys())
+        header = list(set(list_of_all_keys))
+        the_big_one.append(header)
+        for dictionary1 in data:
+            new_list = []
+            for element1 in header:
+                if element1 in dictionary1:
+                    new_list.append(dictionary1[element1])
+                else:
+                    new_list.append('')
+            the_big_one.append(new_list)
+        with open(filename, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file, delimiter=",")
+            for row in the_big_one:
+                csv_writer.writerow(row)
