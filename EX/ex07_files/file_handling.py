@@ -286,4 +286,24 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :param data: List of dictionaries to write to the file.
     :return: None
     """
-    pass
+    the_big_one = []
+    list_of_lengths = []
+    for dictionary in data:
+        list_of_lengths.append(len(dictionary))
+    needed_dict = max(list_of_lengths)
+    for dictionary1 in data:
+        if len(dictionary1) == needed_dict:
+            header = dictionary1.keys()
+    the_big_one.append(header)
+    for dictionary1 in data:
+        new_list = []
+        for element1 in header:
+            if element1 in dictionary1:
+                new_list.append(dictionary1[element1])
+            else:
+                new_list.append('')
+        the_big_one.append(new_list)
+    with open(filename, 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter=",")
+        for row in the_big_one:
+            csv_writer.writerow(row)
