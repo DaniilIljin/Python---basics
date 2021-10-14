@@ -236,7 +236,7 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             list_of_info.append(row)
-    if list_of_info[0] == [] or len(list_of_info) == 1:
+    if list_of_info == [] or list_of_info[0] == [] or len(list_of_info) == 1:
         return []
     else:
         big_list = []
