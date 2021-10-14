@@ -297,8 +297,6 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
         for element1 in header:
             if element1 in dictionary1:
                 new_list.append(dictionary1[element1])
-            else:
-                continue
         the_big_one.append(new_list)
     with open(filename, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=",")
