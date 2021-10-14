@@ -287,13 +287,10 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :return: None
     """
     the_big_one = []
-    list_of_lengths = []
+    list_of_all_keys = []
     for dictionary in data:
-        list_of_lengths.append(len(dictionary))
-    needed_dict = max(list_of_lengths)
-    for dictionary1 in data:
-        if len(dictionary1) == needed_dict:
-            header = dictionary1.keys()
+        list_of_all_keys.extend(dictionary.keys())
+    header = list(set(list_of_all_keys))
     the_big_one.append(header)
     for dictionary1 in data:
         new_list = []
