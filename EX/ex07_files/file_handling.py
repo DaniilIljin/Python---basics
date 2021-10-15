@@ -306,3 +306,7 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
             csv_writer = csv.writer(csv_file, delimiter=",")
             for row in the_big_one:
                 csv_writer.writerow(row)
+    else:
+        with open(filename, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file, delimiter=",")
+write_list_of_dicts_to_csv_file('text.txt', [])
