@@ -321,8 +321,10 @@ def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
     for number in range(number_of_lists):
         checking_type_list.append([])
     for lst in list_of_info:
+        counter = 0
         for element1 in lst:
-            checking_type_list[lst.index(element1)].append(element1)
+            checking_type_list[counter].append(element1)
+            counter += 1
     total_list_of_types = []
     for list1 in checking_type_list:
         list_of_types = []
@@ -341,10 +343,13 @@ def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
         total_list_of_types.append(list_of_types)
     list_of_scenarios = []
     for element in total_list_of_types:
-        if element.count(element[0]) == len(element):
-            list_of_scenarios.append(0)
+        if element != []:
+            if element.count(element[0]) == len(element):
+                list_of_scenarios.append(0)
+            else:
+                list_of_scenarios.append(1)
         else:
-            list_of_scenarios.append(1)
+            list_of_scenarios.append(0)
     return list_of_scenarios
 
 
@@ -436,6 +441,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
         scenarios = choose_the_scenaries_to_make_list_of_dicts(list_of_info)
         for element in list_of_info:
             new_dict = {}
+            counter = 0
             for element1 in element:
                 if element1 != '-':
                     if scenarios[element.index(element1)] == 0:
@@ -444,12 +450,14 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                         elif [element1] == re.findall(r'\d\d\.\d\d.\d{4}', element1):
                             day, month, year = element1.split('.')
                             new_dict[header[element.index(element1)]] = datetime.date(int(year), int(month), int(day))
+                        elif element1 == '-':
+                            new_dict[header[element.index(element1)]] = None
                         else:
                             new_dict[header[element.index(element1)]] = str(element1)
                     else:
                         new_dict[header[element.index(element1)]] = str(element1)
                 else:
                     new_dict[header[element.index(element1)]] = None
+                element[element.index(element1)] = 'nothing'
             big_list.append(new_dict)
     return big_list
-
