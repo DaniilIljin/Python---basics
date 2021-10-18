@@ -439,7 +439,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
             for element1 in element:
                 if element1 != '-':
                     if scenarios[element.index(element1)] == 0:
-                        if type(element1) == type(0):
+                        if element1.isdigit():
                             new_dict[header[element.index(element1)]] = int(element1)
                         elif [element1] == re.findall(r'\d\d\.\d\d.\d{4}', element1):
                             day, month, year = element1.split('.')
@@ -452,3 +452,4 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                     new_dict[header[element.index(element1)]] = None
             big_list.append(new_dict)
     return big_list
+
