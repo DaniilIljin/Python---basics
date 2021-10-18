@@ -313,7 +313,8 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
             pass
 
 
-def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
+def create_checking_type_list(list_of_info):
+    """Creates lists of data to check its type."""
     header = list_of_info[0]
     list_of_info.pop(0)
     checking_type_list = []
@@ -325,6 +326,12 @@ def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
         for element1 in lst:
             checking_type_list[counter].append(element1)
             counter += 1
+    return checking_type_list
+
+
+def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
+    """Finds the scenario for a group of objects."""
+    checking_type_list = create_checking_type_list(list_of_info)
     total_list_of_types = []
     for list1 in checking_type_list:
         list_of_types = []
@@ -343,7 +350,7 @@ def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
         total_list_of_types.append(list_of_types)
     list_of_scenarios = []
     for element in total_list_of_types:
-        if element != []:
+        if element:
             if element.count(element[0]) == len(element):
                 list_of_scenarios.append(0)
             else:
@@ -356,6 +363,7 @@ def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
 def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     """
     Read data from file and cast values into different datatypes.
+
     If a field contains only numbers, turn this into int.
     If a field contains only dates (in format dd.mm.yyyy), turn this into date.
     Otherwise the datatype is string (default by csv reader).
@@ -441,7 +449,6 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
         scenarios = choose_the_scenaries_to_make_list_of_dicts(list_of_info)
         for element in list_of_info:
             new_dict = {}
-            counter = 0
             for element1 in element:
                 if element1 != '-':
                     if scenarios[element.index(element1)] == 0:
