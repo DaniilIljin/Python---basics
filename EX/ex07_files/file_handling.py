@@ -314,7 +314,7 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
 
 
 def create_checking_type_list(list_of_info):
-    """Creates lists of data to check its type."""
+    """Create lists of data to check its type."""
     header = list_of_info[0]
     list_of_info.pop(0)
     checking_type_list = []
@@ -330,7 +330,7 @@ def create_checking_type_list(list_of_info):
 
 
 def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
-    """Finds the scenario for a group of objects."""
+    """Find the scenario for a group of objects."""
     checking_type_list = create_checking_type_list(list_of_info)
     total_list_of_types = []
     for list1 in checking_type_list:
