@@ -1,6 +1,8 @@
 """Fear files EX07."""
 
 import csv
+import datetime
+import re
 
 
 def read_file_contents(filename: str) -> str:
@@ -311,6 +313,37 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
             pass
 
 
+def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
+    header = list_of_info[0]
+    list_of_info.pop(0)
+    checking_type_list = []
+    number_of_lists = len(header)
+    for number in range(number_of_lists):
+        checking_type_list.append([])
+    for lst in list_of_info:
+        for element1 in lst:
+            checking_type_list[lst.index(element1)].append(element1)
+    total_list_of_types = []
+    for list1 in checking_type_list:
+        list_of_types = []
+        for element2 in list1:
+            if element2 != '-':
+                if [element2] == re.findall(r'\d\d\.\d\d\.\d{4}', element2):
+                    day, month, year = element2.split('.')
+                    if datetime.date(year, month, day):
+                        list_of_types.append(type(datetime.date(year, month, day)))
+                else:
+                    list_of_types.append(type(element2))
+        total_list_of_types.append(list_of_types)
+    list_of_scenarios = []
+    for element in total_list_of_types:
+        if element.count(element[0]) == len(element):
+            list_of_scenarios.append(0)
+        else:
+            list_of_scenarios.append(1)
+    return list_of_scenarios
+
+
 def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     """
     Read data from file and cast values into different datatypes.
@@ -397,9 +430,25 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
         big_list = []
         header = list_of_info[0]
         list_of_info.pop(0)
+        scenarios = choose_the_scenaries_to_make_list_of_dicts(list_of_info)
         for element in list_of_info:
             new_dict = {}
             for element1 in element:
-                new_dict[header[element.index(element1)]] = element1
+                if element1 == '-':
+                    if scenarios[element.index(element1)] == 0:
+                        if type(element1) == type(0):
+                            new_dict[header[element.index(element1)]] = int(element1)
+                        elif [element1] == re.findall(r'\d\d\.\d\d.\d{4}', element1):
+                            day, month, year = element1.split('.')
+                            new_dict[header[element.index(element1)]] = datetime.date(year, month, day)
+                        else:
+                            new_dict[header[element.index(element1)]] = int(str)
+                    else:
+                        new_dict[header[element.index(element1)]] = str(element1)
+                else:
+                    new_dict[header[element.index(element1)]] = None
             big_list.append(new_dict)
     return big_list
+
+
+read_csv_file_into_list_of_dicts_using_datatypes('text.txt')
