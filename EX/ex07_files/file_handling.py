@@ -330,8 +330,12 @@ def choose_the_scenaries_to_make_list_of_dicts(list_of_info: list) -> list:
             if element2 != '-':
                 if [element2] == re.findall(r'\d\d\.\d\d\.\d{4}', element2):
                     day, month, year = element2.split('.')
-                    if datetime.date(year, month, day):
-                        list_of_types.append(type(datetime.date(year, month, day)))
+                    if datetime.date(int(year), int(month), int(day)):
+                        list_of_types.append(type(datetime.date(int(year), int(month), int(day))))
+                    else:
+                        list_of_types.append(type(element2))
+                elif element2.isdigit():
+                    list_of_types.append(type(int(element2)))
                 else:
                     list_of_types.append(type(element2))
         total_list_of_types.append(list_of_types)
@@ -429,26 +433,22 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     else:
         big_list = []
         header = list_of_info[0]
-        list_of_info.pop(0)
         scenarios = choose_the_scenaries_to_make_list_of_dicts(list_of_info)
         for element in list_of_info:
             new_dict = {}
             for element1 in element:
-                if element1 == '-':
+                if element1 != '-':
                     if scenarios[element.index(element1)] == 0:
                         if type(element1) == type(0):
                             new_dict[header[element.index(element1)]] = int(element1)
                         elif [element1] == re.findall(r'\d\d\.\d\d.\d{4}', element1):
                             day, month, year = element1.split('.')
-                            new_dict[header[element.index(element1)]] = datetime.date(year, month, day)
+                            new_dict[header[element.index(element1)]] = datetime.date(int(year), int(month), int(day))
                         else:
-                            new_dict[header[element.index(element1)]] = int(str)
+                            new_dict[header[element.index(element1)]] = str(element1)
                     else:
                         new_dict[header[element.index(element1)]] = str(element1)
                 else:
                     new_dict[header[element.index(element1)]] = None
             big_list.append(new_dict)
     return big_list
-
-
-read_csv_file_into_list_of_dicts_using_datatypes('text.txt')
