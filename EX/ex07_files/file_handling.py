@@ -531,6 +531,29 @@ def read_people_data(directory: str) -> dict:
     return new_dict
 
 
+def calculate_the_age(date1, date2):
+    day, month, year = date1.strftime('%d.%m.%Y').split('.')
+    day1, month1, year1 = date2.strftime('%d.%m.%Y').split('.')
+    if int(year1) - int(year) > 0:
+        if int(month1) - int(month) < 0:
+            age = int(year1) - int(year) - 1
+        elif int(month1) - int(month) > 0:
+            age = int(year1) - int(year)
+        elif int(month1) == int(month) and int(day1) - int(day) < 0:
+            age = int(year1) - int(year) - 1
+        else:
+            age = age = int(year1) - int(year)
+    else:
+        age = 0
+    return age
+
+
+def date_magic(x):
+    day, month, year = x.strftime('%d.%m.%Y').split('.')
+    x = int(year) * 1000 + int(month) * 100 + int(day)
+    return x
+
+
 def generate_people_report(person_data_directory: str, report_filename: str) -> None:
     """
     Generate report about people data.
@@ -570,4 +593,35 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     :param report_filename: Output file.
     :return: None
     """
-    pass
+    data = read_people_data(person_data_directory)
+    dead = []
+    alive = []
+    idk = []
+    for person in data:
+        if 'death' and 'birth' in data[person]:
+            data[person]['status'] = 'dead'
+            dead.append(person)
+        elif 'birth' in data[person]:
+            data[person]['status'] = 'alive'
+            alive.append(person)
+        else:
+            data[person]['status'] = None
+            data[person]['age'] = -1
+            idk.append(data[person])
+    sorted_with_normal_age = []
+    for person in data:
+        if data[person] not in idk:
+            a = data[person]
+            if data[person]['death'] is None:
+                age = calculate_the_age(data[person]['birth'], datetime.date.today())
+                data[person]['age'] = age
+                sorted_with_normal_age.append(data[person])
+            else:
+                age = calculate_the_age(data[person]['birth'], data[person]['death'])
+                data[person]['age'] = age
+                sorted_with_normal_age.append(data[person])
+    all_sorted_data = []
+    all_sorted_data.extend(sorted(sorted_with_normal_age, key=lambda x: (
+        x['age'], -date_magic(x['birth']), x['name'] if x['name'] is None else '', x['id'])))
+    all_sorted_data.extend(sorted(idk, key=lambda t: (t['name'] if t['name'] is None else '', t['id'])))
+    write_list_of_dicts_to_csv_file(report_filename, all_sorted_data)
