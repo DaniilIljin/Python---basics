@@ -637,5 +637,3 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
             dict_['death'] = dict_['death'].strftime('%d.%m.%Y')
     write_list_of_dicts_to_csv_file(report_filename, all_sorted_data)
 
-
-print(generate_people_report(r'C:\Users\Даниил\PycharmProjects\iti0102-2021\EX\ex07_files', 'test4.csv'))
