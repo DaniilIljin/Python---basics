@@ -556,8 +556,9 @@ def date_magic(x):
     x = int(year) * 1000 + int(month) * 100 + int(day)
     return x
 
+
 def add_status(data):
-    """Add status"""
+    """Add status."""
     dead = []
     alive = []
     idk = []
