@@ -605,7 +605,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
             data[person]['status'] = 'alive'
             alive.append(person)
         else:
-            data[person]['status'] = None
+            data[person]['status'] = 'alive'
             data[person]['age'] = -1
             idk.append(data[person])
     sorted_with_normal_age = []
@@ -625,3 +625,4 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         x['age'], -date_magic(x['birth']), x['name'] if x['name'] is None else '', x['id'])))
     all_sorted_data.extend(sorted(idk, key=lambda t: (t['name'] if t['name'] is None else '', t['id'])))
     write_list_of_dicts_to_csv_file(report_filename, all_sorted_data)
+
