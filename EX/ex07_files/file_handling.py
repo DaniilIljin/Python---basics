@@ -615,7 +615,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     for person in data:
         if data[person] not in idk:
             a = data[person]
-            if data[person]['death'] is None:
+            if data[person]['death'] == '-':
                 age = calculate_the_age(data[person]['birth'], datetime.date.today())
                 data[person]['age'] = age
                 sorted_with_normal_age.append(data[person])
@@ -625,7 +625,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
                 sorted_with_normal_age.append(data[person])
     all_sorted_data = []
     all_sorted_data.extend(sorted(sorted_with_normal_age, key=lambda x: (
-        x['age'], -date_magic(x['birth']), x['name'] if x['name'] is None else '', x['id'])))
+        x['age'], -date_magic(x['birth']), x['name'] if 'name' in x else '', x['id'])))
     all_sorted_data.extend(sorted(idk, key=lambda t: (t['name'] if t['name'] is None else '', t['id'])))
     for dict_ in all_sorted_data:
         if dict_['birth'] != '-' and dict_['death'] != '-':
