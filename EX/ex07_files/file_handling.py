@@ -532,6 +532,7 @@ def read_people_data(directory: str) -> dict:
 
 
 def calculate_the_age(date1, date2):
+    """Calculate the age of a person."""
     day, month, year = date1.strftime('%d.%m.%Y').split('.')
     day1, month1, year1 = date2.strftime('%d.%m.%Y').split('.')
     if int(year1) - int(year) > 0:
@@ -549,6 +550,7 @@ def calculate_the_age(date1, date2):
 
 
 def date_magic(x):
+    """Convert the date for lambda."""
     day, month, year = x.strftime('%d.%m.%Y').split('.')
     x = int(year) * 1000 + int(month) * 100 + int(day)
     return x
@@ -636,4 +638,3 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         elif dict_['death'] != '-':
             dict_['death'] = dict_['death'].strftime('%d.%m.%Y')
     write_list_of_dicts_to_csv_file(report_filename, all_sorted_data)
-
