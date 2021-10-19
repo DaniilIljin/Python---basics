@@ -474,6 +474,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
 def read_people_data(directory: str) -> dict:
     """
     Read people data from files.
+
     Files are inside directory. Read all *.csv files.
 
     Each file has an int field "id" which should be used to merge information.
@@ -555,6 +556,27 @@ def date_magic(x):
     x = int(year) * 1000 + int(month) * 100 + int(day)
     return x
 
+def add_status(data):
+    """Add status"""
+    dead = []
+    alive = []
+    idk = []
+    for person in data:
+        if data[person]['death'] is not None and data[person]['birth'] is not None:
+            data[person]['status'] = 'dead'
+            dead.append(person)
+        elif data[person]['birth'] is not None:
+            data[person]['death'] = '-'
+            data[person]['status'] = 'alive'
+            alive.append(person)
+        else:
+            data[person]['death'] = '-'
+            data[person]['birth'] = '-'
+            data[person]['status'] = 'alive'
+            data[person]['age'] = -1
+            idk.append(data[person])
+    return dead, alive, idk, data
+
 
 def generate_people_report(person_data_directory: str, report_filename: str) -> None:
     """
@@ -596,27 +618,10 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     :return: None
     """
     data = read_people_data(person_data_directory)
-    dead = []
-    alive = []
-    idk = []
-    for person in data:
-        if data[person]['death'] is not None and data[person]['birth'] is not None:
-            data[person]['status'] = 'dead'
-            dead.append(person)
-        elif data[person]['birth'] is not None:
-            data[person]['death'] = '-'
-            data[person]['status'] = 'alive'
-            alive.append(person)
-        else:
-            data[person]['death'] = '-'
-            data[person]['birth'] = '-'
-            data[person]['status'] = 'alive'
-            data[person]['age'] = -1
-            idk.append(data[person])
+    dead, alive, idk, data = add_status(data)
     sorted_with_normal_age = []
     for person in data:
         if data[person] not in idk:
-            a = data[person]
             if data[person]['death'] == '-':
                 age = calculate_the_age(data[person]['birth'], datetime.date.today())
                 data[person]['age'] = age
