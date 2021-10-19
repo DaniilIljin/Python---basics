@@ -598,13 +598,16 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     alive = []
     idk = []
     for person in data:
-        if 'death' and 'birth' in data[person]:
+        if data[person]['death'] is not None and data[person]['birth'] is not None:
             data[person]['status'] = 'dead'
             dead.append(person)
-        elif 'birth' in data[person]:
+        elif data[person]['birth'] is not None:
+            data[person]['death'] = '-'
             data[person]['status'] = 'alive'
             alive.append(person)
         else:
+            data[person]['death'] = '-'
+            data[person]['birth'] = '-'
             data[person]['status'] = 'alive'
             data[person]['age'] = -1
             idk.append(data[person])
@@ -624,5 +627,15 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     all_sorted_data.extend(sorted(sorted_with_normal_age, key=lambda x: (
         x['age'], -date_magic(x['birth']), x['name'] if x['name'] is None else '', x['id'])))
     all_sorted_data.extend(sorted(idk, key=lambda t: (t['name'] if t['name'] is None else '', t['id'])))
+    for dict_ in all_sorted_data:
+        if dict_['birth'] != '-' and dict_['death'] != '-':
+            dict_['birth'] = dict_['birth'].strftime('%d.%m.%Y')
+            dict_['death'] = dict_['death'].strftime('%d.%m.%Y')
+        elif dict_['birth'] != '-':
+            dict_['birth'] = dict_['birth'].strftime('%d.%m.%Y')
+        elif dict_['death'] != '-':
+            dict_['death'] = dict_['death'].strftime('%d.%m.%Y')
     write_list_of_dicts_to_csv_file(report_filename, all_sorted_data)
 
+
+print(generate_people_report(r'C:\Users\Даниил\PycharmProjects\iti0102-2021\EX\ex07_files', 'test4.csv'))
