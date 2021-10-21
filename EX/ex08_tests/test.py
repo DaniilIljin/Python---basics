@@ -26,9 +26,6 @@ def test_part2_minimal_testing_length():
 
 
 def test_par2_wrong_types():
-    types = [str, int, set, dict, tuple, list, float]
-    inputed_types = ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']
-    for index, type_ in enumerate(types):
-        actual_type = inputed_types[index]
-        answer = solution.generate_combined_list(1, actual_type)
-        assert isinstance(answer[0], type_)
+    answer = solution.generate_combined_list([(3, 'int'), (5, 'int'), (4, 'int')])
+    for item in answer:
+        assert isinstance(item, int)
