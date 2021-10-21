@@ -49,7 +49,7 @@ def test_par3_wrong_types():
     counter = 0
     for type_ in types:
         actual_type = inputed_types[counter]
-        answer = solution.generate_combined_list_unique([(1, actual_type)])
+        answer = solution.generate_combined_list_unique([(10, actual_type)])
         for element in answer:
             assert isinstance(element, type_)
         counter += 1
