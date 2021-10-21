@@ -12,10 +12,10 @@ def test_part1_int_correct_len():
 def test_part1_correct_type():
     types = [str, int, set, dict, tuple, list]
     inputed_types = ['string', 'int', 'set', 'dict', 'tuple', 'list']
-    for type_ in inputed_types:
-        actual_type = types[inputed_types.index(type_)]
-        answer = solution.generate_list(1, type_)
-        assert type(answer[0]) == actual_type
+    for index, type_ in types:
+        actual_type = inputed_types[index]
+        answer = solution.generate_list(1, actual_type)
+        assert isinstance(answer[0], type_)
 
 
 def test_part2_minimal_possible_length():
