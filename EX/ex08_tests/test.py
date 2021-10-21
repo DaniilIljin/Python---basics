@@ -1,7 +1,8 @@
 import solution
 
 
-def test_part1_int_correct_len():
+def test_part1_int_correct_length():
+    """Test possible lengths."""
     for size in range(200):
         for type_ in ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']:
             res = solution.generate_list(size, type_)
@@ -9,6 +10,7 @@ def test_part1_int_correct_len():
 
 
 def test_part1_correct_type():
+    """Test type in output."""
     types = [str, int, set, dict, tuple, list, float]
     inputed_types = ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']
     for index, type_ in enumerate(types):
@@ -18,6 +20,7 @@ def test_part1_correct_type():
 
 
 def test_part2_testing_length():
+    """Test possible lengths."""
     for type_ in ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']:
         for size in range(100):
             answer = solution.generate_combined_list([(size, type_)])
@@ -25,6 +28,7 @@ def test_part2_testing_length():
 
 
 def test_par2_wrong_types():
+    """Test type in output."""
     types = [str, int, set, dict, tuple, list, float]
     inputed_types = ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']
     counter = 0
@@ -37,6 +41,7 @@ def test_par2_wrong_types():
 
 
 def test_part3_testing_length():
+    """Test possible lengths."""
     for type_ in ['string', 'int', 'float']:
         for size in range(100):
             answer = solution.generate_combined_list_unique([(size, type_)])
@@ -44,6 +49,7 @@ def test_part3_testing_length():
 
 
 def test_part3_wrong_types():
+    """Test type in output."""
     types = [str, int, float]
     inputed_types = ['string', 'int', 'float']
     counter = 0
@@ -56,6 +62,7 @@ def test_part3_wrong_types():
 
 
 def test_part3_uniq_elements():
+    """Test if all elements are unique."""
     inputed_types = ['string', 'int', 'float']
     for type_ in inputed_types:
         answer = solution.generate_combined_list_unique([(10, type_)])
