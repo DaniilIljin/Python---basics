@@ -3,10 +3,10 @@ import solution
 
 
 def test_part1_int_correct_len():
-    input_amount = 5
-    res = solution.generate_list(input_amount, "string")
-    expected_len = 5
-    assert len(res) == expected_len
+    for size in range(20):
+        for type_ in ['string', 'int', 'set', 'dict', 'tuple', 'list']:
+            res = solution.generate_list(size, type_)
+            assert len(res) == size
 
 
 def test_part1_correct_type():
