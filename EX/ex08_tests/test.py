@@ -12,7 +12,7 @@ def test_part1_int_correct_len():
 def test_part1_correct_type():
     types = [str, int, set, dict, tuple, list]
     inputed_types = ['string', 'int', 'set', 'dict', 'tuple', 'list']
-    for index, type_ in types:
+    for index, type_ in enumerate(types):
         actual_type = inputed_types[index]
         answer = solution.generate_list(1, actual_type)
         assert isinstance(answer[0], type_)
