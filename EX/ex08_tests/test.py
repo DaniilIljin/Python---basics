@@ -37,7 +37,7 @@ def test_par2_wrong_types():
 
 
 def test_part3_size():
-    for size in range(200):
-        for type_ in ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']:
+    for type_ in ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']:
+        for size in range(200):
             res = solution.generate_combined_list_unique([(size, type_)])
             assert len(res) == size
