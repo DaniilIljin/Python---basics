@@ -20,7 +20,7 @@ def test_part1_correct_type():
 
 def test_part2_minimal_possible_length():
     for type_ in ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']:
-        for size in range(100):
+        for size in range(200):
             answer = solution.generate_combined_list([(size, type_)])
             assert len(answer) == size
 
@@ -32,3 +32,9 @@ def test_part2_correct_type():
         actual_type = inputed_types[index]
         answer = solution.generate_combined_list(1, actual_type)
         assert isinstance(answer[0], type_)
+
+
+def test_part2_wrong_type():
+    wrong_type = 'wrong_type'
+    if wrong_type not in ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']:
+        raise AssertionError
