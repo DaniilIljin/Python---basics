@@ -43,13 +43,21 @@ def test_part3_testing_length():
             assert len(answer) == size
 
 
-def test_par3_wrong_types():
+def test_part3_wrong_types():
     types = [str, int, float]
     inputed_types = ['string', 'int', 'float']
     counter = 0
     for type_ in types:
         actual_type = inputed_types[counter]
-        answer = solution.generate_combined_list_unique([(10, actual_type)])
+        answer = solution.generate_combined_list_unique([(1, actual_type)])
         for element in answer:
             assert isinstance(element, type_)
         counter += 1
+
+
+def test_part3_uniq_elements():
+    inputed_types = ['string', 'int', 'float']
+    for type_ in inputed_types:
+        answer = solution.generate_combined_list_unique([(10, type_)])
+        for element in answer:
+            assert answer.count(element) == 1
