@@ -1,4 +1,3 @@
-import pytest
 import solution
 
 
@@ -26,6 +25,11 @@ def test_part2_minimal_testing_length():
 
 
 def test_par2_wrong_types():
-    answer = solution.generate_combined_list([(3, 'int'), (5, 'int'), (4, 'int')])
-    for item in answer:
-        assert isinstance(item, int)
+    inputed_types = ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']
+    counter = 0
+    for element in inputed_types:
+        actual_type = inputed_types[counter]
+        answer = solution.generate_combined_list([(1, actual_type)])
+        for element in answer:
+            assert isinstance(element, (str, int, set, dict, tuple, list, float))
+        counter += 1
