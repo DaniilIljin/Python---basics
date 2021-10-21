@@ -18,9 +18,9 @@ def test_part1_correct_type():
         assert isinstance(answer[0], type_)
 
 
-
 def test_part2_minimal_possible_length():
     for type_ in ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']:
-        answer = solution.generate_combined_list([(3, type_), (5, type_), (4, type_)])
-        assert len(answer) == 5
+        for size in range(20):
+            answer = solution.generate_combined_list([(size, type_)])
+            assert len(answer) == size
 
