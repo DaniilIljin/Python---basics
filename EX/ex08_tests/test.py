@@ -35,6 +35,6 @@ def test_part2_correct_type():
 
 
 def test_part2_wrong_type():
-    wrong_type = 'wrong_type'
-    if wrong_type not in ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']:
-        raise AssertionError
+    answer = solution.generate_combined_list(5, 'string')
+    for item in answer:
+        assert isinstance(item, str)
