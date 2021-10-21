@@ -34,7 +34,3 @@ def test_part2_correct_type():
         assert isinstance(answer[0], type_)
 
 
-def test_part2_wrong_type():
-    answer = solution.generate_combined_list(5, 'string')
-    for item in answer:
-        assert isinstance(item, str)
