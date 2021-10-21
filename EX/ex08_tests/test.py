@@ -19,6 +19,7 @@ def test_part1_correct_type():
 
 
 def test_part2_minimal_possible_length():
-    answer = solution.generate_combined_list([(3, 'int'), (5, 'int'), (4, 'int')])
-    assert len(answer) == 5
+    for type_ in ['string', 'int', 'set', 'dict', 'tuple', 'list']:
+        answer = solution.generate_combined_list([(3, type_), (5, type_), (4, type_)])
+        assert len(answer) == 5
 
