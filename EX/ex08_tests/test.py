@@ -25,11 +25,12 @@ def test_part2_minimal_testing_length():
 
 
 def test_par2_wrong_types():
+    types = [str, int, set, dict, tuple, list, float]
     inputed_types = ['string', 'int', 'set', 'dict', 'tuple', 'list', 'float']
     counter = 0
-    for element in inputed_types:
+    for type_ in types:
         actual_type = inputed_types[counter]
         answer = solution.generate_combined_list([(1, actual_type)])
         for element in answer:
-            assert isinstance(element, (str, int, set, dict, tuple, list, float))
+            assert isinstance(element, type_)
         counter += 1
