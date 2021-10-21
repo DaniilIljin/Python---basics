@@ -41,3 +41,4 @@ def test_part3_size():
         for size in range(200):
             res = solution.generate_combined_list_unique([(size, type_)])
             assert len(res) == size
+
