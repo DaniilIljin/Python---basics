@@ -1,3 +1,6 @@
+"""EX08 2nd."""
+
+
 def students_study(time: int, coffee_needed: bool) -> bool:
     """
     Return True if students study in given circumstances.
@@ -38,7 +41,7 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
     (3, 1, 10) -> -1
     """
     if ordered_amount >= 0 and big_baskets >= 0 and small_baskets >= 0:
-        if big_baskets * 5 + small_baskets == ordered_amount:
+        if big_baskets * 5 + small_baskets >= ordered_amount:
             return small_baskets
         else:
             return -1
