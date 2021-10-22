@@ -5,20 +5,11 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     (19, False) -> True
     (1, True) -> False.
     """
-    # return 1 <= time <= 24 and (
-    #         1 <= time <= 4 and not coffee_needed or
-    #         5 <= time <= 17 and coffee_needed or
-    #         18 <= time <= 24 and not coffee_needed
-    #                             )
-    if 1 <= time <= 24:
-        if 1 <= time <= 4 and not coffee_needed:
-            return True
-        elif 5 <= time <= 17 and coffee_needed:
-            return True
-        elif 18 <= time <= 24 and not coffee_needed:
-            return True
-        else:
-            return False
+    return 1 <= time <= 24 and (
+            1 <= time <= 4 and not coffee_needed or
+            5 <= time <= 17 and coffee_needed or
+            18 <= time <= 24 and (not coffee_needed or coffee_needed)
+                                )
 
 
 def lottery(a: int, b: int, c: int) -> int:
