@@ -33,7 +33,7 @@ def test_lottery_testing_zero():
     assert solution.lottery(0, 0, 0) == 5
 
 
-# def test_lottery_testing_similar():
-#     """Test numbers in range(100)."""
-#     for num in range(1, 30):
-#         assert solution.lottery(num, num, num) == 5
+def test_lottery_testing_similar():
+    """Test positive."""
+    for num in range(1, 5):
+        assert solution.lottery(num, num, num) == 5
