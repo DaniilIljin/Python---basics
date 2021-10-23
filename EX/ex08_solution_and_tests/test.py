@@ -47,7 +47,7 @@ def test_lottery_testing_similar_negative():
 
 def test_lottery_testing_same_a_b_diff_c():
     for num in range(1, 4):
-        assert solution.lottery(num, num, num + 1) == 1
+        assert solution.lottery(num, num, num + 1) == 0
 
 #
 # def test_lottery_testing_same_a_c_diff_b():
