@@ -14,5 +14,4 @@ def test_students_study_right_time_for_coffee():
     #     else:
     #         assert solution.students_study(time, True) is True
     #         assert solution.students_study(time, False) is True
-    answer = solution.students_study(4, False)
-    assert answer
+    assert solution.students_study(1, False)
