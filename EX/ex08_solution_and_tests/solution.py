@@ -8,11 +8,8 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     (19, False) -> True
     (1, True) -> False.
     """
-    return 1 <= time <= 24 and (
-            1 <= time <= 4 and not coffee_needed or
-            5 <= time <= 17 and coffee_needed or
-            18 <= time <= 24 and (not coffee_needed or coffee_needed)
-                                )
+    return 1 <= time <= 24 and (1 <= time <= 4 and not coffee_needed or 5 <= time <= 17 and coffee_needed or
+                                18 <= time <= 24 and (not coffee_needed or coffee_needed))
 
 
 def lottery(a: int, b: int, c: int) -> int:
@@ -61,5 +58,3 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
             return -1
     else:
         return -1
-
-print(fruit_order(1, 2, 6))
