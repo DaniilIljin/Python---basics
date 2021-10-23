@@ -3,7 +3,7 @@ import solution
 
 
 def test_students_study_right_time_for_coffee():
-    """Test the right time for coffee"""
+    """Test the right time for coffee."""
     # for time in range(1, 25):
     #     if 1 <= time <= 4:
     #         assert solution.students_study(time, False) is True
@@ -15,5 +15,4 @@ def test_students_study_right_time_for_coffee():
     #         assert solution.students_study(time, True) is True
     #         assert solution.students_study(time, False) is True
     answer = solution.students_study(4, False)
-    assert answer is True
-
+    assert answer
