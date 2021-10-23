@@ -33,7 +33,14 @@ def test_lottery_testing_zero():
     assert solution.lottery(0, 0, 0) == 5
 
 
-def test_lottery_testing_similar():
+def test_lottery_testing_similar_positive():
     """Test positive."""
     for num in range(1, 5):
         assert solution.lottery(num, num, num) == 5
+
+
+def test_lottery_testing_similar_negative():
+    """Test negative."""
+    for num in range(-15, -5):
+        assert solution.lottery(num, num, num) == 5
+
