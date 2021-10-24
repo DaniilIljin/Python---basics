@@ -90,3 +90,7 @@ def test_fruit_order__zero_amount_zero_big():
 
 def test_fruit_order__zero_amount_others_not_zero():
     assert solution.fruit_order(5, 6, 0) == 0
+
+
+def test_fruit_order__only_big_not_enough_but_multiple_of_5():
+    assert solution.fruit_order(0, 3, 20) == -1
