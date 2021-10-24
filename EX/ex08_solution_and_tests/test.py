@@ -130,3 +130,7 @@ def test_fruit_order__use_some_smalls_some_bigs():
 
 def test_fruit_order__enough_bigs_not_enough_smalls():
     assert solution.fruit_order(1, 5, 22) == -1
+
+
+def test_fruit_order__not_enough_with_more_than_5_smalls():
+    assert solution.fruit_order(6, 3, 22) == -1
