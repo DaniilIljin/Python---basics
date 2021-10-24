@@ -159,4 +159,4 @@ def test_fruit_order__match_large_numbers():
 
 def test_fruit_order__enough_bigs_not_enough_smalls_large_numbers():
     """O."""
-    assert solution.fruit_order(400, 1000, 5500) == -1
+    assert solution.fruit_order(2, 1100, 5503) == -1
