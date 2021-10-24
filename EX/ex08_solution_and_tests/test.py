@@ -99,3 +99,6 @@ def test_fruit_order__only_big_not_enough_but_multiple_of_5():
 def test_fruit_order__only_big_more_than_required_match():
     assert solution.fruit_order(0, 6, 20) == 0
 
+
+def test_fruit_order__only_small_match_more_than_5_smalls():
+    assert solution.fruit_order(6, 0, 6) == 6
