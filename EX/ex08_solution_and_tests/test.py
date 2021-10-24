@@ -112,5 +112,8 @@ def test_fruit_order__only_small_more_than_required():
     assert solution.fruit_order(7, 0, 6) == 6
 
 
-def test_fruit_order__match_with_more_than_5_smalls():
-    assert solution.fruit_order(15, 0, 15) == 15
+# def test_fruit_order__match_with_more_than_5_smalls():
+#     assert solution.fruit_order(15, 0, 15) == 15
+def test_fruit_order__all_positive_exact_match():
+    assert solution.fruit_order(7, 3, 22) == 7
+
