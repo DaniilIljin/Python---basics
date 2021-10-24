@@ -58,8 +58,8 @@ def test_lottery_testing_same_a_c_diff_b():
     for num in range(1, 5):
         assert solution.lottery(num, num + 1, num) == 0
 
-
-def test_lottery_testing_same_c_b_diff_a():
-    """Two are same."""
-    for num in range(1, 5):
-        assert solution.lottery(num + 1, num, num) == 0
+#
+# def test_lottery_testing_same_c_b_diff_a():
+#     """Two are same."""
+#     for num in range(1, 5):
+#         assert solution.lottery(num + 1, num, num) == 0
