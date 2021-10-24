@@ -86,3 +86,7 @@ def test_fruit_order__zero_amount_zero_small():
 
 def test_fruit_order__zero_amount_zero_big():
     assert solution.fruit_order(5, 0, 0) == 0
+
+
+def test_fruit_order__zero_amount_others_not_zero():
+    assert solution.fruit_order(5, 6, 0) == 0
