@@ -82,3 +82,7 @@ def test_fruit_order__only_small_exact_match():
 
 def test_fruit_order__zero_amount_zero_small():
     assert solution.fruit_order(0, 5, 0) == 0
+
+
+def test_fruit_order__zero_amount_zero_big():
+    assert solution.fruit_order(5, 0, 0) == 0
