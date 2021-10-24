@@ -64,3 +64,7 @@ def test_lottery_testing_same_a_c_diff_b():
 #     assert solution.lottery(6, 1, 1) == 0
 def test_fruit_order__all_zero():
     assert solution.fruit_order(0, 0, 0) == 0
+
+
+def test_fruit_order__zero_amount_zero_small():
+    assert solution.fruit_order(0, 5, 8) == -1
