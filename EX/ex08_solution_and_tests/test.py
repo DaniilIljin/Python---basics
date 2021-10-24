@@ -122,3 +122,7 @@ def test_fruit_order__use_all_smalls_some_bigs():
 
 def test_fruit_order__use_some_smalls_all_bigs():
     assert solution.fruit_order(7, 4, 22) == 2
+
+
+def test_fruit_order__use_some_smalls_some_bigs():
+    assert solution.fruit_order(7, 8, 22) == 2
