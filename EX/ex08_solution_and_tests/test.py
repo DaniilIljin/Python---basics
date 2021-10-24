@@ -63,8 +63,12 @@ def test_lottery_testing_same_a_c_diff_b():
 #     """Two are same."""
 #     assert solution.lottery(6, 1, 1) == 0
 def test_fruit_order__all_zero():
+    """All zeros."""
     assert solution.fruit_order(0, 0, 0) == 0
 
 
-def test_fruit_order__zero_amount_zero_small():
+def test_fruit_order__only_big_more_than_required_no_match():
     assert solution.fruit_order(0, 5, 8) == -1
+
+def test_fruit_order__zero_amount_zero_small():
+    assert solution.fruit_order(0, 2, 10) == 0
