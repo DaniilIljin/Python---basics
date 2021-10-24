@@ -59,6 +59,8 @@ def test_lottery_testing_same_a_c_diff_b():
         assert solution.lottery(num, num + 1, num) == 0
 
 
-def test_lottery_testing_same_c_b_diff_a():
-    """Two are same."""
-    assert solution.lottery(6, 1, 1) == 0
+# def test_lottery_testing_same_c_b_diff_a():
+#     """Two are same."""
+#     assert solution.lottery(6, 1, 1) == 0
+def test_fruit_order__all_zero():
+    assert solution.fruit_order(0, 0, 0) == 0

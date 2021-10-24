@@ -55,5 +55,7 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
                 return -1
         else:
             return -1
+    elif ordered_amount < 0 <= small_baskets:
+        return 0
     else:
         return -1
