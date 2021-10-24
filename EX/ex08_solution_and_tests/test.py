@@ -155,3 +155,8 @@ def test_fruit_order__not_enough_with_more_than_5_smalls():
 def test_fruit_order__match_large_numbers():
     """O."""
     assert solution.fruit_order(500, 1000, 5500) == 500
+
+
+def test_fruit_order__enough_bigs_not_enough_smalls_large_numbers():
+    """O."""
+    assert solution.fruit_order(400, 1000, 5500) == -1
