@@ -62,4 +62,7 @@ def test_lottery_testing_same_a_c_diff_b():
 def test_lottery_testing_same_c_b_diff_a():
     """Two are same."""
     for num in range(1, 3):
-        assert solution.lottery(num + 1, num, num) == 0
+        a = num + 1
+        b = num
+        c = num
+        assert solution.lottery(a, b, c) == 0

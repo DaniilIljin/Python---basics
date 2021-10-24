@@ -23,7 +23,7 @@ def lottery(a: int, b: int, c: int) -> int:
         return 10
     elif a == b == c:
         return 5
-    elif a != b and a != c:
+    elif a != b and a != c and b != c:
         return 1
     else:
         return 0
