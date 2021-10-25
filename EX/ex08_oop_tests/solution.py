@@ -1,11 +1,13 @@
 class Factory:
 
     def __init__(self):
+        """Initiate a Factory class."""
         self.small_count = 0
         self.medium_count = 0
         self.large_count = 0
 
     def bake_cake(self, toppings: int, base: int) -> int:
+        """Start baking."""
         count = 0
         if toppings == base >= 0:
             if toppings >= 5:
@@ -36,6 +38,7 @@ class Factory:
         return count
 
     def get_last_cakes(self, n: int) -> list:
+        """Get list of last cakes."""
         list_of_cakes = self.get_cakes_baked()
         index = -n
         if index != 0:
@@ -45,6 +48,7 @@ class Factory:
             return []
 
     def get_cakes_baked(self) -> list:
+        """list of baked cakes."""
         list_of_cakes = []
         for large in range(self.large_count):
             list_of_cakes.append(Cake(5, 5))
@@ -56,8 +60,8 @@ class Factory:
         return list_of_cakes
 
     def __str__(self):
-        x = len(Factory.get_cakes_baked(self))
-        if x == 1:
+        """How many factory made."""
+        if len(Factory.get_cakes_baked(self)) == 1:
             return f"Factory with {len(Factory.get_cakes_baked(self))} cake."
         else:
             return f"Factory with {len(Factory.get_cakes_baked(self))} cakes."
@@ -66,6 +70,7 @@ class Factory:
 class Cake:
 
     def __init__(self, base_amount, toppings_amount):
+        """Right cakes."""
         if base_amount == toppings_amount and base_amount in (1, 2, 5):
             self.base_amount = base_amount
             self.toppings_amount = toppings_amount
@@ -82,6 +87,7 @@ class Cake:
             return 'large'
 
     def __repr__(self):
+        """Define typo of cake."""
         if self.toppings_amount == self.base_amount == 1:
             return "Cake(basic)"
         elif self.toppings_amount == self.base_amount == 2:
@@ -90,6 +96,7 @@ class Cake:
             return "Cake(large)"
 
     def __eq__(self, other):
+        """Compare cakes."""
         return self.toppings_amount, self.base_amount == other.toppings_amount, other.base_amount
 
 
