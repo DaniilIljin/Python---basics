@@ -1,4 +1,4 @@
-"""EX08 Making new classes."""
+"""EX08 Cakes making."""
 
 
 class Factory:
@@ -79,8 +79,8 @@ class Cake:
         else:
             raise WrongIngredientsAmountException
 
+    @property
     def type(self):
-        """Define a type of cake."""
         if self.toppings_amount == self.base_amount == 1:
             return "basic"
         elif self.toppings_amount == self.base_amount == 2:
