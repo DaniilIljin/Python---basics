@@ -81,9 +81,16 @@ def x_sum_recursion(nums, x) -> int:
     """
     if x == 0:
         return 0
-    else:
+    elif x > 0:
+        index = x - 1
         try:
-            return nums[lambda inputs: inputs == x -1 if x > 0 else inputs == x] + x_sum_loop(lambda inputs: inputs == nums[x:] if x > 0 else inputs == nums[:x], x)
+            return nums[index] + x_sum_loop(nums[index + 1:], x)
+        except IndexError:
+            return 0
+    else:
+        index = x
+        try:
+            return nums[index] + x_sum_loop(nums[:index], x)
         except IndexError:
             return 0
 
@@ -167,3 +174,4 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     :return: dict of given symbols and their count
     """
     pass
+
