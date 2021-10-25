@@ -100,7 +100,7 @@ def lets_count_calories(salad: float, chocolate_pieces: int, fridge_visits: int)
     Return how many calories Kadri eats.
 
     Every time Kadri goes to fridge, she wants to eat something. In case she has salad in her fridge, she eats exactly 100g
-    of it, no matter what. If she has chocolate in the fridge and she had just eaten salad, she takes one piece of
+    of it, no matter what.  If she has chocolate in the fridge and she had just eaten salad, she takes one piece of
     chocolate. In case she came to fridge and didn't have any salad to eat, she takes two pieces of chocolate (if she
     has at least two pieces, if she doesn't, she takes just one). She keeps on going to the fridge for a little snack until
     she either runs out of fridge visits or snacks.
