@@ -83,12 +83,7 @@ def x_sum_recursion(nums, x) -> int:
         return 0
     else:
         try:
-            if x < 0:
-                index = x
-                return nums[index] + x_sum_loop(nums[index + 1:], x)
-            else:
-                index = x - 1
-                return nums[index] + x_sum_loop(nums[:index], x)
+            return nums[lambda inputs: inputs == x -1 if x > 0 else inputs == x] + x_sum_loop(lambda inputs: inputs == nums[x:] if x > 0 else inputs == nums[:x], x)
         except IndexError:
             return 0
 
