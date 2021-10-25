@@ -2,6 +2,7 @@
 
 
 class Factory:
+    """Factory to make cakes."""
 
     def __init__(self):
         """Initiate a Factory class."""
@@ -70,6 +71,7 @@ class Factory:
 
 
 class Cake:
+    """My tasty cakes."""
 
     def __init__(self, base_amount, toppings_amount):
         """Right cakes."""
@@ -81,6 +83,7 @@ class Cake:
 
     @property
     def type(self):
+        """Define a type of specific cake."""
         if self.toppings_amount == self.base_amount == 1:
             return "basic"
         elif self.toppings_amount == self.base_amount == 2:
@@ -89,7 +92,7 @@ class Cake:
             return 'large'
 
     def __repr__(self):
-        """Define typo of cake."""
+        """Define type of cake."""
         if self.toppings_amount == self.base_amount == 1:
             return "Cake(basic)"
         elif self.toppings_amount == self.base_amount == 2:
