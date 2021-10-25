@@ -1,3 +1,6 @@
+"""EX08 Making new classes."""
+
+
 class Factory:
 
     def __init__(self):
@@ -56,7 +59,6 @@ class Factory:
             list_of_cakes.append(Cake(2, 2))
         for small in range(self.small_count):
             list_of_cakes.append(Cake(1, 1))
-        x = len(list_of_cakes)
         return list_of_cakes
 
     def __str__(self):
@@ -77,8 +79,8 @@ class Cake:
         else:
             raise WrongIngredientsAmountException
 
-    @property
     def type(self):
+        """Define a type of cake."""
         if self.toppings_amount == self.base_amount == 1:
             return "basic"
         elif self.toppings_amount == self.base_amount == 2:
