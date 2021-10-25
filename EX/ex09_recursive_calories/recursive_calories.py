@@ -1,4 +1,4 @@
-"""Let's count calories!"""
+"""Let's count calories!."""
 
 
 def recursive_reverse(s: str) -> str:
