@@ -97,20 +97,6 @@ def x_sum_recursion(nums, x) -> int:
         return number + x_sum_recursion(the_rest_of_nums, x)
     except IndexError:
         return 0
-    # if x == 0:
-    #     return 0
-    # elif x > 0:
-    #     index = x - 1
-    #     try:
-    #         return nums[index] + x_sum_recursion(nums[index + 1:], x)
-    #     except IndexError:
-    #         return 0
-    # else:
-    #     index = x
-    #     try:
-    #         return nums[index] + x_sum_recursion(nums[:index], x)
-    #     except IndexError:
-    #         return 0
 
 
 def lets_count_calories(salad: float, chocolate_pieces: int, fridge_visits: int) -> int:
@@ -140,7 +126,27 @@ def lets_count_calories(salad: float, chocolate_pieces: int, fridge_visits: int)
     :param chocolate_pieces: pieces of chocolate in the fridge.
     :return: calories eaten while visiting fridge.
     """
-    pass
+    if fridge_visits == 0:
+        return 0
+    else:
+        n = fridge_visits
+        u = salad
+        c = chocolate_pieces
+        salad = round(salad, 1)
+        u = salad
+        ch_multiplier = 1
+        s_multiplier = 1
+        if salad <= 0:
+            s_multiplier = 0
+            if chocolate_pieces > 1:
+                ch_multiplier += 1
+                chocolate_pieces -= 1
+        if chocolate_pieces <= 0:
+            ch_multiplier = 0
+        fridge_visits -= 1
+        salad -= 0.1
+        chocolate_pieces -= 1
+        return s_multiplier * 120 + ch_multiplier * 34 + lets_count_calories(salad, chocolate_pieces, fridge_visits)
 
 
 def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str:
@@ -194,4 +200,5 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     pass
 
 
-print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
+print(lets_count_calories(0, 4, 2))  # 4 * 34 = 136
+
