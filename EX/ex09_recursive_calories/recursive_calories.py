@@ -82,17 +82,15 @@ def x_sum_recursion(nums, x) -> int:
     if x == 0:
         return 0
     elif x > 0:
-        index = x - 1
-        try:
-            return nums[index] + x_sum_loop(nums[index + 1:], x)
-        except IndexError:
-            return 0
+        number = nums[x-1]
+        the_rest_of_nums = nums[x-1:]
     else:
-        index = x
-        try:
-            return nums[index] + x_sum_loop(nums[:index], x)
-        except IndexError:
-            return 0
+        number = nums[x]
+        the_rest_of_nums = nums[:x]
+    try:
+        return number + x_sum_loop(the_rest_of_nums)
+    except IndexError:
+        return 0
 
 
 def lets_count_calories(salad: float, chocolate_pieces: int, fridge_visits: int) -> int:
