@@ -175,7 +175,24 @@ def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str
     :param index: index to know which cyclist's turn it is to be first
     :return: string indicating the last cyclist to carry the others
     """
-    pass
+    if cyclists == [] or distance == 0:
+        return 'Everyone fails.'
+    else:
+        n = index
+        t = time
+        d = distance
+        if index > len(cyclists) - 1:
+            index = 0
+        distance -= cyclists[index][1]
+        distance = round(distance, 1)
+        time += cyclists[index][2]
+        if distance <= 0:
+            cyclist1 = cyclists[index][0]
+            hours = time // 60
+            minutes = time - hours * 60
+            return f"{cyclist1} is the last leader. Total time: {hours}h {minutes}min."
+        index += 1
+        return cycle(cyclists, distance, time, index)
 
 
 def count_strings(data: list, pos=None, result: dict = None) -> dict:
@@ -198,7 +215,3 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     :return: dict of given symbols and their count
     """
     pass
-
-
-print(lets_count_calories(0, 4, 2))  # 4 * 34 = 136
-
