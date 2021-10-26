@@ -88,7 +88,7 @@ def x_sum_recursion(nums, x) -> int:
         number = nums[x]
         the_rest_of_nums = nums[:x]
     try:
-        return number + x_sum_recursion(the_rest_of_nums)
+        return number + x_sum_recursion(the_rest_of_nums, x)
     except IndexError:
         return 0
 
