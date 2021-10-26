@@ -84,7 +84,7 @@ def x_sum_recursion(nums, x) -> int:
     elif x > 0:
         try:
             number = nums[x-1]
-            the_rest_of_nums = nums[x-1:]
+            the_rest_of_nums = nums[x:]
         except IndexError:
             return 0
     else:
@@ -194,4 +194,4 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     pass
 
 
-print(x_sum_recursion([1, 2], -9))  # 0
+print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
