@@ -129,11 +129,7 @@ def lets_count_calories(salad: float, chocolate_pieces: int, fridge_visits: int)
     if fridge_visits == 0:
         return 0
     else:
-        n = fridge_visits
-        u = salad
-        c = chocolate_pieces
         salad = round(salad, 1)
-        u = salad
         ch_multiplier = 1
         s_multiplier = 1
         if salad <= 0:
@@ -178,9 +174,6 @@ def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str
     if cyclists == [] or distance == 0:
         return 'Everyone fails.'
     else:
-        n = index
-        t = time
-        d = distance
         if index > len(cyclists) - 1:
             index = 0
         distance -= cyclists[index][1]
