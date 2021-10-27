@@ -188,6 +188,21 @@ def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str
         return cycle(cyclists, distance, time, index)
 
 
+def another_recursion(data: list, result: dict, must_be_checked: list, pos: int):
+    """To make more recursion."""
+    if pos + 1> len(data):
+        return result, must_be_checked
+    if isinstance(data[pos], str):
+        if data[pos] in result:
+            result[data[pos]] += 1
+        else:
+            result[data[pos]] = 1
+    else:
+        must_be_checked.append(data[pos])
+    pos += 1
+    return another_recursion(data, result, must_be_checked, pos)
+
+
 def count_strings(data: list, pos=None, result: dict = None) -> dict:
     """
     Count strings in list.
@@ -209,17 +224,12 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     """
     if not data:
         return result
+    if pos is None:
+        pos = 0
     if result is None:
         result = {}
     must_be_checked = []
-    for index, element in enumerate(data):
-        if isinstance(element, str):
-            if element in result:
-                result[element] += 1
-            else:
-                result[element] = 1
-        else:
-            must_be_checked.append(element)
+    result, must_be_checked = another_recursion(data, result, must_be_checked, pos)
     data = []
     for element1 in must_be_checked:
         data.extend(element1)
