@@ -83,7 +83,7 @@ def x_sum_recursion(nums, x) -> int:
         return 0
     elif x > 0:
         try:
-            number = nums[x-1]
+            number = nums[x - 1]
             the_rest_of_nums = nums[x:]
         except IndexError:
             return 0
@@ -207,4 +207,25 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     :param result: figure out how to use it
     :return: dict of given symbols and their count
     """
-    pass
+    if not data:
+        return result
+    if result is None:
+        result = {}
+    must_be_checked = []
+    for index, element in enumerate(data):
+        if isinstance(element, str):
+            if element in result:
+                result[element] += 1
+            else:
+                result[element] = 1
+        else:
+            must_be_checked.append(element)
+    data = []
+    r = result
+    for element1 in must_be_checked:
+        data.extend(element1)
+    n = data
+    if not data:
+        return result
+    else:
+        return count_strings(data, pos, result)
