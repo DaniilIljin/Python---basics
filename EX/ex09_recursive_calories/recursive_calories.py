@@ -221,11 +221,6 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
         else:
             must_be_checked.append(element)
     data = []
-    r = result
     for element1 in must_be_checked:
         data.extend(element1)
-    n = data
-    if not data:
-        return result
-    else:
-        return count_strings(data, pos, result)
+    return count_strings(data, pos, result)
