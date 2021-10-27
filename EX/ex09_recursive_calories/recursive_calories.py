@@ -190,7 +190,7 @@ def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str
 
 def another_recursion(data: list, result: dict, must_be_checked: list, pos: int):
     """To make more recursion."""
-    if pos + 1> len(data):
+    if pos + 1 > len(data):
         return result, must_be_checked
     if isinstance(data[pos], str):
         if data[pos] in result:
