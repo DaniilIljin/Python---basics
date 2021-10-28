@@ -16,14 +16,17 @@ def add_char_into_pos(char: str, pos: int, string: str) -> str:
     """
     if string == '' and pos == 1:
         return char
-    elif pos < len(string) or -pos < len(string):
-        return string[:pos - 1] + char + string[pos - 1:]
-    elif pos == len(string) or -pos == len(string):
-        return string + char
-    elif string == '' and pos == 1:
-        return char
-    else:
+    elif string == '':
         return string
+    else:
+        if 1 < pos <= len(string) or 1 < -pos <= len(string):
+            return string[:pos - 1] + char + string[pos - 1:]
+        elif pos == 1:
+            return char + string
+        elif pos == len(string) + 1:
+            return string + char
+        else:
+            return string
 
 
 def nr_of_common_characters(string1: str, string2: str) -> int:
