@@ -47,8 +47,7 @@ def nr_of_common_characters(string1: str, string2: str) -> int:
         set_of_characters1.add(chr1)
     for chr2 in string2:
         set_of_characters2.add(chr2)
-    common = set_of_characters2 & set_of_characters1
-    return len(common)
+    return len(set_of_characters2 & set_of_characters1)
 
 
 def nr_into_num_list(nr: int, num_list: list) -> list:
@@ -63,7 +62,15 @@ def nr_into_num_list(nr: int, num_list: list) -> list:
     nr_into_num_list(0, [1,2,3,4,5]) -> [0,1,2,3,4,5,]
 
     """
-    pass
+    if not num_list:
+        return [nr]
+    else:
+        sorted_list = []
+        num_list.append(nr)
+        for repeat in range(len(num_list)):
+            sorted_list.append(min(num_list))
+            num_list.remove(min(num_list))
+        return sorted_list
 
 
 def symbol_average_position_in_words(words):
