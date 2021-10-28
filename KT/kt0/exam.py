@@ -1,5 +1,6 @@
 """KT0."""
 
+
 def add_char_into_pos(char: str, pos: int, string: str) -> str:
     """
     Return a string where a given character is added into a given position in a string
@@ -13,7 +14,12 @@ def add_char_into_pos(char: str, pos: int, string: str) -> str:
     add_char_into_pos("k", 10, "kalla") -> "kalla"
 
     """
-    pass
+    if string != '' and (pos <= len(string) or -pos <= len(string)):
+        return string[:pos - 1] + char + string[pos - 1:]
+    elif string == '' and pos == 1:
+        return char
+    else:
+        return string
 
 
 def nr_of_common_characters(string1: str, string2: str) -> int:
