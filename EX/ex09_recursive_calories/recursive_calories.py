@@ -76,7 +76,7 @@ def x_sum_recursion(nums, x) -> int:
     print(x_sum_recursion([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
 
     :param nums: list of integer
-    :param x: number indicating every which num to add to sum
+    :param x: number indicating every which num to add  to sum
     :return: sum of every x'th number in the list
     """
     if x == 0:
