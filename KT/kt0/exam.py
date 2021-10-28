@@ -41,7 +41,14 @@ def nr_of_common_characters(string1: str, string2: str) -> int:
     common_characters("memm", "") -> 0
 
     """
-    pass
+    set_of_characters1 = set()
+    set_of_characters2 = set()
+    for chr1 in string1:
+        set_of_characters1.add(chr1)
+    for chr2 in string2:
+        set_of_characters2.add(chr2)
+    common = set_of_characters2 & set_of_characters1
+    return len(common)
 
 
 def nr_into_num_list(nr: int, num_list: list) -> list:
