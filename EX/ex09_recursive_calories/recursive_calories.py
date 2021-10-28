@@ -81,18 +81,14 @@ def x_sum_recursion(nums, x) -> int:
     """
     if x == 0:
         return 0
-    elif x > 0:
-        try:
-            number = nums[x - 1]
-            the_rest_of_nums = nums[x:]
-        except IndexError:
-            return 0
+    elif 0 < x <= len(nums):
+        number = nums[x - 1]
+        the_rest_of_nums = nums[x:]
+    elif x < 0 and -x <= len(nums):
+        number = nums[x]
+        the_rest_of_nums = nums[:x]
     else:
-        try:
-            number = nums[x]
-            the_rest_of_nums = nums[:x]
-        except IndexError:
-            return 0
+        return 0
     try:
         return number + x_sum_recursion(the_rest_of_nums, x)
     except IndexError:
