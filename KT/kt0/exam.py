@@ -3,7 +3,7 @@
 
 def add_char_into_pos(char: str, pos: int, string: str) -> str:
     """
-    Return a string where a given character is added into a given position in a string
+    Return a string where a given character is added into a given position in a string.
 
     In the case of empty string and position 1, return the given character.
 
