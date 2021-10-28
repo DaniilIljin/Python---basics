@@ -114,4 +114,17 @@ def symbol_average_position_in_words(words):
     :param words: list of words
     :return: dictionary with symbol average positions
     """
-    pass
+    dict_of_chars = {}
+    for word in words:
+        if word != '':
+            for index, char in enumerate(word):
+                if char in dict_of_chars:
+                    dict_of_chars[char] += [index]
+                else:
+                    dict_of_chars[char] = [index]
+    for key, value in dict_of_chars.items():
+        total = 0
+        for num in value:
+            total += num
+        dict_of_chars[key] = round(total / len(value), 2)
+    return dict_of_chars
