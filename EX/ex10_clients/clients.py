@@ -115,7 +115,16 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest loss.
     """
-    pass
+    checking_earnings = []
+    for client in list_of_clients:
+        earnings = client.current_amount - client.starting_amount
+        if earnings < 0:
+            checking_earnings.append(client)
+    if not checking_earnings:
+        return None
+    else:
+        sorted_clients = sorted(list_of_clients, key=lambda person: (person.earnings_per_day(), person.account_age))
+        return sorted_clients[0]
 
 
 if __name__ == '__main__':
@@ -126,4 +135,3 @@ if __name__ == '__main__':
     print(largest_earnings_per_day("clients_info.txt"))  # -> Josh
 
     print(largest_loss_per_day("clients_info.txt"))  # -> Franz
-    print(list_of_clients)
