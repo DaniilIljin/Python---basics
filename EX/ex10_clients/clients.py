@@ -14,6 +14,7 @@ class Client:
     the starting amount of money and
     the current amount of money.
     """
+
     def __init__(self, name: str, bank: str, account_age: int, starting_amount: int, current_amount: int):
         """
         Client constructor.
@@ -33,13 +34,14 @@ class Client:
     def __repr__(self):
         """
         Client representation.
+
         :return: clients name
         """
         return self.name
 
     def earnings_per_day(self):
         """
-        Clients earnings per day since the start.
+        Client(s) earnings per day since the start.
 
         You can either calculate the value or
         save it into a new attribute and return the value.
