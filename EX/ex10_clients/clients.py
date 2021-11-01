@@ -62,12 +62,10 @@ def read_from_file_into_list(filename: str) -> list:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             new_list.append(row)
-    list_of_names = []
     for person in new_list:
         new_client = Client(person[0], person[1], int(person[2]), int(person[3]), int(person[4]))
-        list_of_names.append(new_client.name)
         list_of_clients.append(new_client)
-    return list_of_names
+    return list_of_clients
 
 
 def filter_by_bank(filename: str, bank: str) -> list:
