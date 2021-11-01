@@ -63,7 +63,7 @@ def read_from_file_into_list(filename: str) -> list:
         for row in csv_reader:
             new_list.append(row)
     list_of_names = []
-    for index, person in enumerate(new_list):
+    for person in new_list:
         new_client = Client(person[0], person[1], int(person[2]), int(person[3]), int(person[4]))
         list_of_names.append(new_client.name)
         list_of_clients.append(new_client)
@@ -95,8 +95,8 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     :return: client with largest earnings.
     """
     checking_earnings = []
-    for client in list_of_clients:
-        earnings = client.current_amount - client.starting_amount
+    for index, client in enumerate(list_of_clients):
+        earnings = list_of_clients[index].current_amount - list_of_clients[index].starting_amount
         if earnings <= 0:
             checking_earnings.append(client)
     if len(checking_earnings) == len(list_of_clients):
@@ -116,8 +116,8 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     :return: client with largest loss.
     """
     checking_earnings = []
-    for client in list_of_clients:
-        earnings = client.current_amount - client.starting_amount
+    for index, client in enumerate(list_of_clients):
+        earnings = list_of_clients[index].current_amount - list_of_clients[index].starting_amount
         if earnings < 0:
             checking_earnings.append(client)
     if not checking_earnings:
