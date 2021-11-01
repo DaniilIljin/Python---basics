@@ -81,6 +81,7 @@ def sort_by_least_hobbies(people_list: list) -> list:
 def sort_people_and_hobbies(people_list: list) -> list:
     """
     Return a list of people but sorted alphabetically by their full name.
+
     Also sort their list of hobbies alphabetically.
 
     :param people_list: list of people to sort.
@@ -89,6 +90,7 @@ def sort_people_and_hobbies(people_list: list) -> list:
     for person in people_list:
         person.hobbies = sorted(person.hobbies)
     return sorted(people_list, key=lambda person0: person0.full_name)
+
 
 if __name__ == '__main__':
     person1 = Person("Mari", "Kukk", ["dancing", "biking", "programming"])
