@@ -3,9 +3,6 @@ from typing import Optional
 import csv
 
 
-list_of_clients = []
-
-
 class Client:
     """
     Class for clients.
@@ -57,6 +54,7 @@ def read_from_file_into_list(filename: str) -> list:
     :param filename: name of file to get info from.
     :return: list of clients.
     """
+    list_of_clients = []
     new_list = []
     with open(filename) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -76,6 +74,7 @@ def filter_by_bank(filename: str, bank: str) -> list:
     :param bank: to filter by.
     :return: filtered list of people.
     """
+    list_of_clients = read_from_file_into_list(filename)
     clients_of_the_bank = []
     for client in list_of_clients:
         if client.bank == bank:
@@ -92,6 +91,7 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest earnings.
     """
+    list_of_clients = read_from_file_into_list(filename)
     checking_earnings = []
     for index, client in enumerate(list_of_clients):
         earnings = list_of_clients[index].current_amount - list_of_clients[index].starting_amount
@@ -113,6 +113,7 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest loss.
     """
+    list_of_clients = read_from_file_into_list(filename)
     checking_earnings = []
     for index, client in enumerate(list_of_clients):
         earnings = list_of_clients[index].current_amount - list_of_clients[index].starting_amount
