@@ -65,7 +65,7 @@ def read_from_file_into_list(filename: str) -> list:
     list_of_names = []
     for index, person in enumerate(new_list):
         new_client = Client(person[0], person[1], int(person[2]), int(person[3]), int(person[4]))
-        list_of_names.append(new_client.__repr__())
+        list_of_names.append(new_client.name)
         list_of_clients.append(new_client)
     return list_of_names
 
