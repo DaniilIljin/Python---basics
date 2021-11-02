@@ -52,7 +52,10 @@ def list_move(initial_list: list, amount: int, factor: int) -> list:
     list_move([], 3, 4) => [[], [], [], []]
     """
     if not initial_list:
-        return [initial_list * amount]
+        list_of_lists = []
+        for i in range(amount):
+            list_of_lists.append([])
+        return list_of_lists
     else:
         final_list = [initial_list]
         for i in range(amount - 1):
@@ -110,4 +113,4 @@ def parse_call_log(call_log: str) -> dict:
     """
     pass
 
-print(has_seven([7, 1, 7, 1, 1, 7]))
+print(list_move([], 3, 4))
