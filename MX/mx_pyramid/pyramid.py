@@ -76,10 +76,10 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
         for index, layer in enumerate(big):
             new_index = -(index + 1)
             if -new_index <= len(small):
-                new_layer = big[new_index] + small[new_index]
+                new_layer = small[new_index] + big[new_index]
                 connected_pyramids.insert(0, new_layer)
             else:
-                new_layer = big[new_index] + layers_of_space
+                new_layer = layers_of_space + big[new_index]
                 connected_pyramids.insert(0, new_layer)
         return connected_pyramids
 
