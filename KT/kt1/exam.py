@@ -8,7 +8,12 @@ def capitalize_string(s: str) -> str:
     capitalize_string("ABc") => "ABc"
     capitalize_string("") => ""
     """
-    return s.capitalize()
+    if s == '':
+        return ''
+    elif len(s) == 1:
+        return s.capitalize()
+    else:
+        return s[0].capitalize() + s[1:]
 
 
 def has_seven(nums):
@@ -75,3 +80,5 @@ def parse_call_log(call_log: str) -> dict:
     :return: dictionary with call information
     """
     pass
+
+print(capitalize_string('ABc'))
