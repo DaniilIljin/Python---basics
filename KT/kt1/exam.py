@@ -89,4 +89,4 @@ def parse_call_log(call_log: str) -> dict:
     """
     pass
 
-print(h)
+print(has_seven([7, 1, 7, 7]))
