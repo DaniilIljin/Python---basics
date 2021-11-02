@@ -29,7 +29,7 @@ def has_seven(nums):
     if nums.count(7) == 3:
         list_of_truth = []
         for index, element in enumerate(nums):
-            if index != 0 or index != len(nums) - 1:
+            if index != 0 and index != len(nums) - 1:
                 if element != nums[index - 1] and element != nums[index + 1]:
                     list_of_truth.append(1)
         return len(list_of_truth) == len(nums) - 2
@@ -110,4 +110,4 @@ def parse_call_log(call_log: str) -> dict:
     """
     pass
 
-print(list_move([1, 2, 3], 3, 2))
+print(has_seven([7, 1, 7, 1, 1, 7]))
