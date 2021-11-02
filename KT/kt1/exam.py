@@ -51,7 +51,28 @@ def list_move(initial_list: list, amount: int, factor: int) -> list:
     list_move([1, 2, 3], 4, 1) => [[1, 2, 3], [3, 1, 2], [2, 3, 1], [1, 2, 3]]
     list_move([], 3, 4) => [[], [], [], []]
     """
-    pass
+    if not initial_list:
+        return [initial_list * amount]
+    else:
+        final_list = [initial_list]
+        for i in range(amount - 1):
+            final_list.append([])
+        counter = 0
+        for rep in range(len(final_list) - 1):
+            one_of_lists = []
+            dict_with_indexes = {}
+            one_of_lists.extend(final_list[counter])
+            for index, element in enumerate(one_of_lists):
+                if index + 1 + factor <= len(one_of_lists):
+                    dict_with_indexes[index + factor] = element
+                elif index + 1 + factor > len(one_of_lists):
+                    needed_to_be_skipped = (index + 1 + factor) // len(one_of_lists)
+                    new_index = index + factor - len(one_of_lists) * needed_to_be_skipped
+                    dict_with_indexes[new_index] = element
+            counter += 1
+            for element1 in sorted(dict_with_indexes):
+                final_list[counter].append(dict_with_indexes[element1])
+    return final_list
 
 
 def parse_call_log(call_log: str) -> dict:
@@ -89,4 +110,4 @@ def parse_call_log(call_log: str) -> dict:
     """
     pass
 
-print(has_seven([7, 1, 7, 7]))
+print(list_move(["a", "b", "c"], 3, 1))
