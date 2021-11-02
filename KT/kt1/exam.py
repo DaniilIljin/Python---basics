@@ -19,7 +19,8 @@ def capitalize_string(s: str) -> str:
 
 def has_seven(nums):
     """
-    Given a list if ints, return True if the value 7 appears in the list exactly 3 times
+    Given a list if ints, return True if the value 7 appears in the list exactly 3 times.
+
     and no consecutive elements have the same value.
 
     has_seven([1, 2, 3]) => False
@@ -116,7 +117,6 @@ def parse_call_log(call_log: str) -> dict:
     final_dict = {}
     for element in calls:
         caller_and_others = element.split(':')
-        c = caller_and_others
         for index, person in enumerate(caller_and_others):
             if index != len(caller_and_others) - 1:
                 if person in final_dict:
