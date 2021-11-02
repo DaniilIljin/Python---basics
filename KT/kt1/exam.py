@@ -26,12 +26,15 @@ def has_seven(nums):
     has_seven([7, 1, 7, 1, 7]) => True
     has_seven([7, 1, 7, 1, 1, 7]) => False
     """
-    list_of_three_elements = []
-    new_set = set(nums)
-    for element in new_set:
-        if nums.count(element) == 3:
-            list_of_three_elements.append(element)
-    return len(list_of_three_elements) == 1
+    if 7 in nums:
+        list_of_three_elements = []
+        new_set = set(nums)
+        for element in new_set:
+            if nums.count(element) == 3:
+                list_of_three_elements.append(element)
+        return len(list_of_three_elements) == 1
+    else:
+        return False
 
 
 def list_move(initial_list: list, amount: int, factor: int) -> list:
@@ -86,4 +89,4 @@ def parse_call_log(call_log: str) -> dict:
     """
     pass
 
-print(capitalize_string('ABc'))
+print(h)
