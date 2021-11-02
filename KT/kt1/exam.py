@@ -1,5 +1,6 @@
 """KT1."""
 
+
 def capitalize_string(s: str) -> str:
     """
     Return capitalized string. The first char is capitalized, the rest remain as they are.
@@ -112,5 +113,3 @@ def parse_call_log(call_log: str) -> dict:
     :return: dictionary with call information
     """
     pass
-
-print(list_move([], 3, 4))
