@@ -26,7 +26,7 @@ def has_seven(nums):
     has_seven([7, 1, 7, 1, 7]) => True
     has_seven([7, 1, 7, 1, 1, 7]) => False
     """
-    if 7 in nums:
+    if nums.count(7) == 3:
         list_of_three_elements = []
         new_set = set(nums)
         for element in new_set:
