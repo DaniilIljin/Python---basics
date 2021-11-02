@@ -27,12 +27,12 @@ def has_seven(nums):
     has_seven([7, 1, 7, 1, 1, 7]) => False
     """
     if nums.count(7) == 3:
-        list_of_three_elements = []
-        new_set = set(nums)
-        for element in new_set:
-            if nums.count(element) == 3:
-                list_of_three_elements.append(element)
-        return len(list_of_three_elements) == 1
+        list_of_truth = []
+        for index, element in enumerate(nums):
+            if index != 0 or index != len(nums) - 1:
+                if element != nums[index - 1] and element != nums[index + 1]:
+                    list_of_truth.append(1)
+        return len(list_of_truth) == len(nums) - 2
     else:
         return False
 
@@ -110,4 +110,4 @@ def parse_call_log(call_log: str) -> dict:
     """
     pass
 
-print(list_move(["a", "b", "c"], 3, 1))
+print(list_move([1, 2, 3], 3, 2))
