@@ -112,4 +112,14 @@ def parse_call_log(call_log: str) -> dict:
     :param call_log: the whole log as string
     :return: dictionary with call information
     """
-    pass
+    calls = call_log.split(',')
+    final_dict = {}
+    for element in calls:
+        person_who_calls, to_whom_he_calls = element.split(':')
+        if person_who_calls in final_dict:
+            final_dict[person_who_calls] += [to_whom_he_calls]
+        else:
+            final_dict[person_who_calls] = [to_whom_he_calls]
+    for person in final_dict:
+        final_dict[person] = list(set(final_dict[person]))
+    return final_dict
