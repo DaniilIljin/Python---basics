@@ -115,11 +115,14 @@ def parse_call_log(call_log: str) -> dict:
     calls = call_log.split(',')
     final_dict = {}
     for element in calls:
-        person_who_calls, to_whom_he_calls = element.split(':')
-        if person_who_calls in final_dict:
-            final_dict[person_who_calls] += [to_whom_he_calls]
-        else:
-            final_dict[person_who_calls] = [to_whom_he_calls]
+        caller_and_others = element.split(':')
+        c = caller_and_others
+        for index, person in enumerate(caller_and_others):
+            if index != len(caller_and_others) - 1:
+                if person in final_dict:
+                    final_dict[person] += [caller_and_others[index + 1]]
+                else:
+                    final_dict[person] = [caller_and_others[index + 1]]
     for person in final_dict:
         final_dict[person] = list(set(final_dict[person]))
     return final_dict
