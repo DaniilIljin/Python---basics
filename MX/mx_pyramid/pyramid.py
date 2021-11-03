@@ -64,6 +64,7 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
         for index, layer in enumerate(pyramid_a):
             new_layer = layer + pyramid_b[index]
             connected_pyramids.append(new_layer)
+        return connected_pyramids
     else:
         if len(pyramid_a) < len(pyramid_b):
             small = pyramid_a
@@ -102,7 +103,7 @@ def to_string(pyramid: list) -> str:
 
 
 if __name__ == '__main__':
-    pyramid_a = make_pyramid(3, "A")
+    pyramid_a = make_pyramid(4, "A")
     print(pyramid_a)  # ->
     """
     [
@@ -111,7 +112,7 @@ if __name__ == '__main__':
     ]
     """
 
-    pyramid_b = make_pyramid(6, 'a')
+    pyramid_b = make_pyramid(4, 'a')
     print(pyramid_b)  # ->
     """
     [
