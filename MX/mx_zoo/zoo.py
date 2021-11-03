@@ -130,7 +130,7 @@ if __name__ == '__main__':
     #                  "savannah")
     lynx = Animal("Eurasian lynx", "Lynx lynx", 7, (60, 75), (0.55, 0.75), "carnivorous", "temperate forest")
     bear = Animal("Brown bear", "Ursus arctos", 33, (130, 217), (1.4, 2.8), "omnivorous", "temperate forest")
-    animal_list = [elephant, fruit_bat, giraffe, lynx, bear]
+    animal_list = [elephant, fruit_bat, lynx, bear]
 
     print(find_smallest_animal_by_weight(animal_list))  # Little red flying-fox
     print(list_species_and_scientific_names(animal_list))  # [('African bush elephant', 'Loxodonta africana'), ('Little red flying-fox', 'Pteropus scapulatus'), ('Giraffe', 'Giraffa camelopardalis'), ('Eurasian lynx', 'Lynx lynx'), ('Brown bear', 'Ursus arctos')]
