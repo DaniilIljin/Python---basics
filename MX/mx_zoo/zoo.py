@@ -1,6 +1,5 @@
 """A small exercise in zookeeping."""
 import math
-from functools import reduce
 
 
 class Animal:
@@ -57,9 +56,7 @@ def find_how_many_pumpkins_are_needed_to_feed_animals(animal_list: list) -> int:
     :param animal_list: input list
     :return: amount of pumpkins needed to sustain all the animals over the winter (rounded up).
     """
-    return math.ceil(sum(list(map(lambda animal: (animal.weight_range[0] + animal.weight_range[1]) / 100,
-                                  [an for an in animal_list if an.diet == 'herbivorous' or
-                                   an.diet == 'omnivorous']))) * 180)
+    return math.ceil(sum(list(map(lambda animal: (animal.weight_range[0] + animal.weight_range[1]) / 100, [an for an in animal_list if an.diet == 'herbivorous' or an.diet == 'omnivorous']))) * 180)
 
 
 def sort_alphabetically_by_scientific_name(animal_list: list) -> list:
@@ -129,8 +126,8 @@ if __name__ == '__main__':
                       "savannah")
     fruit_bat = Animal("Little red flying-fox", "Pteropus scapulatus", 30, (0.3, 0.6), (0.24, 0.26), "herbivorous",
                        "tropics")
-    giraffe = Animal("Giraffe", "Giraffa camelopardalis", 25, (1200, 1800), (4.3, 5.7), "herbivorous",
-                     "savannah")
+    # giraffe = Animal("Giraffe", "Giraffa camelopardalis", 25, (1200, 1800), (4.3, 5.7), "herbivorous",
+    #                  "savannah")
     lynx = Animal("Eurasian lynx", "Lynx lynx", 7, (60, 75), (0.55, 0.75), "carnivorous", "temperate forest")
     bear = Animal("Brown bear", "Ursus arctos", 33, (130, 217), (1.4, 2.8), "omnivorous", "temperate forest")
     animal_list = [elephant, fruit_bat, giraffe, lynx, bear]
