@@ -99,11 +99,15 @@ def to_string(pyramid: list) -> str:
     :param pyramid: list
     :return: str
     """
-    pass
+    single_string = ''
+    for layer in pyramid:
+        str_layer = ''.join(layer) + '\n'
+        single_string += str_layer
+    return single_string
 
 
 if __name__ == '__main__':
-    pyramid_a = make_pyramid(4, "A")
+    pyramid_a = make_pyramid(0, "A")
     print(pyramid_a)  # ->
     """
     [
@@ -112,7 +116,7 @@ if __name__ == '__main__':
     ]
     """
 
-    pyramid_b = make_pyramid(4, 'a')
+    pyramid_b = make_pyramid(0, 'a')
     print(pyramid_b)  # ->
     """
     [
@@ -132,10 +136,10 @@ if __name__ == '__main__':
     ]
     """
 
-    # pyramid_string = to_string(joined)
-    # print(pyramid_string)  # ->
-    # """
-    #      aa
-    #  A  aaaa
-    # AAAaaaaaa
-    # """
+    pyramid_string = to_string(joined)
+    print(pyramid_string)  # ->
+    """
+         aa
+     A  aaaa
+    AAAaaaaaa
+    """
