@@ -101,7 +101,10 @@ def to_string(pyramid: list) -> str:
     """
     single_string = ''
     for layer in pyramid:
-        str_layer = ''.join(layer) + '\n'
+        if pyramid[-1] == layer:
+            str_layer = ''.join(layer)
+        else:
+            str_layer = ''.join(layer) + '\n'
         single_string += str_layer
     return single_string
 
