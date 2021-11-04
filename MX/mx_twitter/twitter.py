@@ -1,4 +1,6 @@
 """Twitter."""
+import re
+
 
 class Tweet:
     """Tweet class."""
@@ -60,7 +62,7 @@ def filter_by_hashtag(tweets: list, hashtag: str) -> list:
     :param hashtag: Hashtag to filter by.
     :return: Filtered list of tweets.
     """
-    pass
+    return list(filter(lambda tweet: re.search(rf'{hashtag}', tweet.content), tweets))
 
 
 def sort_hashtags_by_popularity(tweets: list) -> list:
@@ -77,7 +79,9 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     :param tweets: Input list of tweets.
     :return: List of hashtags by popularity.
     """
-    pass
+    all_hashtags = [re.search(rf'#\w*', tweet.content).group() for tweet in tweets]
+    hashtags_by_popularity = sorted(list(set(all_hashtags)), key=lambda hashtag: (all_hashtags.count(hashtag)))
+    return hashtags_by_popularity
 
 
 if __name__ == '__main__':
@@ -92,10 +96,10 @@ if __name__ == '__main__':
     print(filtered_by_popularity[0].user)  # -> "@CIA"
     print(filtered_by_popularity[1].user)  # -> "@elonmusk"
     print(filtered_by_popularity[2].user)  # -> "@realDonaldTrump"
-    #
-    # filtered_by_hashtag = filter_by_hashtag(tweets, "#bigsmart")
-    # print(filtered_by_hashtag[0].user)  # -> "@realDonaldTrump"
-    # print(filtered_by_hashtag[1].user)  # -> "@elonMusk"
-    #
-    # sorted_hashtags = sort_hashtags_by_popularity(tweets)
-    # print(sorted_hashtags[0])  # -> "#heart"
+
+    filtered_by_hashtag = filter_by_hashtag(tweets, "#bigsmart")
+    print(filtered_by_hashtag[0].user)  # -> "@realDonaldTrump"
+    print(filtered_by_hashtag[1].user)  # -> "@elonMusk"
+
+    sorted_hashtags = sort_hashtags_by_popularity(tweets)
+    print(sorted_hashtags[0])  # -> "#heart"
