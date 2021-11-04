@@ -121,6 +121,7 @@ def create_animal_descriptions(animal_list: list) -> list:
     """
     return list(map(lambda animal: f"""{animal.species} ({animal.scientific_name}) lives in {animal.habitat} and its diet is {animal.diet}. These animals can live upto {animal.age_up_to} years and they weigh between {animal.weight_range[0]} kg and {animal.weight_range[1]} kg as adults.""", animal_list))
 
+
 if __name__ == '__main__':
     elephant = Animal("African bush elephant", "Loxodonta africana", 70, (3000, 6000), (2.2, 4), "herbivorous",
                       "savannah")
