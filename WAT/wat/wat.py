@@ -13,7 +13,7 @@ def function_b(a):
 
 def function_c(a):
     """."""
-    return
+    return a ** 3
 
 
 def function_d(a):
@@ -23,7 +23,7 @@ def function_d(a):
 
 def function_e(a):
     """."""
-    return
+    return a * 23
 
 
 def function_f(a):
