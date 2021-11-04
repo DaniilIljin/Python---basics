@@ -81,7 +81,7 @@ def find_animals_whose_height_is_less_than(animal_list: list, height_limit: int)
     :param height_limit: upper limit for animal height
     :return: list of animals who do not grow taller than the height limit
     """
-    return list(filter(lambda animal: animal.weight_range[1] < height_limit, animal_list))
+    return list(filter(lambda animal: animal.height_range[1] < height_limit, animal_list))
 
 
 def filter_animals_based_on_diet(animal_list: list, diet: str) -> list:
