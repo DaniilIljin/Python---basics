@@ -58,7 +58,15 @@ def min_diff(nums):
     :param nums: list of ints, at least 2 elements.
     :return: min diff between 2 numbers.
     """
-    pass
+    sorted_nums = sorted(nums, reverse=True)
+    # list_of_diffs = [sorted_nums[index] - sorted_nums[index + 1] for index, number in enumerate(sorted_nums) if index < len(sorted_nums)]
+    list_of_diffs = []
+    for index, num in enumerate(sorted_nums):
+        try:
+            list_of_diffs.append(sorted_nums[index] - sorted_nums[index + 1])
+        except IndexError:
+            pass
+    return min(list_of_diffs)
 
 
 def get_symbols_by_occurrences(text: str) -> dict:
