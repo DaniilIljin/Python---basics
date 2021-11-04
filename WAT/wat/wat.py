@@ -11,31 +11,31 @@ def function_b():
     return
 
 
-def function_c():
+def function_c(a):
     """."""
     return
 
 
-def function_d():
+def function_d(a):
     """."""
     return
 
 
-def function_e():
+def function_e(a):
     """."""
     return
 
 
-def function_f():
+def function_f(a):
     """."""
     return
 
 
-def function_g():
+def function_g(a):
     """."""
     return
 
 
-def function_h():
+def function_h(a):
     """."""
     return
