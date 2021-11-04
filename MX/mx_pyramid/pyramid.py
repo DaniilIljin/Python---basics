@@ -27,14 +27,8 @@ def make_pyramid(base: int, char: str) -> list:
             amounts_of_char_in_list = [i for i in range(base + 1) if i % 2 == 0 and i != 0]
         else:
             amounts_of_char_in_list = [i for i in range(base + 1) if i % 2 != 0]
-        pyramid = []
-        for element in amounts_of_char_in_list:
-            layer_of_pyramid = []
-            spaces = int((base - element) / 2)
-            layer_of_pyramid.extend([' ' for i in range(spaces)])
-            layer_of_pyramid.extend([char for i in range(element)])
-            layer_of_pyramid.extend([' ' for i in range(spaces)])
-            pyramid.append(layer_of_pyramid)
+        pyramid = [[' ' for i in range(int((base - element) / 2))] + [char for i in range(element)]
+                   + [' ' for i in range(int((base - element) / 2))] for element in amounts_of_char_in_list]
         return pyramid
     else:
         return []
