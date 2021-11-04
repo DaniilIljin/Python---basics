@@ -76,7 +76,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     >Tweet2 has 19 retweets and has common hashtag.
     >The popularity of that hashtag is 19 + 21 = 40.
 
-    :param tweets: Input list of tweets.
+    :param tweets: Input list of  tweets.
     :return: List of hashtags by popularity.
     """
     all_hashtags = [[re.search(r'#\w*', tweet.content).group(), tweet.retweets] for tweet in tweets if re.search(r'#\w*', tweet.content) is not None]
