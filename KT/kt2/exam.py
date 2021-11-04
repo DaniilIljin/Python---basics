@@ -1,5 +1,6 @@
 """KT2."""
 
+
 def switch_lasts_and_firsts(s: str) -> str:
     """
     Move last two characters to the beginning of string and first two characters to the end of string.
@@ -38,7 +39,6 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
     try:
         if text == '':
             return ''
-        a = text[leave_count: leave_count + take_count]
         return text[leave_count: leave_count + take_count] + take_partial(text[leave_count + take_count:], leave_count, take_count)
     except IndexError:
         return ''
