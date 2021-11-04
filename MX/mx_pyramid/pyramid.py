@@ -56,8 +56,6 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
     :param pyramid_b: list
     :return: list
     """
-    connected_pyramids = []
-    layers_of_space = []
     if pyramid_b == pyramid_a == []:
         return []
     elif len(pyramid_a) == len(pyramid_b):
@@ -66,10 +64,14 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
     else:
         if len(pyramid_a) < len(pyramid_b):
             layers_of_space = [' ' for i in range(len(pyramid_a[0]))]
-            connected_pyramids = [layers_of_space + pyramid_b[index] if -(index - len(pyramid_b)) > len(pyramid_a) else pyramid_a[index - len(pyramid_b)] + pyramid_b[index] for index, layer in enumerate(pyramid_b)]
+            connected_pyramids = [layers_of_space + pyramid_b[index] if -(index - len(pyramid_b)) > len(pyramid_a)
+                                  else pyramid_a[index - len(pyramid_b)] + pyramid_b[index]
+                                  for index, layer in enumerate(pyramid_b)]
         else:
             layers_of_space = [' ' for i in range(len(pyramid_b[0]))]
-            connected_pyramids = [pyramid_a[index] + layers_of_space if -(index - len(pyramid_a)) > len(pyramid_b) else pyramid_a[index] + pyramid_b[index - len(pyramid_a)] for index, layer in enumerate(pyramid_a)]
+            connected_pyramids = [pyramid_a[index] + layers_of_space if -(index - len(pyramid_a)) > len(pyramid_b)
+                                  else pyramid_a[index] + pyramid_b[index - len(pyramid_a)]
+                                  for index, layer in enumerate(pyramid_a)]
         return connected_pyramids
 
 
@@ -87,14 +89,7 @@ def to_string(pyramid: list) -> str:
     :param pyramid: list
     :return: str
     """
-    single_string = ''
-    for layer in pyramid:
-        if pyramid[-1] == layer:
-            str_layer = ''.join(layer)
-        else:
-            str_layer = ''.join(layer) + '\n'
-        single_string += str_layer
-    return single_string
+    return ''.join([''.join(layer) + '\n' if pyramid[-1] != layer else ''.join(layer) for layer in pyramid])
 
 
 if __name__ == '__main__':
