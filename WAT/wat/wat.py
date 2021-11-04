@@ -28,7 +28,7 @@ def function_e(a):
 
 def function_f(a):
     """."""
-    return
+    return (a - 1417) / 2
 
 
 def function_g(a):
