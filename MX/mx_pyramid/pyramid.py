@@ -65,27 +65,11 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
         return connected_pyramids
     else:
         if len(pyramid_a) < len(pyramid_b):
-            for i in range(len(pyramid_a[0])):
-                layers_of_space.append(' ')
-            for index, layer in enumerate(pyramid_b):
-                new_index = -(index + 1)
-                if -new_index <= len(pyramid_a):
-                    new_layer = pyramid_a[new_index] + pyramid_b[new_index]
-                    connected_pyramids.insert(0, new_layer)
-                else:
-                    new_layer = layers_of_space + pyramid_b[new_index]
-                    connected_pyramids.insert(0, new_layer)
+            layers_of_space = [' ' for i in range(len(pyramid_a[0]))]
+            connected_pyramids = [layers_of_space + pyramid_b[index] if -(index - len(pyramid_b)) > len(pyramid_a) else pyramid_a[index - len(pyramid_b)] + pyramid_b[index] for index, layer in enumerate(pyramid_b)]
         else:
-            for i in range(len(pyramid_b[0])):
-                layers_of_space.append(' ')
-            for index, layer in enumerate(pyramid_a):
-                new_index = -(index + 1)
-                if -new_index <= len(pyramid_b):
-                    new_layer = pyramid_a[new_index] + pyramid_b[new_index]
-                    connected_pyramids.insert(0, new_layer)
-                else:
-                    new_layer = pyramid_a[new_index] + layers_of_space
-                    connected_pyramids.insert(0, new_layer)
+            layers_of_space = [' ' for i in range(len(pyramid_b[0]))]
+            connected_pyramids = [pyramid_a[index] + layers_of_space if -(index - len(pyramid_a)) > len(pyramid_b) else pyramid_a[index] + pyramid_b[index - len(pyramid_a)] for index, layer in enumerate(pyramid_a)]
         return connected_pyramids
 
 
@@ -114,7 +98,7 @@ def to_string(pyramid: list) -> str:
 
 
 if __name__ == '__main__':
-    pyramid_a = make_pyramid(20, "A")
+    pyramid_a = make_pyramid(10, "A")
     print(pyramid_a)  # ->
     """
     [
@@ -123,7 +107,7 @@ if __name__ == '__main__':
     ]
     """
 
-    pyramid_b = make_pyramid(10, 'B')
+    pyramid_b = make_pyramid(20, 'B')
     print(pyramid_b)  # ->
     """
     [
