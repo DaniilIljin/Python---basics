@@ -81,7 +81,7 @@ def find_animals_whose_height_is_less_than(animal_list: list, height_limit: int)
     :param height_limit: upper limit for animal height
     :return: list of animals who do not grow taller than the height limit
     """
-    return [animal for animal in animal_list if animal.height_range[1] < height_limit]
+    return list(filter(lambda animal: animal.weight_range[1] < height_limit, animal_list))
 
 
 def filter_animals_based_on_diet(animal_list: list, diet: str) -> list:
@@ -92,7 +92,7 @@ def filter_animals_based_on_diet(animal_list: list, diet: str) -> list:
     :param diet: the type of diet we are looking for
     :return: list of animals who eat this type of food
     """
-    return [animal for animal in animal_list if animal.diet == diet]
+    return list(filter(lambda animal: animal.diet == diet, animal_list))
 
 
 def find_animal_with_longest_lifespan(animal_list: list) -> Animal:
@@ -119,8 +119,7 @@ def create_animal_descriptions(animal_list: list) -> list:
     :param animal_list: input list
     :return: list of animal description strings
     """
-    return list(map(lambda animal: f"{animal.species} ({animal.scientific_name}) lives in {animal.habitat} and its diet is {animal.diet}. These animals can live upto {animal.age_up_to} years and they weigh between {animal.weight_range[0]} kg and {animal.weight_range[1]} kg as adults.", animal_list))
-
+    return list(map(lambda animal: f"""{animal.species} ({animal.scientific_name}) lives in {animal.habitat} and its diet is {animal.diet}. These animals can live upto {animal.age_up_to} years and they weigh between {animal.weight_range[0]} kg and {animal.weight_range[1]} kg as adults.""", animal_list))
 
 if __name__ == '__main__':
     elephant = Animal("African bush elephant", "Loxodonta africana", 70, (3000, 6000), (2.2, 4), "herbivorous",
