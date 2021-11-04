@@ -35,9 +35,16 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
     take_partial("abcdef", 0, 1) => "abcdef"
     take_partial("abcdef", 1, 0) => ""
     """
-    pass
+    try:
+        if text == '':
+            return ''
+        a = text[leave_count: leave_count + take_count]
+        return text[leave_count: leave_count + take_count] + take_partial(text[leave_count + take_count:], leave_count, take_count)
+    except IndexError:
+        return ''
 
 
+print(take_partial("abcdef", 0, 1))
 def min_diff(nums):
     """
     Find the smallest diff between two integer numbers in the list.
