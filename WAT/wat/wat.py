@@ -8,7 +8,7 @@ def function_a(a):
 
 def function_b(a):
     """."""
-    return
+    return a + 11
 
 
 def function_c(a):
@@ -18,7 +18,7 @@ def function_c(a):
 
 def function_d(a):
     """."""
-    return a + 11
+    return
 
 
 def function_e(a):
