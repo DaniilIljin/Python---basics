@@ -71,7 +71,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
 
     Hashtags must be sorted in descending order.
     A hashtag's popularity is the sum of its tweets' retweets.
-    If two hashtags are equally popular, sort by alphabet from A-Z to a-z  (upper case before lower case).
+    If two hashtags are equally popular, sort by alphabet from A-Z to a-z (upper case before lower case).
     >Tweet1 has 21 retweets and has common hashtag.
     >Tweet2 has 19 retweets and has common hashtag.
     >The popularity of that hashtag is 19 + 21 = 40.
@@ -79,7 +79,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     :param tweets: Input list of tweets.
     :return: List of hashtags by popularity.
     """
-    all_hashtags = [[re.search(r'#\w*', tweet.content).group(), tweet.retweets] for tweet in tweets if re.search(r'#\w*', tweet.content) is not None]
+    all_hashtags = [[re.search(rf'#\w*', tweet.content).group(), tweet.retweets] for tweet in tweets if re.search(rf'#\w*', tweet.content) is not None]
     dict_of_hashtags = {}
     for hashtag in all_hashtags:
         if hashtag[0] in dict_of_hashtags:
