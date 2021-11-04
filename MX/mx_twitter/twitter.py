@@ -79,8 +79,14 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     :param tweets: Input list of tweets.
     :return: List of hashtags by popularity.
     """
-    all_hashtags = list(map(lambda hastag_: hastag_.group(), list(filter(lambda hashtag: hashtag is not None, [re.search(rf'#\w*', tweet.content)for tweet in tweets]))))
-    hashtags_by_popularity = sorted(list(set(all_hashtags)), key=lambda hashtag: -all_hashtags.count(hashtag))
+    all_hashtags = [[re.search(rf'#\w*', tweet.content).group(), tweet.retweets] for tweet in tweets if re.search(rf'#\w*', tweet.content) is not None]
+    dict_of_hashtags = {}
+    for hashtag in all_hashtags:
+        if hashtag[0] in dict_of_hashtags:
+            dict_of_hashtags[hashtag[0]] += hashtag[1]
+        else:
+            dict_of_hashtags[hashtag[0]] = hashtag[1]
+    hashtags_by_popularity = sorted([hashtag_ for hashtag_ in dict_of_hashtags.keys()], key=lambda hashtag_: -dict_of_hashtags[hashtag_])
     return hashtags_by_popularity
 
 
