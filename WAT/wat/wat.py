@@ -18,7 +18,7 @@ def function_c(a):
 
 def function_d(a):
     """."""
-    return
+    return a * (a + 1)
 
 
 def function_e(a):
