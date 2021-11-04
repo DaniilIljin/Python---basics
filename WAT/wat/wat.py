@@ -1,12 +1,12 @@
 """WAT."""
 
 
-def function_a():
+def function_a(a):
     """."""
     return
 
 
-def function_b():
+def function_b(a):
     """."""
     return
 
@@ -33,7 +33,7 @@ def function_f(a):
 
 def function_g(a):
     """."""
-    return
+    return -a
 
 
 def function_h(a):
