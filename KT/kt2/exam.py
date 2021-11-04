@@ -59,7 +59,6 @@ def min_diff(nums):
     :return: min diff between 2 numbers.
     """
     sorted_nums = sorted(nums, reverse=True)
-    # list_of_diffs = [sorted_nums[index] - sorted_nums[index + 1] for index, number in enumerate(sorted_nums) if index < len(sorted_nums)]
     list_of_diffs = []
     for index, num in enumerate(sorted_nums):
         try:
@@ -78,4 +77,12 @@ def get_symbols_by_occurrences(text: str) -> dict:
     get_symbols_by_occurrences("hello") => {1: ['e', 'o', 'h'], 2: ['l']}
     get_symbols_by_occurrences("abcaba") => {2: ['b'], 1: ['c'], 3: ['a']}
     """
-    pass
+    new_dict = {}
+    list_of_all_chars = list(text)
+    list_of_chars = set(list_of_all_chars)
+    for char in list_of_chars:
+        if list_of_all_chars.count(char) in new_dict:
+            new_dict[list_of_all_chars.count(char)] += [char]
+        else:
+            new_dict[list_of_all_chars.count(char)] = [char]
+    return new_dict
