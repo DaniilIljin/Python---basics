@@ -61,27 +61,31 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
     if pyramid_b == pyramid_a == []:
         return []
     elif len(pyramid_a) == len(pyramid_b):
-        for index, layer in enumerate(pyramid_a):
-            new_layer = layer + pyramid_b[index]
-            connected_pyramids.append(new_layer)
+        connected_pyramids = [pyramid_a[layer_index] + pyramid_b[layer_index] for layer_index in range(len(pyramid_a))]
         return connected_pyramids
     else:
         if len(pyramid_a) < len(pyramid_b):
-            small = pyramid_a
-            big = pyramid_b
+            for i in range(len(pyramid_a[0])):
+                layers_of_space.append(' ')
+            for index, layer in enumerate(pyramid_b):
+                new_index = -(index + 1)
+                if -new_index <= len(pyramid_a):
+                    new_layer = pyramid_a[new_index] + pyramid_b[new_index]
+                    connected_pyramids.insert(0, new_layer)
+                else:
+                    new_layer = layers_of_space + pyramid_b[new_index]
+                    connected_pyramids.insert(0, new_layer)
         else:
-            small = pyramid_b
-            big = pyramid_a
-        for i in range(len(small[0])):
-            layers_of_space.append(' ')
-        for index, layer in enumerate(big):
-            new_index = -(index + 1)
-            if -new_index <= len(small):
-                new_layer = big[new_index] + small[new_index]
-                connected_pyramids.insert(0, new_layer)
-            else:
-                new_layer = big[new_index] + layers_of_space
-                connected_pyramids.insert(0, new_layer)
+            for i in range(len(pyramid_b[0])):
+                layers_of_space.append(' ')
+            for index, layer in enumerate(pyramid_a):
+                new_index = -(index + 1)
+                if -new_index <= len(pyramid_b):
+                    new_layer = pyramid_a[new_index] + pyramid_b[new_index]
+                    connected_pyramids.insert(0, new_layer)
+                else:
+                    new_layer = pyramid_a[new_index] + layers_of_space
+                    connected_pyramids.insert(0, new_layer)
         return connected_pyramids
 
 
@@ -110,7 +114,7 @@ def to_string(pyramid: list) -> str:
 
 
 if __name__ == '__main__':
-    pyramid_a = make_pyramid(10, "A")
+    pyramid_a = make_pyramid(20, "A")
     print(pyramid_a)  # ->
     """
     [
@@ -119,7 +123,7 @@ if __name__ == '__main__':
     ]
     """
 
-    pyramid_b = make_pyramid(20, 'B')
+    pyramid_b = make_pyramid(10, 'B')
     print(pyramid_b)  # ->
     """
     [
