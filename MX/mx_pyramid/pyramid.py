@@ -39,7 +39,7 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
     Join together two pyramid lists.
 
     Get 2 pyramid lists as inputs. Join them together horizontally. If the the pyramid heights are not equal, add empty lines on the top until they are equal.
-    join_pyramids(make_pyramid(3, "A"), make_pyramid(6, 'a')) ->
+    join_pyramids(make_pyramid(3, "A"),  make_pyramid(6, 'a')) ->
     [
         [' ', ' ', ' ', ' ', ' ', 'a', 'a', ' ', ' '],
         [' ', 'A', ' ', ' ', 'a', 'a', 'a', 'a', ' '],
