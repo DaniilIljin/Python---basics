@@ -36,12 +36,6 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
     take_partial("abcdef", 0, 1) => "abcdef"
     take_partial("abcdef", 1, 0) => ""
     """
-    # try:
-    #     if text == '':
-    #         return ''
-    #     return text[leave_count: leave_count + take_count] + take_partial(text[leave_count + take_count:], leave_count, take_count)
-    # except IndexError:
-    #     return ''
     if text == '':
         return ''
     return text[leave_count: leave_count + take_count] + take_partial(text[leave_count + take_count:], leave_count, take_count)
