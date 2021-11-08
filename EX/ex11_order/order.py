@@ -1,6 +1,5 @@
 """Order system."""
 import math
-from math import ceil
 
 
 class OrderItem:
@@ -158,7 +157,7 @@ class ContainerAggregator:
             needed_orders = [order for order in orders if order.destination == destination]
             total_volume = sum(order_.total_volume for order_ in needed_orders)
             needed_containers = math.ceil(total_volume / self.container_volume)
-            new_dict[destination] = [Container(self.container_volume, []) for container in range(needed_containers)]
+            new_dict[destination] = [Container(self.container_volume, []) for _ in range(needed_containers)]
             counter = 0
             for order in needed_orders:
                 if new_dict[destination][counter].volume_left >= order.total_volume:
@@ -166,7 +165,7 @@ class ContainerAggregator:
                 else:
                     counter += 1
                     new_dict[destination][counter] += [order]
-            return new_dict
+        return new_dict
             # counte = 0
             # for _ in range(needed_containers):
             #     volume = 0 + self.container_volume
@@ -213,8 +212,8 @@ if __name__ == '__main__':
     print(f'after orders creation, aggregator has only {len(oa.order_items)}(2 is correct) order items left.')
 
     print("Container Aggregator")
-    ca = ContainerAggregator(70000)
-    too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
+    ca = ContainerAggregator(1000000)
+    too_big_order = Order([OrderItem("Apple", "Apple Car", 100, 300)])
     too_big_order.destination = "Somewhere"
     containers = ca.prepare_containers((order1, order2, too_big_order))
     print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
