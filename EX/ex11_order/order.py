@@ -1,4 +1,6 @@
 """Order system."""
+import math
+from math import ceil
 
 
 class OrderItem:
@@ -75,11 +77,14 @@ class Container:
 
     @property
     def volume_left(self):
-        """Calculate how much volume is left."""
+        """Calculate how muh volume is left."""
         volume_of_orders = 0
-        for order in self.orders:
-            volume_of_orders += order.total_volume
-        return self.volume - volume_of_orders
+        if self.orders:
+            for order in self.orders:
+                volume_of_orders += order.total_volume
+                return self.volume - volume_of_orders
+        else:
+            return self.volume
 
 
 class OrderAggregator:
@@ -144,28 +149,34 @@ class ContainerAggregator:
         """
         new_dict = {}
         list_of_destinations = []
-        for el in orders:
-            if el.destination is not None and el.total_volume <= self.container_volume:
-                list_of_destinations.append(el.destination)
+        for order in orders:
+            if order.destination is not None and order.total_volume <= self.container_volume:
+                list_of_destinations.append(order.destination)
             else:
-                self.not_used_orders.append(el)
-        for destination in list(set(list_of_destinations)):
+                self.not_used_orders.append(order)
+        for destination in set(list_of_destinations):
             needed_orders = [order for order in orders if order.destination == destination]
             total_volume = sum(order_.total_volume for order_ in needed_orders)
-            needed_containers = total_volume / self.container_volume
-            if needed_containers > total_volume // self.container_volume:
-                needed_containers += 1
-            new_dict[destination] = []
+            needed_containers = math.ceil(total_volume / self.container_volume)
+            new_dict[destination] = [Container(self.container_volume, []) for container in range(needed_containers)]
             counter = 0
-            for _ in range(int(needed_containers // 1)):
-                volume = 0 + self.container_volume
-                orders_here = []
-                for needed_orders[counter] in needed_orders:
-                    if volume - needed_orders[counter].total_volume >= 0:
-                        volume -= needed_orders[counter].total_volume
-                        orders_here.append(needed_orders[counter])
-                        counter += 1
-                new_dict[destination] += [Container(self.container_volume, orders_here)]
+            for order in needed_orders:
+                if new_dict[destination][counter].volume_left >= order.total_volume:
+                    new_dict[destination][counter].orders += [order]
+                else:
+                    counter += 1
+                    new_dict[destination][counter] += [order]
+            return new_dict
+            # counte = 0
+            # for _ in range(needed_containers):
+            #     volume = 0 + self.container_volume
+            #     orders_here = []
+            #     for order0 in needed_orders:
+            #         if volume - order0.total_volume >= 0:
+            #             volume -= order0.total_volume
+            #             orders_here.append(order0)
+            #             counter += 1
+            #     new_dict[destination] += [Container(self.container_volume, orders_here)]
         return new_dict
 
 
