@@ -113,13 +113,13 @@ class OrderAggregator:
         :return: Order.
         """
         items = []
-        for index, item in enumerate(sorted(self.order_items, key=lambda i: (i.quantity, i.total_volume))):
+        for index, item in enumerate(self.order_items):
             if item.customer == customer:
                 if max_items_quantity - item.quantity >= 0 and max_volume - item.total_volume >= 0:
                     items.append(item)
                     max_items_quantity -= item.quantity
                     max_volume -= item.total_volume
-        self.order_items = list(set(self.order_items) - set(items))
+        self.order_items = [item_ for item_ in self.order_items if item_ not in items]
         return Order(items)
 
 
