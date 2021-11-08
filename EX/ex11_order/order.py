@@ -176,7 +176,6 @@ class ContainerAggregator:
             #             orders_here.append(order0)
             #             counter += 1
             #     new_dict[destination] += [Container(self.container_volume, orders_here)]
-        return new_dict
 
 
 if __name__ == '__main__':
