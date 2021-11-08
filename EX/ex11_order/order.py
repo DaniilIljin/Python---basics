@@ -77,8 +77,8 @@ class Container:
     @property
     def volume_left(self):
         """Calculate how muh volume is left."""
-        volume_of_orders = 0
         if self.orders:
+            volume_of_orders = 0
             for order in self.orders:
                 volume_of_orders += order.total_volume
                 return self.volume - volume_of_orders
