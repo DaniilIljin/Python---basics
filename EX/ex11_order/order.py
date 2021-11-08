@@ -81,7 +81,7 @@ class Container:
             volume_of_orders = 0
             for order in self.orders:
                 volume_of_orders += order.total_volume
-                return self.volume - volume_of_orders
+            return self.volume - volume_of_orders
         else:
             return self.volume
 
@@ -208,6 +208,7 @@ if __name__ == '__main__':
     order2.destination = "Tallinn"
     print(f'order2 has {len(order2.order_items)}(2 is correct) order items')
 
+
     print(f'after orders creation, aggregator has only {len(oa.order_items)}(2 is correct) order items left.')
 
     print("Container Aggregator")
@@ -215,6 +216,7 @@ if __name__ == '__main__':
     too_big_order = Order([OrderItem("Apple", "Apple Car", 100, 300)])
     too_big_order.destination = "Somewhere"
     containers = ca.prepare_containers((order1, order2, too_big_order))
+    print(Container(70000, [order1, order2]).volume_left)
     print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
     containers_to_tallinn = containers['Tallinn']
     a = containers_to_tallinn[0].orders
