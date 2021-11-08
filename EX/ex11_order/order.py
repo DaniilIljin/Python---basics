@@ -86,9 +86,7 @@ class OrderAggregator:
     """Algorithm of aggregating orders."""
 
     def __init__(self):
-        """
-        Initialize order aggregator.
-        """
+        """Initialize order aggregator."""
         self.order_items = []
 
     def add_item(self, item: OrderItem):
@@ -157,7 +155,6 @@ class ContainerAggregator:
             needed_containers = total_volume / self.container_volume
             if needed_containers > total_volume // self.container_volume:
                 needed_containers += 1
-            a = needed_containers // 1
             new_dict[destination] = []
             counter = 0
             for _ in range(int(needed_containers // 1)):
