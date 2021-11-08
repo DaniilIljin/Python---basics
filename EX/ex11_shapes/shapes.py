@@ -106,6 +106,12 @@ class Rectangle(Shape):
         self.width = width
 
     def __repr__(self) -> str:
+        """
+        Return representation of the rectangle.
+
+        For this exercise, this should return a string:
+        Rectangle (a: {side}, color: {color})
+        """
         return f'Rectangle (l: {self.length}, w: {self.width}, color: {self.color})'
 
     def get_area(self) -> float:
