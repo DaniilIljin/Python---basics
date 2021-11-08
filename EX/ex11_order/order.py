@@ -164,18 +164,18 @@ class ContainerAggregator:
                     new_dict[destination][counter].orders += [order]
                 else:
                     counter += 1
-                    new_dict[destination][counter] += [order]
+                    new_dict[destination][counter].orders += [order]
         return new_dict
-            # counte = 0
-            # for _ in range(needed_containers):
-            #     volume = 0 + self.container_volume
-            #     orders_here = []
-            #     for order0 in needed_orders:
-            #         if volume - order0.total_volume >= 0:
-            #             volume -= order0.total_volume
-            #             orders_here.append(order0)
-            #             counter += 1
-            #     new_dict[destination] += [Container(self.container_volume, orders_here)]
+# counte = 0
+# for _ in range(needed_containers):
+#     volume = 0 + self.container_volume
+#     orders_here = []
+#     for order0 in needed_orders:
+#         if volume - order0.total_volume >= 0:
+#             volume -= order0.total_volume
+#             orders_here.append(order0)
+#             counter += 1
+#     new_dict[destination] += [Container(self.container_volume, orders_here)]
 
 
 if __name__ == '__main__':
