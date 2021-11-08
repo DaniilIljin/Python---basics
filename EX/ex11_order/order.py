@@ -154,10 +154,8 @@ class ContainerAggregator:
             else:
                 self.not_used_orders.append(order)
         for destination in set(list_of_destinations):
-            needed_orders = [order for order in orders if order.destination == destination]
-            # total_volume = sum(order_.total_volume for order_ in needed_orders)
-            # needed_containers = math.ceil(total_volume / self.container_volume)
             new_dict[destination] = [Container(self.container_volume, [])]
+            needed_orders = [order for order in orders if order.destination == destination]
             for order in needed_orders:
                 counter = 1
                 for index, container in enumerate(new_dict[destination]):
