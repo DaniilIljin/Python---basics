@@ -36,7 +36,6 @@ class Circle(Shape):
         The radius value is stored here.
         """
         super().__init__(color)
-        a = self.color
         self.radius = radius
 
     def __repr__(self) -> str:
@@ -46,7 +45,7 @@ class Circle(Shape):
         For this exercise, this should return a string:
         Circle (r: {radius}, color: {color})
         """
-        return f'r: {self.radius}, color: {self.color}'
+        return f'Circle (r: {self.radius}, color: {self.color})'
 
     def get_area(self) -> float:
         """
@@ -79,7 +78,7 @@ class Square(Shape):
         For this exercise, this should return a string:
         Square (a: {side}, color: {color})
         """
-        return f'a: {self.side}, color: {self.color}'
+        return f'Square (a: {self.side}, color: {self.color})'
 
     def get_area(self) -> float:
         """
@@ -107,7 +106,7 @@ class Rectangle(Shape):
         self.width = width
 
     def __repr__(self) -> str:
-        return f'l: {self.length}, w: {self.width}, color: {self.color}'
+        return f'Rectangle (l: {self.length}, w: {self.width}, color: {self.color})'
 
     def get_area(self) -> float:
         """
