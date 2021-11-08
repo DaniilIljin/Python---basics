@@ -1,5 +1,6 @@
 """Order system."""
 
+
 class OrderItem:
     """Order Item requested by a customer."""
 
@@ -36,7 +37,8 @@ class Order:
 
         :param order_items: list of order items.
         """
-        pass
+        self.order_items = order_items
+        self.destination = None
 
     @property
     def total_quantity(self) -> int:
@@ -45,7 +47,10 @@ class Order:
 
         :return: Total quantity as int.
         """
-        return 0
+        total_q = 0
+        for item in self.order_items:
+            total_q += item.quantity
+        return total_q
 
     @property
     def total_volume(self) -> int:
@@ -54,16 +59,27 @@ class Order:
 
         :return: Total volume (cm^3) as int.
         """
-        return 0
+        total_v = 0
+        for item in self.order_items:
+            total_v += item.quantity * item.one_item_volume
+        return total_v
 
 
 class Container:
     """Container to transport orders."""
 
-    # define constructor
+    def __init__(self, volume: int, orders: list):
+        """Create a container."""
+        self.volume = volume
+        self.orders = orders
 
-    # define volume left property method
-    pass
+    @property
+    def volume_left(self):
+        """Calculate how much volume is left."""
+        volume_of_orders = 0
+        for order in self.orders:
+            volume_of_orders += order.total_volume
+        return self.volume - volume_of_orders
 
 
 class OrderAggregator:
@@ -82,7 +98,7 @@ class OrderAggregator:
         :param item: Item to add.
         :return: None
         """
-        pass
+        self.order_items.append(item)
 
     def aggregate_order(self, customer: str, max_items_quantity: int, max_volume: int):
         """
@@ -97,7 +113,13 @@ class OrderAggregator:
         :return: Order.
         """
         items = []
-        # collect items to the order here
+        for index, item in enumerate(self.order_items):
+            if item.customer == customer:
+                if max_items_quantity - item.quantity >= 0 and max_volume - item.total_volume >= 0:
+                    items.append(item)
+                    max_items_quantity -= item.quantity
+                    max_volume -= item.total_volume
+        self.order_items = list(set(self.order_items) - set(items))
         return Order(items)
 
 
@@ -110,7 +132,8 @@ class ContainerAggregator:
 
         :param container_volume: Volume of each container created by this aggregator.
         """
-        pass
+        self.container_volume = container_volume
+        self.not_used_orders = []
 
     def prepare_containers(self, orders: tuple) -> dict:
         """
@@ -121,7 +144,32 @@ class ContainerAggregator:
         :param orders: tuple of orders.
         :return: dict where keys are destinations and values are containers to that destination with orders.
         """
-        return {}
+        new_dict = {}
+        list_of_destinations = []
+        for el in orders:
+            if el.destination is not None and el.total_volume <= self.container_volume:
+                list_of_destinations.append(el.destination)
+            else:
+                self.not_used_orders.append(el)
+        for destination in list(set(list_of_destinations)):
+            needed_orders = [order for order in orders if order.destination == destination]
+            total_volume = sum(order_.total_volume for order_ in needed_orders)
+            needed_containers = total_volume / self.container_volume
+            if needed_containers > total_volume // self.container_volume:
+                needed_containers += 1
+            a = needed_containers // 1
+            new_dict[destination] = []
+            counter = 0
+            for _ in range(int(needed_containers // 1)):
+                volume = 0 + self.container_volume
+                orders_here = []
+                for needed_orders[counter] in needed_orders:
+                    if volume - needed_orders[counter].total_volume >= 0:
+                        volume -= needed_orders[counter].total_volume
+                        orders_here.append(needed_orders[counter])
+                        counter += 1
+                new_dict[destination] += [Container(self.container_volume, orders_here)]
+        return new_dict
 
 
 if __name__ == '__main__':
@@ -162,6 +210,8 @@ if __name__ == '__main__':
     too_big_order.destination = "Somewhere"
     containers = ca.prepare_containers((order1, order2, too_big_order))
     print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
+    containers_to_tallinn = containers['Tallinn']
+    a = containers_to_tallinn[0].orders
 
     try:
         containers_to_tallinn = containers['Tallinn']
