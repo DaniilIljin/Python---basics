@@ -158,24 +158,11 @@ class ContainerAggregator:
             total_volume = sum(order_.total_volume for order_ in needed_orders)
             needed_containers = math.ceil(total_volume / self.container_volume)
             new_dict[destination] = [Container(self.container_volume, []) for _ in range(needed_containers)]
-            counter = 0
             for order in needed_orders:
-                if new_dict[destination][counter].volume_left >= order.total_volume:
-                    new_dict[destination][counter].orders += [order]
-                else:
-                    counter += 1
-                    new_dict[destination][counter].orders += [order]
+                for index, container in enumerate(new_dict[destination]):
+                    if container.volume_left >= order.total_volume:
+                        new_dict[destination][index].orders += [order]
         return new_dict
-# counte = 0
-# for _ in range(needed_containers):
-#     volume = 0 + self.container_volume
-#     orders_here = []
-#     for order0 in needed_orders:
-#         if volume - order0.total_volume >= 0:
-#             volume -= order0.total_volume
-#             orders_here.append(order0)
-#             counter += 1
-#     new_dict[destination] += [Container(self.container_volume, orders_here)]
 
 
 if __name__ == '__main__':
@@ -208,18 +195,14 @@ if __name__ == '__main__':
     order2.destination = "Tallinn"
     print(f'order2 has {len(order2.order_items)}(2 is correct) order items')
 
-
     print(f'after orders creation, aggregator has only {len(oa.order_items)}(2 is correct) order items left.')
 
     print("Container Aggregator")
-    ca = ContainerAggregator(1000000)
-    too_big_order = Order([OrderItem("Apple", "Apple Car", 100, 300)])
+    ca = ContainerAggregator(70000)
+    too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
     too_big_order.destination = "Somewhere"
     containers = ca.prepare_containers((order1, order2, too_big_order))
-    print(Container(70000, [order1, order2]).volume_left)
     print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
-    containers_to_tallinn = containers['Tallinn']
-    a = containers_to_tallinn[0].orders
 
     try:
         containers_to_tallinn = containers['Tallinn']
