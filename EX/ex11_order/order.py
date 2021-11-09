@@ -165,10 +165,6 @@ class ContainerAggregator:
                         order_in_container = True
                 if not order_in_container:
                     new_dict[destination].append(Container(self.container_volume, [order]))
-        f = len(new_dict["ABC"])
-        a = new_dict["ABC"][0].orders
-        b = new_dict["ABC"][1].orders
-        c = new_dict["ABC"][2].orders
         return new_dict
 
 
