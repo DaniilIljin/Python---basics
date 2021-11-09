@@ -156,20 +156,19 @@ class ContainerAggregator:
             new_dict[destination] = [Container(self.container_volume, [])]
             needed_orders = [order for order in orders if order.destination == destination]
             for order in needed_orders:
-                # counter = 1
                 order_in_container = False
                 for index, container in enumerate(new_dict[destination]):
+                    if order_in_container:
+                        continue
                     if container.volume_left >= order.total_volume:
                         new_dict[destination][index].orders += [order]
                         order_in_container = True
-                    # else:
-                        # counter += 1
                 if not order_in_container:
                     new_dict[destination].append(Container(self.container_volume, [order]))
-        # f = len(new_dict["Tallinn"])
-        # a = new_dict["Tallinn"][0].orders
-        # b = new_dict["Tallinn"][1].orders
-        # c = new_dict["Tallinn"][2].orders
+        f = len(new_dict["ABC"])
+        a = new_dict["ABC"][0].orders
+        b = new_dict["ABC"][1].orders
+        c = new_dict["ABC"][2].orders
         return new_dict
 
 
@@ -185,6 +184,24 @@ if __name__ == '__main__':
 
     print(order_item3.total_volume)  # 60000
 
+    ca = ContainerAggregator(100)
+    order1 = Order([OrderItem("customer", "item1", 1, 100)])
+    order2 = Order([OrderItem("customer", "item2", 1, 99)])
+    order3 = Order([OrderItem("customer", "item3", 1, 99)])
+    order4 = Order([OrderItem("customer", "item4", 1, 1)])
+    order1.destination = "ABC"
+    order2.destination = "ABC"
+    order3.destination = "ABC"
+    order4.destination = "ABC"
+
+    containers = ca.prepare_containers((order1, order2, order3, order4))
+
+    abc_containers = containers['ABC']
+    print(len(abc_containers)) # assert len(abc_containers) == 3
+    #
+    print(abc_containers[0].orders == [order1]) # assert abc_containers[0].orders == [order1]
+    print(abc_containers[1].orders == [order2, order4])# assert abc_containers[1].orders == [order2, order4]
+    print(abc_containers[2].orders == [order3])# assert abc_containers[2].orders == [order3]
     # print("Order Aggregator")
     # oa = OrderAggregator()
     # oa.add_item(order_item1)
@@ -206,19 +223,19 @@ if __name__ == '__main__':
     # print(f'after orders creation, aggregator has only {len(oa.order_items)}(2 is correct) order items left.')
     #
     # print("Container Aggregator")
-    ca = ContainerAggregator(70000)
-    # too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
-    o0 = OrderItem("Apple", "iPhone 11", 7000, 10)
-    o1 = OrderItem("Apple", "iPhone 11", 3500, 10)
-    o2 = OrderItem("Apple", "iPhone 12", 5000, 10)
-    o3 = OrderItem("Apple", "iPhone 13", 3500, 10)
-    o0.destination = "Tallinn"
-    o1.destination = "Tallinn"
-    o2.destination = "Tallinn"
-    o3.destination = "Tallinn"
-
-    containers = ca.prepare_containers((o0, o1, o2, o3))
-    print(len(containers["Tallinn"][0].orders))
+    # ca = ContainerAggregator(70000)
+    # # too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
+    # o0 = OrderItem("Apple", "iPhone 11", 7000, 10)
+    # o1 = OrderItem("Apple", "iPhone 11", 3500, 10)
+    # o2 = OrderItem("Apple", "iPhone 12", 5000, 10)
+    # o3 = OrderItem("Apple", "iPhone 13", 3500, 10)
+    # o0.destination = "Tallinn"
+    # o1.destination = "Tallinn"
+    # o2.destination = "Tallinn"
+    # o3.destination = "Tallinn"
+    #
+    # containers = ca.prepare_containers((o0, o1, o2, o3))
+    # print(len(containers["Tallinn"][0].orders))
     # print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
     #
     # try:
