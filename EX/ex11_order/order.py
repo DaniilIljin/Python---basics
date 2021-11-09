@@ -1,5 +1,4 @@
 """Order system."""
-import math
 
 
 class OrderItem:
@@ -165,6 +164,10 @@ class ContainerAggregator:
                         counter += 1
                 if counter > len(new_dict[destination]):
                     new_dict[destination].append(Container(self.container_volume, [order]))
+        # f = len(new_dict["Tallinn"])
+        # a = new_dict["Tallinn"][0].orders
+        # b = new_dict["Tallinn"][1].orders
+        # c = new_dict["Tallinn"][2].orders
         return new_dict
 
 
@@ -180,37 +183,46 @@ if __name__ == '__main__':
 
     print(order_item3.total_volume)  # 60000
 
-    print("Order Aggregator")
-    oa = OrderAggregator()
-    oa.add_item(order_item1)
-    oa.add_item(order_item2)
-    oa.add_item(order_item3)
-    oa.add_item(order_item4)
-    oa.add_item(order_item5)
-    oa.add_item(order_item6)
-    print(f'Added {len(oa.order_items)}(6 is correct) order items')
-
-    order1 = oa.aggregate_order("Apple", 350, 3000)
-    order1.destination = "Tallinn"
-    print(f'order1 has {len(order1.order_items)}(2 is correct) order items')
-
-    order2 = oa.aggregate_order("Mööbel 24", 325, 64100)
-    order2.destination = "Tallinn"
-    print(f'order2 has {len(order2.order_items)}(2 is correct) order items')
-
-    print(f'after orders creation, aggregator has only {len(oa.order_items)}(2 is correct) order items left.')
-
-    print("Container Aggregator")
+    # print("Order Aggregator")
+    # oa = OrderAggregator()
+    # oa.add_item(order_item1)
+    # oa.add_item(order_item2)
+    # oa.add_item(order_item3)
+    # oa.add_item(order_item4)
+    # oa.add_item(order_item5)
+    # oa.add_item(order_item6)
+    # print(f'Added {len(oa.order_items)}(6 is correct) order items')
+    #
+    # order1 = oa.aggregate_order("Apple", 350, 3000)
+    # order1.destination = "Tallinn"
+    # print(f'order1 has {len(order1.order_items)}(2 is correct) order items')
+    #
+    # order2 = oa.aggregate_order("Mööbel 24", 325, 64100)
+    # order2.destination = "Tallinn"
+    # print(f'order2 has {len(order2.order_items)}(2 is correct) order items')
+    #
+    # print(f'after orders creation, aggregator has only {len(oa.order_items)}(2 is correct) order items left.')
+    #
+    # print("Container Aggregator")
     ca = ContainerAggregator(70000)
-    too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
-    too_big_order.destination = "Somewhere"
-    containers = ca.prepare_containers((order1, order2, too_big_order))
-    print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
+    # too_big_order = Order([OrderItem("Apple", "Apple Car", 10000, 300)])
+    o0 = OrderItem("Apple", "iPhone 11", 7000, 10)
+    o1 = OrderItem("Apple", "iPhone 11", 3500, 10)
+    o2 = OrderItem("Apple", "iPhone 12", 5000, 10)
+    o3 = OrderItem("Apple", "iPhone 13", 3500, 10)
+    o0.destination = "Tallinn"
+    o1.destination = "Tallinn"
+    o2.destination = "Tallinn"
+    o3.destination = "Tallinn"
 
-    try:
-        containers_to_tallinn = containers['Tallinn']
-        print(f'volume of the container to tallinn is {containers_to_tallinn[0].volume}(70000 is correct) cm^3')
-        print(f'container to tallinn has {len(containers_to_tallinn[0].orders)}(2 is correct) orders')
-    except KeyError:
-        print('Container to Tallinn not found!')
-    print(f'{len(ca.not_used_orders)}(1 is correct) cannot be added to containers')
+    containers = ca.prepare_containers((o0, o1, o2, o3))
+    print(len(containers["Tallinn"][0].orders))
+    # print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
+    #
+    # try:
+    #     containers_to_tallinn = containers['Tallinn']
+    #     print(f'volume of the container to tallinn is {containers_to_tallinn[0].volume}(70000 is correct) cm^3')
+    #     print(f'container to tallinn has {len(containers_to_tallinn[0].orders)}(2 is correct) orders')
+    # except KeyError:
+    #     print('Container to Tallinn not found!')
+    # print(f'{len(ca.not_used_orders)}(1 is correct) cannot be added to containers')
