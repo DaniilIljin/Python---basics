@@ -192,12 +192,12 @@ if __name__ == '__main__':
 
     containers = ca.prepare_containers((order1, order2, order3, order4))
 
-    abc_containers = containers['ABC']
-    print(len(abc_containers)) # assert len(abc_containers) == 3
-    #
-    print(abc_containers[0].orders == [order1]) # assert abc_containers[0].orders == [order1]
-    print(abc_containers[1].orders == [order2, order4])# assert abc_containers[1].orders == [order2, order4]
-    print(abc_containers[2].orders == [order3])# assert abc_containers[2].orders == [order3]
+    # abc_containers = containers['ABC']
+    # print(len(abc_containers)) # assert len(abc_containers) == 3
+    # #
+    # print(abc_containers[0].orders == [order1])  # assert abc_containers[0].orders == [order1]
+    # print(abc_containers[1].orders == [order2, order4])  # assert abc_containers[1].orders == [order2, order4]
+    # print(abc_containers[2].orders == [order3])  # assert abc_containers[2].orders == [order3]
     # print("Order Aggregator")
     # oa = OrderAggregator()
     # oa.add_item(order_item1)
