@@ -156,13 +156,15 @@ class ContainerAggregator:
             new_dict[destination] = [Container(self.container_volume, [])]
             needed_orders = [order for order in orders if order.destination == destination]
             for order in needed_orders:
-                counter = 1
+                # counter = 1
+                order_in_container = False
                 for index, container in enumerate(new_dict[destination]):
                     if container.volume_left >= order.total_volume:
                         new_dict[destination][index].orders += [order]
-                    else:
-                        counter += 1
-                if counter > len(new_dict[destination]):
+                        order_in_container = True
+                    # else:
+                        # counter += 1
+                if not order_in_container:
                     new_dict[destination].append(Container(self.container_volume, [order]))
         # f = len(new_dict["Tallinn"])
         # a = new_dict["Tallinn"][0].orders
