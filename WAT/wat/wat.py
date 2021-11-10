@@ -27,8 +27,8 @@ def function_e(a):
 
 
 def function_f(a):
-    """  ."""
-    return (a - 239) / 2
+    """."""
+    return (a // 150) * 69
 
 
 def function_g(a):
