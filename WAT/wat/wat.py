@@ -18,7 +18,7 @@ def function_c(a):
 
 def function_d(a):
     """."""
-    return a * (a + 1)
+    return a
 
 
 def function_e(a):
@@ -27,7 +27,7 @@ def function_e(a):
 
 
 def function_f(a):
-    """."""
+    """.o"""
     return (a - 1417) / 2
 
 
