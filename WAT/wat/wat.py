@@ -27,7 +27,7 @@ def function_e(a):
 
 
 def function_f(a):
-    """.o """
+    """.o  """
     return (a - 239) / 2
 
 
