@@ -121,5 +121,5 @@ if __name__ == '__main__':
     """
          aa
      A  aaaa
-    AAAaaaaaa
+    AAAaaaaaa 
     """
