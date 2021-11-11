@@ -233,6 +233,7 @@ class Client:
         self.__name = name
         self.__balance = balance
         self.__client_type = client_type
+
         self.__order_history: list['Order'] = []  # Kliendi ostu ajalugu
 
     def get_name(self):
