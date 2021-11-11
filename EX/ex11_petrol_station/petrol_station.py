@@ -177,6 +177,9 @@ class Order:
         : param order_date: date of purchase
         : param client_type: The type of client that made the purchase
         """
+        for item in items:
+            if items[item] < 0:
+                raise RuntimeError()
         self.__items = items
         self.__order_date = order_date
         self.__client_type = client_type
