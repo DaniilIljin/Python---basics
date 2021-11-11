@@ -297,6 +297,7 @@ class Client:
         :return: boolean
         """
         if self.__balance - order.get_final_price() > 0:
+            self.__balance -= order.get_final_price()
             self.__order_history.append(order)
             return True
         else:
