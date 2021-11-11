@@ -237,7 +237,7 @@ class Client:
 
     def get_name(self):
         """Return client name."""
-        return ""
+        return self.__name
 
     def get_client_type(self) -> ClientType:
         """
@@ -245,7 +245,7 @@ class Client:
 
         :return: ClientType
         """
-        pass
+        return self.__client_type
 
     def set_client_type(self, value: ClientType):
         """
@@ -253,7 +253,7 @@ class Client:
 
         :param value: ClientType
         """
-        pass
+        self.__client_type = value
 
     def get_balance(self) -> float:
         """
@@ -261,7 +261,7 @@ class Client:
 
         :return: float
         """
-        return 0.0
+        return self.__balance
 
     def get_history(self) -> list['Order']:
         """
@@ -271,11 +271,11 @@ class Client:
         Use deepcopy.So that changes made with the dictionary in the class do not affect the dictionary object that does not belong to the class.
         :return: list['Order']
         """
-        pass
+        return copy.deepcopy(self.__order_history)
 
     def clear_history(self):
         """Clear the purchase history."""
-        pass
+        self.__order_history = []
 
     def get_member_balance(self) -> float:
         """
@@ -283,7 +283,7 @@ class Client:
 
         :return: float: the sum
         """
-        return 0.0
+        return sum([purchase.get_final_price() for purchase in self.__order_history])
 
     def buy(self, order: 'Order') -> bool:
         """
@@ -296,7 +296,11 @@ class Client:
         :param order:
         :return: boolean
         """
-        pass
+        if self.__balance - order.get_final_price() > 0:
+            self.__order_history.append(order)
+            return True
+        else:
+            return False
 
     def __repr__(self):
         """String representation of the client."""

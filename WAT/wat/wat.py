@@ -18,7 +18,7 @@ def function_c(a):
 
 def function_d(a):
     """."""
-    return 29 * a**2
+    return 29 * a ** 2
 
 
 def function_e(a):
