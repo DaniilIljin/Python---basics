@@ -297,7 +297,7 @@ class Client:
         :param order:
         :return: boolean
         """
-        if self.__balance - order.get_final_price() > 0:
+        if self.__balance - order.get_final_price() >= 0:
             self.__balance -= order.get_final_price()
             self.__order_history.append(order)
             return True
@@ -409,6 +409,7 @@ class PetrolStation:
         in which case a new customer must be created with `Basic` status and a sufficient amount of money to purchase
         """
         pass
+
 
 if __name__ == '__main__':
     print(Order.__init__('Toilet paper', 5))
