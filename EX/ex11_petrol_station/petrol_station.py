@@ -292,7 +292,7 @@ class Client:
 
         The purchase price is calculated.
         If the customer has enough money, a purchase will be made.
-        The customer pays for the purchase and the purchase is added to the purchase history.
+        The customer pays for the  purchase and the purchase is added to the purchase history.
         If all succeeded will be returned True, otherwise False.
         :param order:
         :return: boolean
