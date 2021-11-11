@@ -198,9 +198,7 @@ class Order:
 
         :return: float
         """
-
-        total_prices = [item.get_total_price(self.__client_type, self.__items[item]) for item in self.__items]
-        return sum(total_prices)
+        return sum([item.get_total_price(self.__client_type, self.__items[item]) for item in self.__items])
 
     def __hash__(self):
         """Hash for using with dictionaries."""
@@ -235,7 +233,6 @@ class Client:
         self.__name = name
         self.__balance = balance
         self.__client_type = client_type
-
         self.__order_history: list['Order'] = []  # Kliendi ostu ajalugu
 
     def get_name(self):
@@ -411,3 +408,6 @@ class PetrolStation:
         in which case a new customer must be created with `Basic` status and a sufficient amount of money to purchase
         """
         pass
+
+if __name__ == '__main__':
+    print(Order.__init__('Toilet paper', 5))
