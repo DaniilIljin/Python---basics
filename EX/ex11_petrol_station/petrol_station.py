@@ -304,6 +304,29 @@ class Client:
         else:
             return False
 
+    def check_client_current_status(self):
+        """."""
+        if self.get_client_type() != ClientType.Basic or self.get_client_type() != ClientType.Bronze:
+            if not self.get_history():
+                client.set_client_type(ClientType.Bronze)
+            else:
+                last_order_date = self.get_history()[-1].get_date()
+                days = date.today().day - last_order_date.day
+                months = date.today().month - last_order_date.month
+                years = date.today().year - last_order_date.year
+                if days < 0 and months < 0:
+                    difference = (years - 1) * 12 + 12 + months - 1
+                elif days < 0:
+                    difference = years * 12 + months - 1
+                elif months < 0:
+                    difference = (years - 1) * 12 + 12 + months
+                else:
+                    difference = years * 12 + months
+                if difference >= 2:
+                    self.set_client_type(ClientType.Bronze)
+                    self.clear_history()
+        return self.__client_type
+
     def __repr__(self):
         """String representation of the client."""
         return f"{self.__name} - {self.get_client_type().name} customer"
@@ -321,7 +344,9 @@ class PetrolStation:
         :param fuel_stock: fuel tank
         :param shop_item_stock: products warehouse
         """
-        # define variables here
+        self.__fuel_stock = fuel_stock
+        self.__shop_item_stock = shop_item_stock
+        self.__sell_history = {}
 
     def add_fuel(self, fuel: Fuel, quantity: float):
         """
@@ -330,7 +355,10 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
-        pass
+        if fuel in self.__fuel_stock:
+            self.__fuel_stock[fuel] += quantity
+        else:
+            self.__fuel_stock[fuel] = quantity
 
     def add_shop_item(self, item: ShopItem, quantity: float):
         """
@@ -339,7 +367,10 @@ class PetrolStation:
         :param item:
         :param quantity:
         """
-        pass
+        if item in self.__shop_item_stock:
+            self.__shop_item_stock[item] += quantity
+        else:
+            self.__shop_item_stock[item] = quantity
 
     def remove_fuel(self, fuel: Fuel, quantity: float):
         """
@@ -353,7 +384,10 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
-        pass
+        if self.__fuel_stock[fuel] - quantity >= 0:
+            self.__fuel_stock[fuel] -= quantity
+        else:
+            raise RuntimeError
 
     def remove_items(self, item: ShopItem, quantity: float):
         """
@@ -364,19 +398,22 @@ class PetrolStation:
         :param item:
         :param quantity:
         """
-        pass
+        if self.__shop_item_stock[item] - quantity >= 0:
+            self.__shop_item_stock[item] -= quantity
+        else:
+            raise RuntimeError
 
     def get_fuel_dict(self) -> dict[Fuel, float]:
         """Return dict with Fuel objects as keys and quantities as values."""
-        pass
+        return self.__fuel_stock
 
     def get_shop_item_dict(self) -> dict[ShopItem, float]:
         """Return dict with ShopItem objects as keys and quantities as values."""
-        pass
+        return self.__shop_item_stock
 
     def get_sell_history(self) -> dict[Client, list[Order]]:
         """Return sell history dict where key is Client, value is a list of Orders."""
-        pass
+        return self.__sell_history
 
     def sell(self, items_to_sell: list[tuple[OrderItem, float]], client: Client = None):
         """
@@ -408,8 +445,38 @@ class PetrolStation:
         :param client: is a customer, but the customer can be specified as None,
         in which case a new customer must be created with `Basic` status and a sufficient amount of money to purchase
         """
-        pass
-
-
-if __name__ == '__main__':
-    print(Order.__init__('Toilet paper', 5))
+        if not client:
+            special_balance = sum([item[0].get_total_price(ClientType.Basic, item[1]) for item in items_to_sell])
+            client = Client('Someone', special_balance, ClientType.Basic)
+        client.set_client_type(client.check_client_current_status())
+        if_fails_fuel = {}.update(self.__fuel_stock)
+        if_fails_items = {}.update(self.__shop_item_stock)
+        items_for_order = {}
+        for item in items_to_sell:
+            if item[0] is Fuel:
+                fuel = item[0]
+            else:
+                shop_item = item[0]
+            quantity = item[1]
+            if shop_item in self.__shop_item_stock and self.__shop_item_stock[shop_item] >= quantity:
+                self.remove_items(shop_item, quantity)
+                items_for_order[shop_item] = quantity
+            elif fuel in self.__fuel_stock and self.__fuel_stock[fuel] >= quantity:
+                self.remove_fuel(fuel, quantity)
+                items_for_order[fuel] = quantity
+            else:
+                raise RuntimeError
+        new_order = Order(items_for_order, date.today(), client.get_client_type())
+        if items_for_order and client.buy(new_order):
+            if client in self.__sell_history:
+                self.__sell_history[client] += [new_order]
+            else:
+                self.__sell_history[client] = [new_order]
+            if client.get_member_balance() >= 5000:
+                client.set_client_type(ClientType.Gold)
+            elif client.get_member_balance() >= 1000:
+                client.set_client_type(ClientType.Silver)
+        else:
+            self.__fuel_stock = if_fails_fuel
+            self.__shop_item_stock = if_fails_items
+            raise RuntimeError
