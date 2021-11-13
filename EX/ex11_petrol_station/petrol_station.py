@@ -469,10 +469,11 @@ class PetrolStation:
                 self.__sell_history[client] += [new_order]
             else:
                 self.__sell_history[client] = [new_order]
-            if client.get_member_balance() >= 5000:
-                client.set_client_type(ClientType.Gold)
-            elif client.get_member_balance() >= 1000:
-                client.set_client_type(ClientType.Silver)
+            if client.get_client_type() is not ClientType.Basic:
+                if client.get_member_balance() >= 5000:
+                    client.set_client_type(ClientType.Gold)
+                elif client.get_member_balance() >= 1000:
+                    client.set_client_type(ClientType.Silver)
         else:
             self.__fuel_stock = if_fails_fuel
             self.__shop_item_stock = if_fails_items
