@@ -453,17 +453,14 @@ class PetrolStation:
         if_fails_items = {}.update(self.__shop_item_stock)
         items_for_order = {}
         for item in items_to_sell:
-            if type(item[0]) is Fuel:
-                fuel = item[0]
-            else:
-                shop_item = item[0]
+            item_ = item[0]
             quantity = item[1]
-            if shop_item in self.__shop_item_stock and self.__shop_item_stock[shop_item] >= quantity:
-                self.remove_items(shop_item, quantity)
-                items_for_order[shop_item] = quantity
-            elif fuel in self.__fuel_stock and self.__fuel_stock[fuel] >= quantity:
-                self.remove_fuel(fuel, quantity)
-                items_for_order[fuel] = quantity
+            if isinstance(item_, ShopItem) and item_ in self.__shop_item_stock and self.__shop_item_stock[item_] >= quantity:
+                self.remove_items(item_, quantity)
+                items_for_order[item_] = quantity
+            elif isinstance(item_, Fuel) and item_ in self.__fuel_stock and self.__fuel_stock[item_] >= quantity:
+                self.remove_fuel(item_, quantity)
+                items_for_order[item_] = quantity
             else:
                 raise RuntimeError
         new_order = Order(items_for_order, date.today(), client.get_client_type())
