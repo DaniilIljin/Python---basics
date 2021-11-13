@@ -453,7 +453,7 @@ class PetrolStation:
         if_fails_items = {}.update(self.__shop_item_stock)
         items_for_order = {}
         for item in items_to_sell:
-            if item[0] is Fuel:
+            if type(item[0]) is Fuel:
                 fuel = item[0]
             else:
                 shop_item = item[0]
