@@ -308,7 +308,7 @@ class Client:
         """."""
         if self.get_client_type() != ClientType.Basic or self.get_client_type() != ClientType.Bronze:
             if not self.get_history():
-                client.set_client_type(ClientType.Bronze)
+                self.set_client_type(ClientType.Bronze)
             else:
                 last_order_date = self.get_history()[-1].get_date()
                 days = date.today().day - last_order_date.day
