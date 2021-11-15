@@ -477,7 +477,7 @@ class PetrolStation:
         else:
             self.__fuel_stock = if_fails_fuel
             self.__shop_item_stock = if_fails_items
-
+            raise RuntimeError
 
 if __name__ == '__main__':
     f = Fuel('fuel', 5)
