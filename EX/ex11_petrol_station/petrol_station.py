@@ -464,6 +464,8 @@ class PetrolStation:
                 self.remove_fuel(item_, quantity)
                 items_for_order[item_] = quantity
             else:
+                self.__fuel_stock = if_fails_fuel
+                self.__shop_item_stock = if_fails_items
                 raise RuntimeError
         new_order = Order(items_for_order, date.today(), client.get_client_type())
         if items_for_order and client.buy(new_order):
@@ -483,13 +485,12 @@ class PetrolStation:
 
 if __name__ == '__main__':
     f = Fuel('fuel', 5)
+    f1 = Fuel('fuel1', 5)
     i = ShopItem('toilet paper', 5)
-    p = PetrolStation({f: 10.0}, {i: 15.0})
+    p = PetrolStation({f: 1000.0, f1: 1000.0}, {i: 15.0})
 
-    p.sell([(i, 16.0)])
+    p.sell([(f, 1000.0), (f1, 1001.0)])
 
     sold_history = p.get_sell_history()
-    print(p.get_shop_item_dict()[i])
-    p.sell([(i, 16.0)])
-    print(p.get_shop_item_dict()[i])
+    print(p.get_fuel_dict())
 
