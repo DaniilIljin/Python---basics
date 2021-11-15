@@ -483,6 +483,7 @@ class PetrolStation:
             self.__shop_item_stock = if_fails_items
             raise RuntimeError
 
+
 if __name__ == '__main__':
     f = Fuel('fuel', 5)
     f1 = Fuel('fuel1', 5)
@@ -493,4 +494,3 @@ if __name__ == '__main__':
 
     sold_history = p.get_sell_history()
     print(p.get_fuel_dict())
-
