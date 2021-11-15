@@ -101,7 +101,7 @@ class OrderItem(ABC):
 
     def __repr__(self):
         """String representation for OrderItem."""
-        return "Fill this as you wish"
+        return self.__name
 
 
 class ShopItem(OrderItem):
@@ -449,8 +449,10 @@ class PetrolStation:
             special_balance = sum([item[0].get_total_price(ClientType.Basic, item[1]) for item in items_to_sell])
             client = Client('Someone', special_balance, ClientType.Basic)
         client.set_client_type(client.check_client_current_status())
-        if_fails_fuel = {}.update(self.__fuel_stock)
-        if_fails_items = {}.update(self.__shop_item_stock)
+        if_fails_fuel = {}
+        if_fails_items = {}
+        if_fails_fuel.update(self.__fuel_stock)
+        if_fails_items.update(self.__shop_item_stock)
         items_for_order = {}
         for item in items_to_sell:
             item_ = item[0]
@@ -461,8 +463,6 @@ class PetrolStation:
             elif isinstance(item_, Fuel) and item_ in self.__fuel_stock and self.__fuel_stock[item_] >= quantity:
                 self.remove_fuel(item_, quantity)
                 items_for_order[item_] = quantity
-            else:
-                raise RuntimeError
         new_order = Order(items_for_order, date.today(), client.get_client_type())
         if items_for_order and client.buy(new_order):
             if client in self.__sell_history:
@@ -477,7 +477,6 @@ class PetrolStation:
         else:
             self.__fuel_stock = if_fails_fuel
             self.__shop_item_stock = if_fails_items
-            raise RuntimeError
 
 
 if __name__ == '__main__':
@@ -485,8 +484,10 @@ if __name__ == '__main__':
     i = ShopItem('toilet paper', 5)
     p = PetrolStation({f: 10.0}, {i: 15.0})
 
-    p.sell([(i, 10.0)])
+    p.sell([(i, 16.0)])
 
     sold_history = p.get_sell_history()
-    print(len(sold_history))
-    print(list(sold_history.keys())[0].get_client_type())
+    print(p.get_shop_item_dict()[i])
+    p.sell([(i, 16.0)])
+    print(p.get_shop_item_dict()[i])
+
