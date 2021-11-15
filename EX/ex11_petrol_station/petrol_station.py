@@ -463,6 +463,8 @@ class PetrolStation:
             elif isinstance(item_, Fuel) and item_ in self.__fuel_stock and self.__fuel_stock[item_] >= quantity:
                 self.remove_fuel(item_, quantity)
                 items_for_order[item_] = quantity
+            else:
+                raise RuntimeError
         new_order = Order(items_for_order, date.today(), client.get_client_type())
         if items_for_order and client.buy(new_order):
             if client in self.__sell_history:
