@@ -306,7 +306,7 @@ class Client:
 
     def check_client_current_status(self):
         """."""
-        if self.get_client_type() != ClientType.Basic or self.get_client_type() != ClientType.Bronze:
+        if self.get_client_type() != ClientType.Basic and self.get_client_type() != ClientType.Bronze:
             if not self.get_history():
                 self.set_client_type(ClientType.Bronze)
             else:
@@ -478,3 +478,15 @@ class PetrolStation:
             self.__fuel_stock = if_fails_fuel
             self.__shop_item_stock = if_fails_items
             raise RuntimeError
+
+
+if __name__ == '__main__':
+    f = Fuel('fuel', 5)
+    i = ShopItem('toilet paper', 5)
+    p = PetrolStation({f: 10.0}, {i: 15.0})
+
+    p.sell([(i, 10.0)])
+
+    sold_history = p.get_sell_history()
+    print(len(sold_history))
+    print(list(sold_history.keys())[0].get_client_type())
