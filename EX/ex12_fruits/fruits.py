@@ -115,10 +115,10 @@ class App:
         The parameter is list of products. Create a new order, then add passed products to
         this order, then add this order to the orders list.
         """
-        if something_to_order:
+        if something_to_order is not None:
             if type(something_to_order) is list:
                 for element in something_to_order:
-                    if element:
+                    if element is not None:
                         self.list_of_orders.append(Order().add_product(something_to_order))
             else:
                 self.list_of_orders.append(Order().add_product(something_to_order))
