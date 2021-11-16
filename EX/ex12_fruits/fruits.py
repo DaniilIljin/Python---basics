@@ -54,7 +54,8 @@ class Order:
     def add_product(self, product):
         """Method for adding a single product to the dictionary."""
         if product in self.products:
-            self.products[product[0]] += product[1]
+            if self.products[product[0]] < product[1]:
+                self.products[product[0]] += product[1]
         else:
             self.products[product[0]] = product[1]
 
