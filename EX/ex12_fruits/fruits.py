@@ -88,7 +88,7 @@ class App:
 
     def get_orders(self) -> list:
         """Getter for orders list."""
-        pass
+        return self.list_of_orders
 
     def import_products(self, filename) -> list[Product]:
         """
