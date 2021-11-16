@@ -84,7 +84,7 @@ class App:
 
     def get_products(self) -> list:
         """Getter for products list."""
-        return self.list_of_products
+        return self.list_of_products_and_prices
 
     def get_orders(self) -> list:
         """Getter for orders list."""
