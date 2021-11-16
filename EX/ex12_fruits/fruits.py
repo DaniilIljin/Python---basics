@@ -120,7 +120,7 @@ class App:
             if type(something_to_order) is list:
                 for element in something_to_order:
                     if element is not None:
-                        self.list_of_orders.append(Order().add_product(something_to_order))
+                        self.list_of_orders.append(Order().add_product(element))
             else:
                 self.list_of_orders.append(Order().add_product(something_to_order))
 
