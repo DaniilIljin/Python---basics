@@ -32,9 +32,9 @@ class Order:
         self.customer = customer
         self.products = {}
 
-    def get_product(self, product):
+    def get_products(self):
         """."""
-        return self.products[product]
+        return self.products
 
     def get_products_string(self) -> str:
         """
@@ -178,6 +178,7 @@ class Customer:
     def __repr__(self):
         """."""
         return self.name
+
 
 if __name__ == '__main__':
     app = App()
