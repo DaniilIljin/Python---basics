@@ -76,7 +76,7 @@ class App:
         """App constructor, no arguments expected."""
         self.list_of_customers = []
         self.list_of_products = self.import_products('pricelist.txt')
-        self.list_OF_orders = []
+        self.list_of_orders = []
 
     def get_list_of_customers(self):
         """."""
@@ -108,13 +108,16 @@ class App:
                 if product_.get_name() == product:
                     return product_
 
-    def order_products(self):
+    def order_products(self, something_to_order):
         """Order products in general.
 
         The parameter is list of products. Create a new order, then add passed products to
         this order, then add this order to the orders list.
         """
-        pass
+        if type(something_to_order) is list:
+            self.list_of_orders.append(Order().add_products(something_to_order))
+        else:
+            self.list_of_orders.append(Order().add_product(something_to_order))
 
     def order(self):
         """
