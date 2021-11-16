@@ -104,8 +104,9 @@ class App:
     def find_product_by_name(self, product):
         """."""
         if product:
-            if product in self.list_of_products:
-                return product
+            for product_ in self.list_of_products:
+                if product_.get_name() == product:
+                    return product_
 
     def order_products(self):
         """Order products in general.
