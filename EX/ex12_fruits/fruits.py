@@ -118,9 +118,11 @@ class App:
         """
         if something_to_order is not None:
             if type(something_to_order) is list:
+                new_list = []
                 for element in something_to_order:
                     if element is not None:
-                        self.list_of_orders.append(Order().add_product(element))
+                        new_list.append(element)
+                self.list_of_orders.append((Order().add_products(new_list)))
             else:
                 self.list_of_orders.append(Order().add_product(something_to_order))
 
