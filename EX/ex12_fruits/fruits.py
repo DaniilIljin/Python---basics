@@ -97,8 +97,9 @@ class App:
         matches = re.findall(r'.+[^\n]', content)
         return [Product(match.split(' - ')[0], float(match.split(' - ')[1])) for match in matches]
 
-    def find_product_by_name(self, product):
-        return self.list_of_products[product]
+    def find_product_by_name(self, product: Product):
+        if product in self.list_of_products:
+            return product
 
     def order_products(self):
         """Order products in general.
