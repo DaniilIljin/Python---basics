@@ -104,7 +104,7 @@ class App:
     def find_product_by_name(self, product):
         """."""
         if product:
-            for product_ in self.list_of_products:
+            for product_ in self.list_of_products_and_prices:
                 if product_.get_name() == product:
                     return product_
 
