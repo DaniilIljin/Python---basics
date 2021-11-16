@@ -122,9 +122,13 @@ class App:
                 for element in something_to_order:
                     if element is not None:
                         new_list.append(element)
-                self.list_of_orders += [Order().add_products(new_list)]
+                new_order = Order()
+                new_order.add_products(new_list)
+                self.list_of_orders.append(new_order)
             else:
-                self.list_of_orders += [Order().add_product(something_to_order)]
+                new_order = Order()
+                new_order.add_products(something_to_order)
+                self.list_of_orders.append(new_order)
 
     def order(self):
         """
