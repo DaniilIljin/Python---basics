@@ -115,10 +115,11 @@ class App:
         The parameter is list of products. Create a new order, then add passed products to
         this order, then add this order to the orders list.
         """
-        if type(something_to_order) is list:
-            self.list_of_orders.append(Order().add_products(something_to_order))
-        else:
-            self.list_of_orders.append(Order().add_product(something_to_order))
+        if something_to_order:
+            if type(something_to_order) is list:
+                self.list_of_orders.append(Order().add_products(something_to_order))
+            else:
+                self.list_of_orders.append(Order().add_product(something_to_order))
 
     def order(self):
         """
@@ -206,4 +207,4 @@ if __name__ == '__main__':
     # print(app.show_all_orders(True))
     # print("=======")
     # app.calculate_summary()
-    print(Order().get_customer())
+    print([f'{product.name} and its price {product.price}' for product in app.list_of_products_and_prices])
