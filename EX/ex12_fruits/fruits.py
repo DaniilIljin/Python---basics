@@ -14,6 +14,10 @@ class Product:
         self.name = name
         self.price = price
 
+    def get_name(self):
+        """."""
+        return self.name
+
 
 class Order:
     """Order class."""
@@ -98,6 +102,7 @@ class App:
         return [Product(match.split(' - ')[0], float(match.split(' - ')[1])) for match in matches]
 
     def find_product_by_name(self, product: Product):
+        """."""
         if product in self.list_of_products:
             return product
 
