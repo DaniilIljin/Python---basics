@@ -45,7 +45,8 @@ class Order:
         of such long string there should be no comma, nor string. Example:
         'Avocado: 2 kg, Orange: 1 kg, Papaya: 3 kg, Cherry tomato: 2 kg'
         """
-        return ''.join([f'{fruit}: {self.products[fruit]}, ' if fruit != self.products.keys()[-1] else f'{fruit}: {self.products[fruit]}' for fruit in self.products.keys()])
+        return ''.join([f'{fruit}: {self.products[fruit]}, ' if fruit != self.products.keys()[-1]
+                        else f'{fruit}: {self.products[fruit]}' for fruit in self.products.keys()])
 
     def get_customer(self):
         """."""
@@ -114,11 +115,10 @@ class App:
         The parameter is list of products. Create a new order, then add passed products to
         this order, then add this order to the orders list.
         """
-        if something_to_order:
-            if type(something_to_order) is list:
-                self.list_of_orders.append(Order().add_products(something_to_order))
-            else:
-                self.list_of_orders.append(Order().add_product(something_to_order))
+        if type(something_to_order) is list:
+            self.list_of_orders.append(Order().add_products(something_to_order))
+        else:
+            self.list_of_orders.append(Order().add_product(something_to_order))
 
     def order(self):
         """
@@ -206,4 +206,4 @@ if __name__ == '__main__':
     # print(app.show_all_orders(True))
     # print("=======")
     # app.calculate_summary()
-    print(app.get_products())
+    print(Order().get_customer())
