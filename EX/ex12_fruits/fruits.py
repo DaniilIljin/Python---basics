@@ -28,6 +28,10 @@ class Order:
         self.customer = customer
         self.products = {}
 
+    def get_product(self, product):
+        """."""
+        return self.products[product]
+
     def get_products_string(self) -> str:
         """
         Method for converting products to a string.
