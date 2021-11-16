@@ -52,10 +52,10 @@ class Order:
         return self.customer
 
     def add_product(self, product):
-        """Method for adding a single product to the dictionary."""
+        """Method for adding a single produ ct to the dictionary."""
         if product in self.products:
             if self.products[product[0]] < product[1]:
-                self.products[product[0]] += product[1]
+                self.products[product[0]] = product[1]
         else:
             self.products[product[0]] = product[1]
 
