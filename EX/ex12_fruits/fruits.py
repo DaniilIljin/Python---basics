@@ -117,7 +117,9 @@ class App:
         """
         if something_to_order:
             if type(something_to_order) is list:
-                self.list_of_orders.append(Order().add_products(something_to_order))
+                for element in something_to_order:
+                    if element:
+                        self.list_of_orders.append(Order().add_product(something_to_order))
             else:
                 self.list_of_orders.append(Order().add_product(something_to_order))
 
