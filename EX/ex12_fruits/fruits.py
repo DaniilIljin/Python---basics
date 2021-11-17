@@ -127,12 +127,16 @@ class App:
             if type(something_to_order) is list:
                 new_list = []
                 for element in something_to_order:
+                    if something_to_order not in [product_.get_name() for product_ in self.get_products()]:
+                        raise Exception("Woopsie. There is no such product as ")
                     if element:
                         new_list.append(element)
                 new_order = Order()
                 new_order.add_products(new_list)
                 self.list_of_orders += [new_order]
             else:
+                if something_to_order not in [product_.get_name() for product_ in self.get_products()]:
+                    raise Exception("Woopsie. There is no such product as ")
                 new_order = Order()
                 new_order.add_product(something_to_order)
                 self.list_of_orders += [new_order]
@@ -238,8 +242,6 @@ class App:
             for order in customer.get_orders():
                 dic = order.get_products()
                 for product in dic.keys():
-                    if product not in [product_.get_name() for product_ in self.get_products()]:
-                        raise Exception("Woopsie. There is no such product as ")
                     for product_ in self.get_products():
                         if product_.get_name() == product:
                             total += dic[product] * product_.get_price()
