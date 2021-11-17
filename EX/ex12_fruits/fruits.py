@@ -176,7 +176,7 @@ class App:
 
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
-        total = 0
+        total = 0.0
         if customer.get_orders():
             for order in customer.get_orders():
                 dic = order.get_products()
@@ -187,6 +187,7 @@ class App:
                             break
         else:
             total = 'nothing'
+        a = total
         return total
 
     def calculate_summary(self):
@@ -205,8 +206,8 @@ class App:
                     if not order.get_products():
                         counter += 1
                 if counter == len(a):
-                    string += 'nothing\n\n'
-                    string += f'Total: {round(self.calculate_total(costomer), 2)}\n\n'
+                    string += 'nothing\n'
+                    string += f'Total: ' + "{:1.2f}".format(0.0) + '\n\n'
                 else:
                     for order in a:
                         if order:
@@ -216,6 +217,7 @@ class App:
                     string += f'Total: {round(self.calculate_total(costomer), 2)}\n\n'
             else:
                 string += 'nothing\n\n'
+                string += f'Total: ' + "{:1.2f}".format(0.0) + '\n\n'
         string = string[:-1] + f'ALL ORDERS TOTAL: {round(total_total, 2)}'
         return string
 
