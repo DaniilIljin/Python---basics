@@ -242,6 +242,7 @@ class App:
                         if product_.get_name() == product:
                             total += dic[product] * product_.get_price()
                             break
+                    raise Exception("Woopsie. There is no such product as ")
         else:
             total = 'nothing'
         return total
