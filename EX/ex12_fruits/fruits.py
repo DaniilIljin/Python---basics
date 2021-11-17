@@ -151,7 +151,7 @@ class App:
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
-        self.list_of_customers += customer
+        self.list_of_customers += [customer]
 
     def add_customers(self, customers):
         """Method for adding several customers to the list."""
