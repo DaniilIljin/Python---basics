@@ -116,11 +116,11 @@ class App:
         The parameter is list of products. Create a new order, then add passed products to
         this order, then add this order to the orders list.
         """
-        if something_to_order is not None:
+        if something_to_order:
             if type(something_to_order) is list:
                 new_list = []
                 for element in something_to_order:
-                    if element is not None:
+                    if element:
                         new_list.append(element)
                 new_order = Order()
                 new_order.add_products(new_list)
@@ -130,14 +130,20 @@ class App:
                 new_order.add_product(something_to_order)
                 self.list_of_orders.append(new_order)
 
-
-    def order(self):
+    def order(self, customers_name, products_and_their_mass):
         """
         Method for ordering products for a customer.
 
         Products here is list of tuples.
         """
-        pass
+        for customer in self.list_of_customers:
+            if customer.name == customers_name:
+                new_order = Order(customer)
+                if type(products_and_their_mass) is list:
+                    new_order.add_products(products_and_their_mass)
+                else:
+                    new_order.add_product(products_and_their_mass)
+                customer.add_new_order(new_order)
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
