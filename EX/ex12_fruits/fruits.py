@@ -92,6 +92,10 @@ class App:
         """Getter for orders list."""
         return self.list_of_orders
 
+    def get_customers(self):
+        """."""
+        return self.list_of_customers
+
     def import_products(self, filename) -> list[Product]:
         """
         Import products from a file, return list of Product objects.
