@@ -208,7 +208,7 @@ class App:
                     string += 'nothing\n\n'
                 else:
                     for order in a:
-                        if order.get_products_string():
+                        if order:
                             string += order.get_products_string() + '\n'
                         else:
                             continue
