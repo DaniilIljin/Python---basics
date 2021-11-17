@@ -182,11 +182,7 @@ class App:
                 dic = order.get_products()
                 for product in dic.keys():
                     for product_ in self.get_products():
-                        a = product_.get_name()
                         if product_.get_name() == product:
-                            f = dic[product]
-                            d = product_.get_price()
-                            b = dic[product] * product_.get_price()
                             total += dic[product] * product_.get_price()
                             break
         else:
@@ -194,12 +190,22 @@ class App:
         return total
 
     def calculate_summary(self):
-        """Method for printing a summary of all orders with totals and the total for all customers' all orders."""
+        """Method for printing a summary of all orders with totals and the total for all customers' all orders."""7
+        string = ''
         total_total = 0
         for customer in self.list_of_customers:
             if self.calculate_total(customer) != 'nothing':
                 total_total += self.calculate_total(customer)
-        return total_total
+        for costomer in self.list_of_customers:
+            string += f'{costomer.get_name()}:\n'
+            if costomer.get_orders():
+                for order in customer.get_orders():
+                    string += order.get_products_string() + '\n'
+                string += f'Total: {round(self.calculate_total(customer), 2)}\n\n'
+            else:
+                string += 'nothing\n\n'
+        string = string[:-1] + f'Total: {round(total_total, 2)}'
+        return string
 
 
 class Customer:
