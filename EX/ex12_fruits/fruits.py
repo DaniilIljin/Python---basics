@@ -193,30 +193,30 @@ class App:
                         b = format(round(self.calculate_total(costomer), 2), '.2f')
                         string += f'Total: {b}\n\n'
                 else:
-                    string += 'nothing\n\n'
+                    string += 'nothing\n'
                     string += 'Total: 0.00\n\n'
-                return string
-            else:
-                for costomer in self.list_of_customers:
-                    string += f'{costomer.get_name()}:\n'
-                    if costomer.get_orders():
-                        a = costomer.get_orders()
-                        counter = 0
-                        for order in a:
-                            if not order.get_products():
-                                counter += 1
-                        if counter == len(a):
-                            string += 'nothing\n\n'
-                        else:
-                            for order in a:
-                                if order:
-                                    string += order.get_products_string() + '\n'
-                                else:
-                                    continue
-                            string += '\n'
-                    else:
+            return string
+        else:
+            for costomer in self.list_of_customers:
+                string += f'{costomer.get_name()}:\n'
+                if costomer.get_orders():
+                    a = costomer.get_orders()
+                    counter = 0
+                    for order in a:
+                        if not order.get_products():
+                            counter += 1
+                    if counter == len(a):
                         string += 'nothing\n\n'
-                return string
+                    else:
+                        for order in a:
+                            if order:
+                                string += order.get_products_string() + '\n'
+                            else:
+                                continue
+                        string += '\n'
+                else:
+                    string += 'nothing\n\n'
+            return string
 
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
@@ -312,8 +312,8 @@ if __name__ == '__main__':
     # Checking products dictionary format (we want numeric price, not string).
     print("=======")
     # Checking how all orders and summary look like.
-    # print(app.show_all_orders(False))
-    # print("=======")
-    # print(app.show_all_orders(True))
+    print(app.show_all_orders(False))
     print("=======")
-    print(app.calculate_summary())
+    print(app.show_all_orders(True))
+    print("=======")
+    app.calculate_summary()
