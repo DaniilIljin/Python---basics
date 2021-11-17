@@ -49,7 +49,7 @@ class Order:
         of such long string there should be no comma, nor string. Example:
         'Avocado: 2 kg, Orange: 1 kg, Papaya: 3 kg, Cherry tomato: 2 kg'
         """
-        return ''.join([f'{fruit}: {self.products[fruit]}kg, ' for fruit in self.products.keys()])[:-2]
+        return ''.join([f'{fruit}: {self.products[fruit]} kg, ' for fruit in self.products.keys()])[:-2]
 
     def get_customer(self):
         """."""
