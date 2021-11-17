@@ -127,7 +127,7 @@ class App:
             if type(something_to_order) is list:
                 new_list = []
                 for element in something_to_order:
-                    if something_to_order not in [product_.get_name() for product_ in self.get_products()]:
+                    if something_to_order[0] not in [product_.get_name() for product_ in self.get_products()]:
                         raise Exception("Woopsie. There is no such product as ")
                     if element:
                         new_list.append(element)
@@ -135,7 +135,7 @@ class App:
                 new_order.add_products(new_list)
                 self.list_of_orders += [new_order]
             else:
-                if something_to_order not in [product_.get_name() for product_ in self.get_products()]:
+                if something_to_order[0] not in [product_.get_name() for product_ in self.get_products()]:
                     raise Exception("Woopsie. There is no such product as ")
                 new_order = Order()
                 new_order.add_product(something_to_order)
