@@ -220,7 +220,7 @@ class App:
 
 
 class Customer:
-    """Customer to implement."""
+    """Customer to  implement."""
 
     def __init__(self, name, address):
         """Create a customer."""
