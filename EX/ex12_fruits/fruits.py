@@ -195,7 +195,6 @@ class App:
                 else:
                     string += 'nothing\n'
                     string += 'Total: 0.00\n\n'
-            return string
         else:
             for costomer in self.list_of_customers:
                 string += f'{costomer.get_name()}:\n'
@@ -216,7 +215,7 @@ class App:
                         string += '\n'
                 else:
                     string += 'nothing\n\n'
-            return string
+        return string[:-2]
 
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
