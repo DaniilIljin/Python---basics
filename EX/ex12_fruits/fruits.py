@@ -206,19 +206,18 @@ class App:
                             if not order.get_products():
                                 counter += 1
                         if counter == len(a):
-                            string += 'nothing\n'
-                            string += 'Total: 0.00\n\n'
+                            string += 'nothing\n\n'
                         else:
                             for order in a:
                                 if order:
                                     string += order.get_products_string() + '\n'
                                 else:
                                     continue
-                            b = format(round(self.calculate_total(costomer), 2), '.2f')
-                            string += f'Total: {b}\n\n'
+                            string += '\n'
                     else:
                         string += 'nothing\n\n'
-                        string += 'Total: 0.00\n\n'
+                return string
+
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
         total = 0.0
