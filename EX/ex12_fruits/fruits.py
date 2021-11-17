@@ -205,7 +205,7 @@ class App:
                 string += f'Total: {round(self.calculate_total(costomer), 2)}\n\n'
             else:
                 string += 'nothing\n\n'
-        string = string[:-1] + f'TOTAL: {round(total_total, 2)}'
+        string = string[:-1] + f'ALL ORDERS TOTAL: {round(total_total, 2)}'
         return string
 
 
