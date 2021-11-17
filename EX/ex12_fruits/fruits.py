@@ -190,7 +190,7 @@ class App:
         return total
 
     def calculate_summary(self):
-        """Method for printing a summary of all orders with totals and the total for all customers' all orders."""7
+        """Method for printing a summary of all orders with totals and the total for all customers' all orders."""
         string = ''
         total_total = 0
         for customer in self.list_of_customers:
@@ -199,9 +199,10 @@ class App:
         for costomer in self.list_of_customers:
             string += f'{costomer.get_name()}:\n'
             if costomer.get_orders():
-                for order in customer.get_orders():
+                a = costomer.get_orders()
+                for order in a:
                     string += order.get_products_string() + '\n'
-                string += f'Total: {round(self.calculate_total(customer), 2)}\n\n'
+                string += f'Total: {round(self.calculate_total(costomer), 2)}\n\n'
             else:
                 string += 'nothing\n\n'
         string = string[:-1] + f'Total: {round(total_total, 2)}'
