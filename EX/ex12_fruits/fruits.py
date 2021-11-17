@@ -18,6 +18,10 @@ class Product:
         """."""
         return self.name
 
+    def get_price(self):
+        """."""
+        return self.price
+
 
 class Order:
     """Order class."""
@@ -45,8 +49,7 @@ class Order:
         of such long string there should be no comma, nor string. Example:
         'Avocado: 2 kg, Orange: 1 kg, Papaya: 3 kg, Cherry tomato: 2 kg'
         """
-        return ''.join([f'{fruit}: {self.products[fruit]}, ' if fruit != self.products.keys()[-1]
-                        else f'{fruit}: {self.products[fruit]}' for fruit in self.products.keys()])
+        return ''.join([f'{fruit}: {self.products[fruit]}, ' for fruit in self.products.keys()])[:-2]
 
     def get_customer(self):
         """."""
@@ -157,7 +160,7 @@ class App:
         """Method for adding several customers to the list."""
         self.list_of_customers.extend(customers)
 
-    def show_all_orders(self) -> str:
+    def show_all_orders(self, is_summary) -> str:
         """
         Method for returning all orders for all customers.
 
@@ -165,14 +168,29 @@ class App:
         and also global total price.
         """
         pass
+        # string = ''
+        # for customer in self.list_of_customers:
+        #     string += f"{customer.get_name()}:\n"
+        #     for order in customer.get_orders():
+        #         string
 
-    def calculate_total(self) -> float:
+    def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
-        pass
+        total = 0
+        for order in customer.list_of_orders:
+            dic = order.get_products()
+            for product in dic:
+                for product_ in self.get_products():
+                    if product_.get_name == product:
+                        total += dic[product] * product_.get_price()
+        return total
 
     def calculate_summary(self):
         """Method for printing a summary of all orders with totals and the total for all customers' all orders."""
-        pass
+        total_total = 0
+        for customer in self.list_of_customers:
+            total_total += self.calculate_total(customer)
+        return total_total
 
 
 class Customer:
@@ -207,24 +225,23 @@ class Customer:
 
 if __name__ == '__main__':
     app = App()
-    # # Adding default customers to our app.
-    # app.add_customers([Customer("Anton", "home"), Customer("Rubber Duck", "home-table"), Customer("Svetozar", "Dorm 1"),
-    #                    Customer("Toivo", "Dorm 2"), Customer("Muhhamad", "Muhha's lair"), Customer("test", "TEST")])
-    # # Ordering some food for everyone.
-    # app.order("Anton", [("Avocado", 2), ("Orange", 1), ("Papaya", 3), ("Cherry tomato", 2)])
-    # app.order("Anton", [("Avocado", 4), ("Orange", 2), ("Papaya", 3), ("Cherry tomato", 2)])
-    # app.order("Rubber Duck", [("Mango Irwin", 6)])
-    # app.order("Svetozar", [("Lemon", 1)])
-    # app.order("Svetozar", [("Grapefruit", 10)])
-    # app.order("Muhhamad", [("Grenades", 13), ("Cannon", 1), ("Red pepper", 666)])
-    # app.order("Toivo", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
-    # # Checking products dictionary format (we want numeric price, not string).
-    # print(app.get_products())
-    # print("=======")
-    # # Checking how all orders and summary look like.
+    # Adding default customers to our app.
+    app.add_customers([Customer("Anton", "home"), Customer("Rubber Duck", "home-table"), Customer("Svetozar", "Dorm 1"),
+                       Customer("Toivo", "Dorm 2"), Customer("Muhhamad", "Muhha's lair"), Customer("test", "TEST")])
+    # Ordering some food for everyone.
+    app.order("Anton", [("Avocado", 2), ("Orange", 1), ("Papaya", 3), ("Cherry tomato", 2)])
+    app.order("Anton", [("Avocado", 4), ("Orange", 2), ("Papaya", 3), ("Cherry tomato", 2)])
+    app.order("Rubber Duck", [("Mango Irwin", 6)])
+    app.order("Svetozar", [("Lemon", 1)])
+    app.order("Svetozar", [("Grapefruit", 10)])
+    app.order("Muhhamad", [("Grenades", 13), ("Cannon", 1), ("Red pepper", 666)])
+    app.order("Toivo", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
+    # Checking products dictionary format (we want numeric price, not string).
+    print(app.get_products())
+    print("=======")
+    # Checking how all orders and summary look like.
     # print(app.show_all_orders(False))
     # print("=======")
     # print(app.show_all_orders(True))
     # print("=======")
     # app.calculate_summary()
-    print([f'{product.name} and its price {product.price}' for product in app.list_of_products_and_prices])
