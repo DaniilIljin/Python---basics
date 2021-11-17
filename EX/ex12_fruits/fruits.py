@@ -198,7 +198,7 @@ class Customer:
 
     def add_new_order(self, order):
         """."""
-        self.list_of_orders += order
+        self.list_of_orders += [order]
 
     def __repr__(self):
         """."""
