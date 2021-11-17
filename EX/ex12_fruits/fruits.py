@@ -178,7 +178,7 @@ class App:
         """Method for calculating total price for all customer's orders."""
         total = 0
         if customer.list_of_orders:
-            for order in customer.list_of_orders:
+            for order in customer.get_orders():
                 dic = order.get_products()
                 for product in dic:
                     for product_ in self.get_products():
