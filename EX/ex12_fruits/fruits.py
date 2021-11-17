@@ -180,10 +180,15 @@ class App:
         if customer.get_orders():
             for order in customer.get_orders():
                 dic = order.get_products()
-                for product in dic:
+                for product in dic.keys():
                     for product_ in self.get_products():
-                        if product_.get_name == product:
+                        a = product_.get_name()
+                        if product_.get_name() == product:
+                            f = dic[product]
+                            d = product_.get_price()
+                            b = dic[product] * product_.get_price()
                             total += dic[product] * product_.get_price()
+                            break
         else:
             total = 'nothing'
         return total
@@ -248,4 +253,5 @@ if __name__ == '__main__':
     # print("=======")
     # print(app.show_all_orders(True))
     # print("=======")
-    # app.calculate_summary()
+    print([app.calculate_total(customer) for customer in app.list_of_customers])
+    print(app.calculate_summary())
