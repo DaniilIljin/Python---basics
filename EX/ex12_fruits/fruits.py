@@ -177,19 +177,23 @@ class App:
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
         total = 0
-        for order in customer.list_of_orders:
-            dic = order.get_products()
-            for product in dic:
-                for product_ in self.get_products():
-                    if product_.get_name == product:
-                        total += dic[product] * product_.get_price()
+        if customer.list_of_orders:
+            for order in customer.list_of_orders:
+                dic = order.get_products()
+                for product in dic:
+                    for product_ in self.get_products():
+                        if product_.get_name == product:
+                            total += dic[product] * product_.get_price()
+        else:
+            total = 'nothing'
         return total
 
     def calculate_summary(self):
         """Method for printing a summary of all orders with totals and the total for all customers' all orders."""
         total_total = 0
         for customer in self.list_of_customers:
-            total_total += self.calculate_total(customer)
+            if self.calculate_total(customer) != 'nothing':
+                total_total += self.calculate_total(customer)
         return total_total
 
 
