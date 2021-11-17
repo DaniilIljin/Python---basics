@@ -160,7 +160,7 @@ class App:
         """Method for adding several customers to the list."""
         self.list_of_customers.extend(customers)
 
-    def first_way(self):
+    def second_way(self):
         """."""
         string = ''
         total_total = 0
@@ -176,16 +176,16 @@ class App:
                     if not order.get_products():
                         counter += 1
                 if counter == len(a):
-                    string += 'nothing\n'
-                    string += 'Total: 0.00\n\n'
+                    string += 'nothing\n\n'
                 else:
                     for order in a:
                         if order:
                             string += order.get_products_string() + '\n'
                         else:
                             continue
-                    b = format(round(self.calculate_total(costomer), 2), '.2f')
-                    string += f'Total: {b}\n\n'
+                    string += '\n'
+            else:
+                string += 'nothing\n\n'
         return string[:-2]
 
     def show_all_orders(self, is_summary) -> str:
@@ -195,12 +195,12 @@ class App:
         If is_summary is true, add totals for each customer
         and also global total price.
         """
-        if not is_summary:
-            string = ''
-            total_total = 0
-            for customer in self.list_of_customers:
-                if self.calculate_total(customer) != 'nothing':
-                    total_total += self.calculate_total(customer)
+        string = ''
+        total_total = 0
+        for customer in self.list_of_customers:
+            if self.calculate_total(customer) != 'nothing':
+                total_total += self.calculate_total(customer)
+        if is_summary:
             for costomer in self.list_of_customers:
                 string += f'{costomer.get_name()}:\n'
                 if costomer.get_orders():
@@ -210,19 +210,22 @@ class App:
                         if not order.get_products():
                             counter += 1
                     if counter == len(a):
-                        string += 'nothing\n\n'
+                        string += 'nothing\n'
+                        string += 'Total: 0.00\n\n'
                     else:
                         for order in a:
                             if order:
                                 string += order.get_products_string() + '\n'
                             else:
                                 continue
-                        string += '\n'
+                        b = format(round(self.calculate_total(costomer), 2), '.2f')
+                        string += f'Total: {b}\n\n'
                 else:
-                    string += 'nothing\n\n'
+                    string += 'nothing\n'
+                    string += 'Total: 0.00\n\n'
             return string[:-2]
         else:
-            return self.first_way()
+            return self.second_way()
 
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
