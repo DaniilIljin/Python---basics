@@ -238,11 +238,12 @@ class App:
             for order in customer.get_orders():
                 dic = order.get_products()
                 for product in dic.keys():
+                    if product not in [product_.get_name() for product_ in self.get_products()]:
+                        raise Exception("Woopsie. There is no such product as ")
                     for product_ in self.get_products():
                         if product_.get_name() == product:
                             total += dic[product] * product_.get_price()
                             break
-                    raise Exception("Woopsie. There is no such product as ")
         else:
             total = 'nothing'
         return total
