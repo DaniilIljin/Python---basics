@@ -86,7 +86,7 @@ class App:
     def get_products(self) -> list:
         """Getter for products list."""
         if self.list_of_products_and_prices:
-            return [products.get_products() for products in self.list_of_orders]
+            return self.list_of_products_and_prices
 
     def get_orders(self) -> list:
         """Getter for orders list."""
@@ -127,8 +127,9 @@ class App:
                 self.list_of_orders.append(new_order)
             else:
                 new_order = Order()
-                new_order.add_products(something_to_order)
+                new_order.add_product(something_to_order)
                 self.list_of_orders.append(new_order)
+
 
     def order(self):
         """
