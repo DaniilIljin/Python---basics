@@ -207,17 +207,18 @@ class App:
                         counter += 1
                 if counter == len(a):
                     string += 'nothing\n'
-                    string += f'Total: ' + "{:1.2f}".format(0.0) + '\n\n'
+                    string += f'Total: 0.00\n\n'
                 else:
                     for order in a:
                         if order:
                             string += order.get_products_string() + '\n'
                         else:
                             continue
-                    string += f'Total: {round(self.calculate_total(costomer), 2)}\n\n'
+                    b = format(round(self.calculate_total(costomer), 2), '.2f')
+                    string += f'Total: {b}\n\n'
             else:
                 string += 'nothing\n\n'
-                string += f'Total: ' + "{:1.2f}".format(0.0) + '\n\n'
+                string += f'Total: 0.00\n\n'
         string = string[:-1] + f'ALL ORDERS TOTAL: {round(total_total, 2)}'
         return string
 
