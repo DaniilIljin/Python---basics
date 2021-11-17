@@ -128,11 +128,11 @@ class App:
                         new_list.append(element)
                 new_order = Order()
                 new_order.add_products(new_list)
-                self.list_of_orders.append(new_order)
+                self.list_of_orders += [new_order]
             else:
                 new_order = Order()
                 new_order.add_product(something_to_order)
-                self.list_of_orders.append(new_order)
+                self.list_of_orders += [new_order]
 
     def order(self, customers_name, products_and_their_mass):
         """
