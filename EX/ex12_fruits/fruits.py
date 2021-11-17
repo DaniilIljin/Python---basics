@@ -206,6 +206,7 @@ class App:
                         counter += 1
                 if counter == len(a):
                     string += 'nothing\n\n'
+                    string += f'Total: {round(self.calculate_total(costomer), 2)}\n\n'
                 else:
                     for order in a:
                         if order:
