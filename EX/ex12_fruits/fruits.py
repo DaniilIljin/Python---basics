@@ -341,5 +341,5 @@ if __name__ == '__main__':
     # print(app.show_all_orders(True))
     # print("=======")
     # app.calculate_summary()
-    app.order("orderer1", [("Avocado", 2), ("Oranges", 3)])
+    app.order("orderer2", [("fdsahlifdsa", 2), ("Orange", 3)])
     print(app.get_orders())
