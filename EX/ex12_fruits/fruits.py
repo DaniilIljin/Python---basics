@@ -322,22 +322,24 @@ class Customer:
 
 if __name__ == '__main__':
     app = App()
-    # Adding default customers to our app.
+    # # Adding default customers to our app.
     app.add_customers([Customer("name1", "home"), Customer("name1", "home-table"), Customer("name12", "Dorm 1"),
                        Customer("orderer1", "Dorm 2"), Customer("orderer2", "Muhha's lair")])
-    # Ordering some food for everyone.
-    app.order("name1", [])
-    app.order("name1", [])
-    app.order("name12", [])
-    app.order("orderer1", [("Avocado", 2), ("Orange", 3)])
-    app.order("orderer1", [])
-    app.order("orderer1", [("Grenades", 5), ("Lychees", 123)])
-    app.order("orderer2", [("Grenades", 5), ("Lychees", 123), ("Green pepper", 3)])
-    # Checking products dictionary format (we want numeric price, not string).
-    print("=======")
-    # Checking how all orders and summary look like.
-    print(app.show_all_orders(False))
-    print("=======")
-    print(app.show_all_orders(True))
-    print("=======")
-    app.calculate_summary()
+    # # Ordering some food for everyone.
+    # app.order("name1", [])
+    # app.order("name1", [])
+    # app.order("name12", [])
+    # app.order("orderer1", [("Avocado", 2), ("Orange", 3)])
+    # app.order("orderer1", [])
+    # app.order("orderer1", [("Grenades", 5), ("Lychees", 123)])
+    # app.order("orderer2", [("Grenades", 5), ("Lychees", 123), ("Green pepper", 3)])
+    # # Checking products dictionary format (we want numeric price, not string).
+    # print("=======")
+    # # Checking how all orders and summary look like.
+    # print(app.show_all_orders(False))
+    # print("=======")
+    # print(app.show_all_orders(True))
+    # print("=======")
+    # app.calculate_summary()
+    app.order("orderer1", [("Avocado", 2), ("Oranges", 3)])
+    print(app.get_orders())
