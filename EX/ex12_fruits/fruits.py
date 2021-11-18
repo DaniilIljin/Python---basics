@@ -114,6 +114,8 @@ class App:
         """."""
         if product:
             for product_ in self.list_of_products_and_prices:
+                if product_ not in [product_.get_name() for product_ in self.get_products()]:
+                    raise Exception("Woopsie. There is no such product as ")
                 if product_.get_name() == product:
                     return product_
 
