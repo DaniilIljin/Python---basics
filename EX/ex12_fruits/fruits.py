@@ -153,14 +153,14 @@ class App:
                             new_order.add_product(element)
                             element_is_added = True
                         if not element_is_added:
-                            raise Exception("Woopsie. There is no such product as ")
+                            raise Exception(f"Woopsie. There is no such product as {element[0]}")
                 else:
                     element_is_added = False
                     if products_and_their_mass[0] not in [product_.get_name() for product_ in self.get_products()]:
                         new_order.add_products(products_and_their_mass)
                         element_is_added = True
                     if not element_is_added:
-                        raise Exception("Woopsie. There is no such product as ")
+                        raise Exception(f"Woopsie. There is no such product as {products_and_their_mass[0]}")
                 customer.add_new_order(new_order)
 
     def add_customer(self, customer):
