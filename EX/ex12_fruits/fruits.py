@@ -150,7 +150,7 @@ class App:
                     for element in products_and_their_mass:
                         if element[0] not in [product_.get_name() for product_ in self.get_products()]:
                             raise Exception("Woopsie. There is no such product as ")
-                    new_order.add_products(products_and_their_mass)
+                        new_order.add_products(products_and_their_mass)
                 else:
                     if products_and_their_mass[0] not in [product_.get_name() for product_ in self.get_products()]:
                         raise Exception("Woopsie. There is no such product as ")
