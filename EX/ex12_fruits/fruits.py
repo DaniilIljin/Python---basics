@@ -150,7 +150,7 @@ class App:
                     for element in products_and_their_mass:
                         element_is_added = False
                         if element[0] in [product_.get_name() for product_ in self.get_products()]:
-                            new_order.add_product(products_and_their_mass)
+                            new_order.add_product(element)
                             element_is_added = True
                         if not element_is_added:
                             raise Exception("Woopsie. There is no such product as ")
