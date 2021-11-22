@@ -4,7 +4,7 @@ import pytest
 
 
 class Product:
-    """Product class."""
+    """Product  class."""
 
     def __init__(self, name, price):
         """
