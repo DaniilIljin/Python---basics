@@ -1,5 +1,6 @@
 """Fruits delivery application."""
 import re
+import pytest
 
 
 class Product:
@@ -143,24 +144,14 @@ class App:
 
         Products here is list of tuples.
         """
+        for element in products_and_their_mass:
+            if element[0] not in [product_.get_name() for product_ in self.get_products()]:
+                raise Exception(f"Woopsie. There is no such product as {element[0]}")
         for customer in self.list_of_customers:
             if customer.name == customers_name:
                 new_order = Order(customer)
-                if type(products_and_their_mass) is list:
-                    for element in products_and_their_mass:
-                        element_is_added = False
-                        if element[0] in [product_.get_name() for product_ in self.get_products()]:
-                            new_order.add_product(element)
-                            element_is_added = True
-                        if not element_is_added:
-                            raise Exception(f"Woopsie. There is no such product as {element[0]}")
-                else:
-                    element_is_added = False
-                    if products_and_their_mass[0] not in [product_.get_name() for product_ in self.get_products()]:
-                        new_order.add_products(products_and_their_mass)
-                        element_is_added = True
-                    if not element_is_added:
-                        raise Exception(f"Woopsie. There is no such product as {products_and_their_mass[0]}")
+                for element in products_and_their_mass:
+                    new_order.add_product(element)
                 customer.add_new_order(new_order)
 
     def add_customer(self, customer):
@@ -322,24 +313,35 @@ class Customer:
 
 if __name__ == '__main__':
     app = App()
-    # # Adding default customers to our app.
-    app.add_customers([Customer("name1", "home"), Customer("name1", "home-table"), Customer("name12", "Dorm 1"),
-                       Customer("orderer1", "Dorm 2"), Customer("orderer2", "Muhha's lair")])
-    # # Ordering some food for everyone.
-    # app.order("name1", [])
-    # app.order("name1", [])
-    # app.order("name12", [])
-    # app.order("orderer1", [("Avocado", 2), ("Orange", 3)])
-    # app.order("orderer1", [])
-    # app.order("orderer1", [("Grenades", 5), ("Lychees", 123)])
-    # app.order("orderer2", [("Grenades", 5), ("Lychees", 123), ("Green pepper", 3)])
-    # # Checking products dictionary format (we want numeric price, not string).
-    # print("=======")
-    # # Checking how all orders and summary look like.
-    # print(app.show_all_orders(False))
-    # print("=======")
-    # print(app.show_all_orders(True))
-    # print("=======")
-    # app.calculate_summary()
-    app.order("orderer2", [("fdsahlifdsa", 2), ("Orange", 3)])
-    print(app.get_orders())
+    # # # Adding default customers to our app.
+    # app.add_customers([Customer("name1", "home"), Customer("name1", "home-table"), Customer("name12", "Dorm 1"),
+    #                    Customer("orderer1", "Dorm 2"), Customer("orderer2", "Muhha's lair")])
+    # # # Ordering some food for everyone.
+    # # app.order("name1", [])
+    # # app.order("name1", [])
+    # # app.order("name12", [])
+    # # app.order("orderer1", [("Avocado", 2), ("Orange", 3)])
+    # # app.order("orderer1", [])
+    # # app.order("orderer1", [("Grenades", 5), ("Lychees", 123)])
+    # # app.order("orderer2", [("Grenades", 5), ("Lychees", 123), ("Green pepper", 3)])
+    # # # Checking products dictionary format (we want numeric price, not string).
+    # # print("=======")
+    # # # Checking how all orders and summary look like.
+    # # print(app.show_all_orders(False))
+    # # print("=======")
+    # # print(app.show_all_orders(True))
+    # # print("=======")
+    # # app.calculate_summary()
+    # app.order("orderer2", [("fdsahlifdsa", 2), ("Orange", 3)])
+    # print(app.get_orders())
+    @pytest.mark.timeout(1.0)
+    def test_existing_products():
+        app = App()
+
+        with pytest.raises(Exception) as info:
+            app.order("orderer1", [("Avocado", 2), ("Oranges", 3)])
+        assert info.value.args[0] == "Woopsie. There is no such product as Oranges"
+        with pytest.raises(Exception) as info:
+            app.order("orderer2", [("fdsahlifdsa", 2), ("Orange", 3)])
+        assert info.value.args[0] == "Woopsie. There is no such product as fdsahlifdsa"
+    test_existing_products()
