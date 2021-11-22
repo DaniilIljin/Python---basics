@@ -334,10 +334,11 @@ if __name__ == '__main__':
     # # app.calculate_summary()
     # app.order("orderer2", [("fdsahlifdsa", 2), ("Orange", 3)])
     # print(app.get_orders())
+
     @pytest.mark.timeout(1.0)
     def test_existing_products():
+        """."""
         app = App()
-
         with pytest.raises(Exception) as info:
             app.order("orderer1", [("Avocado", 2), ("Oranges", 3)])
         assert info.value.args[0] == "Woopsie. There is no such product as Oranges"
