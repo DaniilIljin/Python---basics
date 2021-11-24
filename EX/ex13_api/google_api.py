@@ -15,20 +15,15 @@ def get_links_from_spreadsheet(id: str, token: str) -> list:
     """
     # If modifying these scopes, delete the file token.json.
     scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-
     # The ID and range of a sample spreadsheet.
     sample_spreadsheet_id = id
-
     creds = Credentials.from_authorized_user_file(token, scopes)
-
     service = build('sheets', 'v4', credentials=creds)
-
     # Call the Sheets API
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=id,
                                 range='A:A').execute()
-    values = result.get('values', [])
-    return values
+    return [row[0] for row in result.get('values')]
 
 
 def get_links_from_playlist(link: str, developer_key: str) -> list:
@@ -43,4 +38,5 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
     return []
 
 
-print(get_links_from_spreadsheet('1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms', 'token.json'))
+if __name__ == '__main__':
+    print(get_links_from_spreadsheet('1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms', 'token.json'))
