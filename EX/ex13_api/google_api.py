@@ -1,5 +1,6 @@
 """EX13."""
 from __future__ import print_function
+import googleapiclient.discovery
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 
@@ -35,8 +36,23 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
     Returns
         ['https://youtube.com/watch?v=r_It_X7v-1E', 'https://youtube.com/watch?v=U4ogK0MIzqk', ... and so on]
     """
-    return []
+    api_service_name = "youtube"
+    api_version = "v3"
+    developer_key_ = developer_key
+
+    youtube = googleapiclient.discovery.build(
+        api_service_name, api_version, developerKey=developer_key_)
+    request = youtube.playlistItems().list(
+        part="contentDetails",
+        playlistId=link.split('?list=')[1]
+    )
+    videoids = []
+    response = request.execute()
+    for item in response['items']:
+        videoids.append(f'www.youtube.com/watch?v={item["contentDetails"]["videoId"]}')
+    return videoids
 
 
 if __name__ == '__main__':
     print(get_links_from_spreadsheet('1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms', 'token.json'))
+    print(get_links_from_playlist('https://www.youtube.com/playlist?list=PLFt_AvWsXl0ehjAfLFsp1PGaatzAwo0uK', "AIzaSyCzqrS9g9oHUz_uuZTJGdOgIzZyXwV6jRY"))
