@@ -44,7 +44,8 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
         api_service_name, api_version, developerKey=developer_key_)
     request = youtube.playlistItems().list(
         part="contentDetails",
-        playlistId=link.split('?list=')[1]
+        playlistId=link.split('?list=')[1],
+        maxResults=100000
     )
     videoids = []
     response = request.execute()
