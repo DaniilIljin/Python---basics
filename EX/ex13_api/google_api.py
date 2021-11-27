@@ -8,6 +8,7 @@ from google.oauth2.credentials import Credentials
 def get_links_from_spreadsheet(id: str, token: str) -> list:
     """
     Return a list of strings from the first column of a Google Spreadsheet with the given ID.
+
     Example input with https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms
         get_links_from_spreadsheet('1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms', 'token.json')
 
@@ -17,7 +18,6 @@ def get_links_from_spreadsheet(id: str, token: str) -> list:
     # If modifying these scopes, delete the file token.json.
     scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly']
     # The ID and range of a sample spreadsheet.
-    sample_spreadsheet_id = id
     creds = Credentials.from_authorized_user_file(token, scopes)
     service = build('sheets', 'v4', credentials=creds)
     # Call the Sheets API
@@ -30,6 +30,7 @@ def get_links_from_spreadsheet(id: str, token: str) -> list:
 def get_links_from_playlist(link: str, developer_key: str) -> list:
     """
     Return a list of links to songs in the Youtube playlist with the given address.
+
     Example input
         get_links_from_playlist('https://www.youtube.com/playlist?list=PLFt_AvWsXl0ehjAfLFsp1PGaatzAwo0uK',
                                 'ThisIsNotARealKey_____ThisIsNotARealKey')
