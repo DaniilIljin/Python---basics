@@ -76,7 +76,24 @@ class Statistics:
         """."""
         if path == '/players':
             return [player.get_name() for player in self.all_players]
-        pass
+        elif path.split('/')[3] == 'amount':
+            if path.split('/')[2] in [player.get_name() for player in self.all_players]:
+                for player in self.all_players:
+                    if path.split('/')[2] == player.get_name():
+                        return sum([player.get_frequency(game) for game in player.get_frequency()])
+        elif path.split('/')[3] == 'favourite':
+            if path.split('/')[2] in [player.get_name() for player in self.all_players]:
+                for player in self.all_players:
+                    if path.split('/')[2] == player.get_name():
+                        return max(player.get_frequency(), key=lambda game: player.get_frequency()[game])
+        elif path.split('/')[3] == 'won':
+            if path.split('/')[2] in [player.get_name() for player in self.all_players]:
+                for player in self.all_players:
+                    if path.split('/')[2] == player.get_name():
+                        if player.wins():
+                            return sum([player.wins()[game] for game in player.wins()])
+                        else:
+                            return 0
 
     def games_info(self, path):
         """."""
@@ -192,7 +209,7 @@ class Player:
         """."""
         return self.games_and_places
 
-    def winns(self):
+    def wins(self):
         """."""
         return self.games_and_wins
 
