@@ -90,7 +90,7 @@ class Statistics:
             return len(self.games)
         elif path[:7] == "/total/":
             if path[7:] == 'points':
-                return len([game for game in self.games if game.get_points()])
+                return list(set([game for game in self.games if game.get_points()]))
             elif path[7:] == 'places':
                 return len([game for game in self.games if game.get_places()])
             elif path[7:] == 'winner':
@@ -235,10 +235,6 @@ class Player:
             self.frequency[game_name] += 1
         else:
             self.frequency[game_name] = 1
-        a = self.games_and_wins
-        b = self.games_and_places
-        c = self.games_and_points
-        f = self.frequency
 
     def is_a_winner(self, game_name):
         """."""
@@ -267,9 +263,4 @@ if __name__ == '__main__':
     # print(p.winns())
     print(g.get_players_data())
     # print(s)
-    for player in s.all_players:
-        print(player.get_name())
-        print(player.get_frequency())
-        print(player.get_points())
-        print(player.get_place())
-        print(player.winns())
+    print(s.get("/total/points"))
