@@ -112,6 +112,7 @@ class Statistics:
                 return sorted(needed_players, key=lambda player: player.wins()[path.split('/')[2]])[-1].get_name()
         elif path.split('/')[3] == '/most-frequent-winner':
             return sorted(self.all_players, key=lambda player: sum(player.wins().values()))[-1].get_name()
+        # elif path.split('/')[3] == '/most-frequent-winner':
 
     def total_info(self, path):
         """."""
