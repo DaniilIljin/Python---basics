@@ -119,7 +119,10 @@ class Statistics:
                 needed_players = [player for player in self.all_players if path.split('/')[2] in player.get_looses()]
                 a = [player.get_name() for player in self.all_players if path.split('/')[2] in player.get_looses()]
                 return sorted(needed_players, key=lambda player: player.get_looses()[path.split('/')[2]] / player.frequency[path.split('/')[2]])[-1].get_name()
-
+        elif path.split('/')[3] == 'most-losses':
+            if path.split('/')[2] in [game.get_name() for game in self.games]:
+                needed_players = [player for player in self.all_players if path.split('/')[2] in player.get_looses()]
+                return sorted(needed_players, key=lambda player: player.get_looses()[path.split('/')[2]])[-1].get_name()
 
         # elif path.split('/')[3] == 'record-holder':
         #     if path.split('/')[2] in [game.get_name() for game in self.games]:
