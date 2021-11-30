@@ -99,7 +99,6 @@ class Statistics:
         """."""
         if path == "/games":
             return [game.get_name() for game in self.games]
-        pass
 
     def total_info(self, path):
         """."""
