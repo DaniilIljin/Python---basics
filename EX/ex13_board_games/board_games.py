@@ -68,7 +68,8 @@ class Statistics:
         if path[:7] == "/player":
             return self.players_info(path)
         elif path[:5] == "/game":
-            return self.games_info(path)
+            if self.games:
+                return self.games_info(path)
         elif path[:6] == "/total":
             return self.total_info(path)
 
@@ -100,14 +101,17 @@ class Statistics:
         if path == "/games":
             return list(set([game.get_name() for game in self.games]))
         elif path.split('/')[3] == 'amount':
-            if self.games:
-                return [game.get_name() for game in self.games].count(path.split('/')[2])
+            return [game.get_name() for game in self.games].count(path.split('/')[2])
         elif path.split('/')[3] == 'player-amount':
             if path.split('/')[2] in [game.get_name() for game in self.games]:
                 list_of_game_players = [len(game.get_players_data()) for game in self.games]
                 return max(list_of_game_players, key=lambda element: list_of_game_players.count(element))
+        elif path.split('/')[3] == 'most-wins':
+            return max(self.all_players, key=lambda player: len(player.wins())).get_name()
 
-    def total_info(self, path):
+
+
+    def total_info(self, path)
         """."""
         if path == "/total":
             return len(self.games)
