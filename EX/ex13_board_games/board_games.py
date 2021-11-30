@@ -81,7 +81,7 @@ class Statistics:
             if path.split('/')[2] in [player.get_name() for player in self.all_players]:
                 for player in self.all_players:
                     if path.split('/')[2] == player.get_name():
-                        return sum([player.get_frequency(game) for game in player.get_frequency()])
+                        return sum([player.get_frequency()[game] for game in player.get_frequency()])
         elif path.split('/')[3] == 'favourite':
             if path.split('/')[2] in [player.get_name() for player in self.all_players]:
                 for player in self.all_players:
