@@ -98,7 +98,9 @@ class Statistics:
     def games_info(self, path):
         """."""
         if path == "/games":
-            return [game.get_name() for game in self.games]
+            return list(set([game.get_name() for game in self.games]))
+        else:
+            pass
 
     def total_info(self, path):
         """."""
