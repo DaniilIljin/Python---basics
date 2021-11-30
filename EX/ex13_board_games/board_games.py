@@ -110,9 +110,11 @@ class Statistics:
             if path.split('/')[2] in [game.get_name() for game in self.games]:
                 needed_players = [player for player in self.all_players if path.split('/')[2] in player.wins()]
                 return sorted(needed_players, key=lambda player: player.wins()[path.split('/')[2]])[-1].get_name()
-        elif path.split('/')[3] == '/most-frequent-winner':
+        elif path.split('/')[3] == 'most-frequent-winner':
             if path.split('/')[2] in [game.get_name() for game in self.games]:
                 needed_players = [player for player in self.all_players if path.split('/')[2] in player.wins()]
+                a = [player.wins()[path.split('/')[2]] for player in needed_players]
+                b = [player.frequency[path.split('/')[2]] for player in needed_players]
                 return sorted(needed_players, key=lambda player: player.wins()[path.split('/')[2]] / player.frequency[path.split('/')[2]])[-1].get_name()
         # elif path.split('/')[3] == '/most-frequent-winner':
 
@@ -296,4 +298,4 @@ if __name__ == '__main__':
     print(g.get_players_data())
     # print(s)
     print(s.get("/total/points"))
-    print(s.get('/game/game of thrones/most-wins'))
+    print(s.get('/game/chess/most-frequent-winner'))
