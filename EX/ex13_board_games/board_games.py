@@ -104,7 +104,8 @@ class Statistics:
             return [game.get_name() for game in self.games].count(path.split('/')[2])
         elif path.split('/')[3] == 'player-amount':
             if path.split('/')[2] in [game.get_name() for game in self.games]:
-                list_of_game_players = [len(game.get_players_data()) for game in self.games]
+                list_of_game_players = [len(game.get_players_data()) for game in self.games if game.get_name() == path.split('/')[2]]
+                b = [list_of_game_players.count(element) for element in list_of_game_players]
                 return max(list_of_game_players, key=lambda element: list_of_game_players.count(element))
         elif path.split('/')[3] == 'most-wins':
             if path.split('/')[2] in [game.get_name() for game in self.games]:
@@ -298,4 +299,4 @@ if __name__ == '__main__':
     print(g.get_players_data())
     # print(s)
     print(s.get("/total/points"))
-    print(s.get('/game/chess/most-frequent-winner'))
+    print(s.get('/game/7 wonders/player-amount'))
