@@ -117,6 +117,7 @@ class Statistics:
         elif path.split('/')[3] == 'most-frequent-loser':
             if path.split('/')[2] in [game.get_name() for game in self.games]:
                 needed_players = [player for player in self.all_players if path.split('/')[2] in player.get_looses()]
+                a = [player.get_name() for player in self.all_players if path.split('/')[2] in player.get_looses()]
                 return sorted(needed_players, key=lambda player: player.get_looses()[path.split('/')[2]] / player.frequency[path.split('/')[2]])[-1].get_name()
 
 
@@ -186,7 +187,7 @@ class Game:
                 players_list = [name, points, len(places) - places.index(int(points))]
                 if points == str(places[-1]):
                     players_list.append('winner')
-                elif points == min(self.points):
+                elif points == str(places[0]):
                     players_list.append('looser')
                 else:
                     players_list.append(None)
@@ -320,11 +321,12 @@ class Player:
 
 if __name__ == '__main__':
     s = Statistics('some_statistics.txt')
-    g = Game(s.get_data()[3])
-    g.creating_players_data(['hans', 'mart', 'riho'])
+    g = Game(s.get_data()[4])
+    g.creating_players_data(['ago', 'jaak', 'kristjan', 'joosep'])
     # ['riho', None, 1, 'winner']
     # p.is_a_winner('upcha')
     # print(p.winns())
     print(g.get_players_data())
     # print(s)
     print(s.get("/total/winner"))
+    print(s.get('/game/terraforming mars/most-frequent-loser'))
