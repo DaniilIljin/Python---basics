@@ -125,11 +125,11 @@ class Statistics:
             return len(self.games)
         elif path[:7] == "/total/":
             if path[7:] == 'points':
-                return len(list(set([game.get_name() for game in self.games if game.get_points()])))
+                return len([game for game in self.games if game.get_points()])
             elif path[7:] == 'places':
-                return len([game for game in self.games if game.get_places()])
+                return len([game for game in self.games if game.get_places() and not game.get_points()])
             elif path[7:] == 'winner':
-                return len([game for game in self.games if game.winner()])
+                return len([game for game in self.games if game.winner() and not game.get_places() and not game.get_points()])
 
 
 class Game:
