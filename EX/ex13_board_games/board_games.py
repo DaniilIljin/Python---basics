@@ -65,13 +65,13 @@ class Statistics:
 
     def get(self, path: str):
         """."""
-        if path[:7] == "/player":
-            return self.players_info(path)
-        elif path[:5] == "/game":
-            if self.games:
+        if self.games:
+            if path[:7] == "/player":
+                return self.players_info(path)
+            elif path[:5] == "/game":
                 return self.games_info(path)
-        elif path[:6] == "/total":
-            return self.total_info(path)
+            elif path[:6] == "/total":
+                return self.total_info(path)
 
     def players_info(self, path):
         """."""
@@ -107,11 +107,11 @@ class Statistics:
                 list_of_game_players = [len(game.get_players_data()) for game in self.games]
                 return max(list_of_game_players, key=lambda element: list_of_game_players.count(element))
         elif path.split('/')[3] == 'most-wins':
-            return max(self.all_players, key=lambda player: len(player.wins())).get_name()
+            return sorted(self.all_players, key=lambda player: sum(player.wins().values()))[-1].get_name()
 
 
 
-    def total_info(self, path)
+    def total_info(self, path):
         """."""
         if path == "/total":
             return len(self.games)
@@ -291,3 +291,4 @@ if __name__ == '__main__':
     print(g.get_players_data())
     # print(s)
     print(s.get("/total/points"))
+    print(s.get('/game/7 wonders/most-wins'))
