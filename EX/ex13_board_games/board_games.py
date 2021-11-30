@@ -43,13 +43,22 @@ class Statistics:
                                 if game.get_points():
                                     if str(player.get_points()[game.get_name()][-1]) in game.get_points():
                                         game.set_record_holder(player, player.get_points()[game.get_name()][-1])
+                            list_of_players += [player]
                     else:
                         new_player = Player(name)
                         self.adding_data_to_player(new_player, player_data, game)
+                        if game.get_name() in new_player.wins():
+                            if game.get_points():
+                                if str(new_player.get_points()[game.get_name()][-1]) in game.get_points():
+                                    game.set_record_holder(new_player, new_player.get_points()[game.get_name()][-1])
                         list_of_players += [new_player]
                 else:
                     new_player = Player(name)
                     self.adding_data_to_player(new_player, player_data, game)
+                    if game.get_name() in new_player.wins():
+                        if game.get_points():
+                            if str(new_player.get_points()[game.get_name()][-1]) in game.get_points():
+                                game.set_record_holder(new_player, new_player.get_points()[game.get_name()][-1])
                     list_of_players += [new_player]
         return list_of_players
 
@@ -126,6 +135,7 @@ class Statistics:
                         -1].get_name()
             elif path.split('/')[3] == 'record-holder':
                 if path.split('/')[2] in [game.get_name() for game in [game for game in self.games if game.get_points()]]:
+                    g = [game for game in self.games if game.get_name() == path.split('/')[2]]
                     record_holders = [game.record_holder for game in self.games if game.get_name() == path.split('/')[2]]
                     record = record_holders[0]
                     for record_holder in record_holders:
@@ -342,4 +352,4 @@ if __name__ == '__main__':
     print(g.get_players_data())
     # print(s)
     print(s.get("/total/winner"))
-    print(s.get('/game/terraforming mars/most-frequent-loser'))
+    print(s.get('/game/terraforming mars/record-holder'))
