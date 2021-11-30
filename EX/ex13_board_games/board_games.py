@@ -54,7 +54,7 @@ class Statistics:
     def adding_data_to_player(self, player, his_data, game):
         """."""
         if his_data[1]:
-            player.set_by_points(game.get_name(), his_data[1], his_data[2], his_data[3], game)
+            player.set_by_points(game.get_name(), his_data[1], his_data[2], his_data[3])
         elif his_data[2]:
             player.set_by_place(game.get_name(), his_data[2], his_data[3])
         elif his_data[3] == 'winner':
