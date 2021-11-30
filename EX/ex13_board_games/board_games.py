@@ -182,12 +182,11 @@ class Game:
             places = [int(element) for element in self.points]
             places.sort()
             for index, name in enumerate(names):
-                c = name
                 points = self.points[index]
                 players_list = [name, points, len(places) - places.index(int(points))]
                 if points == str(places[-1]):
                     players_list.append('winner')
-                elif self.places[-1] == name:
+                elif points == min(self.points):
                     players_list.append('looser')
                 else:
                     players_list.append(None)
