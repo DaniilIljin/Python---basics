@@ -129,7 +129,8 @@ class Statistics:
             elif path[7:] == 'places':
                 return len([game for game in self.games if game.get_places() and not game.get_points()])
             elif path[7:] == 'winner':
-                return len([game for game in self.games if game.winner() and not game.get_places() and not game.get_points()])
+
+                return len([game for game in self.games if game.get_winner() and not game.get_places()])
 
 
 class Game:
@@ -298,5 +299,4 @@ if __name__ == '__main__':
     # print(p.winns())
     print(g.get_players_data())
     # print(s)
-    print(s.get("/total/points"))
-    print(s.get('/game/7 wonders/player-amount'))
+    print(s.get("/total/winner"))
