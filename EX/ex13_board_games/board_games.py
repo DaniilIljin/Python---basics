@@ -3,7 +3,7 @@ import re
 
 
 class Statistics:
-    """Needed class."""
+    """Needed  class."""
 
     def __init__(self, filename):
         """Initiate this class."""
