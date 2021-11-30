@@ -39,8 +39,10 @@ class Statistics:
                         for player in list_of_players:
                             if name == player.get_name():
                                 self.adding_data_to_player(player, player_data, game)
-                            if game.get_name() in player.wins() and player.wins()[game.get_name()][-1] in game.get_points():
-                                game.set_record_holder(player, player.wins()[game.get_name()][-1])
+                            if game.get_name() in player.wins():
+                                if game.get_points():
+                                    if str(player.get_points()[game.get_name()][-1]) in game.get_points():
+                                        game.set_record_holder(player, player.get_points()[game.get_name()][-1])
                     else:
                         new_player = Player(name)
                         self.adding_data_to_player(new_player, player_data, game)
