@@ -38,30 +38,29 @@ class Statistics:
                     if name in names:
                         for player in list_of_players:
                             if name == player.get_name():
-                                self.adding_data_to_player(player, player_data, game.get_name())
-                                a = player.get_frequency()
+                                self.adding_data_to_player(player, player_data, game)
+                            if game.get_name() in player.wins() and player.wins()[game.get_name()][-1] in game.get_points():
+                                game.set_record_holder(player, player.wins()[game.get_name()][-1])
                     else:
                         new_player = Player(name)
-                        self.adding_data_to_player(new_player, player_data, game.get_name())
+                        self.adding_data_to_player(new_player, player_data, game)
                         list_of_players += [new_player]
-                        c = new_player.get_frequency()
                 else:
                     new_player = Player(name)
-                    self.adding_data_to_player(new_player, player_data, game.get_name())
-                    a = new_player
+                    self.adding_data_to_player(new_player, player_data, game)
                     list_of_players += [new_player]
         return list_of_players
 
     def adding_data_to_player(self, player, his_data, game):
         """."""
         if his_data[1]:
-            player.set_by_points(game, his_data[1], his_data[2], his_data[3])
+            player.set_by_points(game.get_name(), his_data[1], his_data[2], his_data[3], game)
         elif his_data[2]:
-            player.set_by_place(game, his_data[2], his_data[3])
+            player.set_by_place(game.get_name(), his_data[2], his_data[3])
         elif his_data[3] == 'winner':
-            player.is_a_winner(game)
+            player.is_a_winner(game.get_name())
         else:
-            player.just_played(game)
+            player.just_played(game.get_name())
 
     def get(self, path: str):
         """."""
@@ -100,33 +99,37 @@ class Statistics:
         """."""
         if path == "/games":
             return list(set([game.get_name() for game in self.games]))
-        elif path.split('/')[3] == 'amount':
-            return [game.get_name() for game in self.games].count(path.split('/')[2])
-        elif path.split('/')[3] == 'player-amount':
-            if path.split('/')[2] in [game.get_name() for game in self.games]:
-                list_of_game_players = [len(game.get_players_data()) for game in self.games if game.get_name() == path.split('/')[2]]
+        elif path.split('/')[2] in [game.get_name() for game in self.games]:
+            needed_players1 = [player for player in self.all_players if path.split('/')[2] in player.wins()]
+            needed_players2 = [player for player in self.all_players if
+                              path.split('/')[2] in player.get_looses()]
+            if path.split('/')[3] == 'amount':
+                return [game.get_name() for game in self.games].count(path.split('/')[2])
+            elif path.split('/')[3] == 'player-amount':
+                list_of_game_players = [len(game.get_players_data()) for game in self.games if
+                                            game.get_name() == path.split('/')[2]]
                 return max(list_of_game_players, key=lambda element: list_of_game_players.count(element))
-        elif path.split('/')[3] == 'most-wins':
-            if path.split('/')[2] in [game.get_name() for game in self.games]:
-                needed_players = [player for player in self.all_players if path.split('/')[2] in player.wins()]
-                return sorted(needed_players, key=lambda player: player.wins()[path.split('/')[2]])[-1].get_name()
-        elif path.split('/')[3] == 'most-frequent-winner':
-            if path.split('/')[2] in [game.get_name() for game in self.games]:
-                needed_players = [player for player in self.all_players if path.split('/')[2] in player.wins()]
-                return sorted(needed_players, key=lambda player: player.wins()[path.split('/')[2]] / player.frequency[path.split('/')[2]])[-1].get_name()
-        elif path.split('/')[3] == 'most-frequent-loser':
-            if path.split('/')[2] in [game.get_name() for game in self.games]:
-                needed_players = [player for player in self.all_players if path.split('/')[2] in player.get_looses()]
-                a = [player.get_name() for player in self.all_players if path.split('/')[2] in player.get_looses()]
-                return sorted(needed_players, key=lambda player: player.get_looses()[path.split('/')[2]] / player.frequency[path.split('/')[2]])[-1].get_name()
-        elif path.split('/')[3] == 'most-losses':
-            if path.split('/')[2] in [game.get_name() for game in self.games]:
-                needed_players = [player for player in self.all_players if path.split('/')[2] in player.get_looses()]
-                return sorted(needed_players, key=lambda player: player.get_looses()[path.split('/')[2]])[-1].get_name()
-
-        # elif path.split('/')[3] == 'record-holder':
-        #     if path.split('/')[2] in [game.get_name() for game in self.games]:
-        #         needed_players = [player for player in self.all_players if path.split('/')[2] in player.wins()]
+            elif path.split('/')[3] == 'most-wins':
+                return sorted(needed_players1, key=lambda player: player.wins()[path.split('/')[2]])[-1].get_name()
+            elif path.split('/')[3] == 'most-frequent-winner':
+                return \
+                    sorted(needed_players1, key=lambda player: player.wins()[path.split('/')[2]] / player.frequency[
+                        path.split('/')[2]])[-1].get_name()
+            elif path.split('/')[3] == 'most-frequent-loser':
+                return sorted(needed_players2,
+                                  key=lambda player: player.get_looses()[path.split('/')[2]] / player.frequency[
+                                      path.split('/')[2]])[-1].get_name()
+            elif path.split('/')[3] == 'most-losses':
+                return sorted(needed_players2, key=lambda player: player.get_looses()[path.split('/')[2]])[
+                        -1].get_name()
+            elif path.split('/')[3] == 'record-holder':
+                if path.split('/')[2] in [game.get_name() for game in [game for game in self.games if game.get_points()]]:
+                    record_holders = [game.record_holder for game in self.games if game.get_name() == path.split('/')[2]]
+                    record = record_holders[0]
+                    for record_holder in record_holders:
+                        if int(record_holder[1]) > int(record[1]):
+                            record = record_holder
+                    return record[0].get_name()
 
     def total_info(self, path):
         """."""
@@ -138,7 +141,6 @@ class Statistics:
             elif path[7:] == 'places':
                 return len([game for game in self.games if game.get_places() and not game.get_points()])
             elif path[7:] == 'winner':
-
                 return len([game for game in self.games if game.get_winner() and not game.get_places()])
 
 
@@ -147,6 +149,7 @@ class Game:
 
     def __init__(self, game_data: list):
         """."""
+        self.record_holder = None
         self.game_data = game_data
         self.name = game_data[0]
         self.places = None
@@ -160,6 +163,10 @@ class Game:
         elif game_data[2] == 'winner':
             self.winner = game_data[3]
         self.players_data = self.creating_players_data(game_data[1].split(','))
+
+    def set_record_holder(self, player, record):
+        """."""
+        self.record_holder = (player, record)
 
     def creating_players_data(self, names):
         """."""
@@ -316,6 +323,7 @@ class Player:
             self.frequency[game_name] = 1
 
     def just_played(self, game_name):
+        """."""
         if game_name in self.frequency:
             self.frequency[game_name] += 1
         else:
