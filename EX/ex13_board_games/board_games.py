@@ -99,8 +99,13 @@ class Statistics:
         """."""
         if path == "/games":
             return list(set([game.get_name() for game in self.games]))
-        else:
-            pass
+        elif path.split('/')[3] == 'amount':
+            if self.games:
+                return [game.get_name() for game in self.games].count(path.split('/')[2])
+        elif path.split('/')[3] == 'player-amount':
+            if path.split('/')[2] in [game.get_name() for game in self.games]:
+                list_of_game_players = [len(game.get_players_data()) for game in self.games]
+                return max(list_of_game_players, key=lambda element: list_of_game_players.count(element))
 
     def total_info(self, path):
         """."""
