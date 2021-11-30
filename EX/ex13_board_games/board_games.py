@@ -107,8 +107,9 @@ class Statistics:
                 list_of_game_players = [len(game.get_players_data()) for game in self.games]
                 return max(list_of_game_players, key=lambda element: list_of_game_players.count(element))
         elif path.split('/')[3] == 'most-wins':
-            return sorted(self.all_players, key=lambda player: sum(player.wins().values()))[-1].get_name()
-
+            if path.split('/')[2] in [game.get_name() for game in self.games]:
+                needed_players = [player for player in self.all_players if path.split('/')[2] in player.wins()]
+                return sorted(needed_players, key=lambda player: player.wins()[path.split('/')[2]])[-1].get_name()
 
 
     def total_info(self, path):
@@ -291,4 +292,4 @@ if __name__ == '__main__':
     print(g.get_players_data())
     # print(s)
     print(s.get("/total/points"))
-    print(s.get('/game/7 wonders/most-wins'))
+    print(s.get('/game/game of thrones/most-wins'))
