@@ -58,7 +58,7 @@ class Statistics:
             player.set_by_points(game, his_data[1], his_data[2], his_data[3])
         elif his_data[2]:
             player.set_by_place(game, his_data[2], his_data[3])
-        elif his_data[3]:
+        elif his_data[3] == 'winner':
             player.is_a_winner(game)
         else:
             player.just_played(game)
