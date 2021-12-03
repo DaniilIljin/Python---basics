@@ -18,21 +18,21 @@ class Statistics:
     def creating_real_players(self):
         """."""
         for game in self.games:
+            a = game.players_data
             for player_data in game.players_data:
                 name = player_data[0]
                 if name in [player.name for player in self.all_players]:
                     for player in self.all_players:
                         if name == player.name:
                             self.adding_data_to_player(player, player_data, game.name)
-                            self.all_players += [player]
                             player.played(game.name)
-                            game.adding_players(player)
+                            game.players.append(player)
                 else:
                     new_player = Player(name)
                     self.adding_data_to_player(new_player, player_data, game.name)
-                    self.all_players += [new_player]
+                    self.all_players.append(new_player)
                     new_player.played(game.name)
-                    game.adding_players(new_player)
+                    game.players.append(new_player)
             if game.points:
                 for player in game.players:
                     if game.name in player.games_and_wins:
@@ -100,7 +100,6 @@ class Statistics:
                         -1].get_name()
             elif path.split('/')[3] == 'record-holder':
                 if path.split('/')[2] in [game.name for game in [game for game in self.games if game.points]]:
-                    g = [game for game in self.games if game.name == path.split('/')[2]]
                     record_holders = [game.record_holder for game in self.games if game.name == game_name]
                     record = record_holders[0]
                     for record_holder in record_holders:
@@ -127,7 +126,6 @@ class Game:
     def __init__(self, game_data: list):
         """."""
         self.record_holder = None
-        self.game_data = game_data
         self.name = game_data[0]
         self.players = []
         self.places = None
@@ -141,10 +139,6 @@ class Game:
         elif game_data[2] == 'winner':
             self.winner = game_data[3]
         self.players_data = self.creating_players_data(game_data[1].split(','))
-
-    def adding_players(self, player):
-        """."""
-        self.players += [player]
 
     def set_record_holder(self, player, record):
         """."""
@@ -253,6 +247,4 @@ if __name__ == '__main__':
     # ['riho', None, 1, 'winner']
     # p.is_a_winner('upcha')
     # print(p.winns())
-    # print(s)
-    print(s.get("/total/winner"))
-    # print(s.get('/game/terraforming mars/record-holder'))
+    print(s.get('/game/terraforming mars/record-holder'))
