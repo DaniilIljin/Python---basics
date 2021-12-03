@@ -162,7 +162,7 @@ class Game:
             self.third_way(names)
 
     def first_way(self, names):
-        """Create player data by winner"""
+        """Create player data by winner."""
         for name in names:
             players_list = [name, None]
             if self.winner == name:
@@ -172,7 +172,7 @@ class Game:
             self.players_data.append(players_list)
 
     def second_way(self):
-        """Create player data by places"""
+        """Create player data by places."""
         for index, name in enumerate(self.places):
             players_list = [None, index + 1]
             if self.places[0] == name:
@@ -184,7 +184,7 @@ class Game:
             self.players_data.append([name] + players_list)
 
     def third_way(self, names):
-        """Create player data by points"""
+        """Create player data by points."""
         places = [int(element) for element in self.points]
         places.sort()
         for index, name in enumerate(names):
