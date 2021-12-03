@@ -50,6 +50,8 @@ class Statistics:
     def find_player(self, player_name):
         """."""
         for player in self.all_players:
+            a = player.name
+            b = player_name
             if player.name == player_name:
                 return player
 
@@ -68,7 +70,7 @@ class Statistics:
         if path == '/players':
             return [player.name for player in self.all_players]
         elif path.split('/')[2] in [player.name for player in self.all_players]:
-            player = self.find_player(path.split('/')[3])
+            player = self.find_player(path.split('/')[2])
             if path.split('/')[3] == 'amount':
                 return sum([player.frequency[game] for game in player.frequency])
             elif path.split('/')[3] == 'favourite':
@@ -248,3 +250,4 @@ if __name__ == '__main__':
     # p.is_a_winner('upcha')
     # print(p.winns())
     print(s.get('/game/terraforming mars/record-holder'))
+    print(s.get('/player/joosep/favourite'))
