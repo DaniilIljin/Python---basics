@@ -147,11 +147,13 @@ class Game:
         self.record_holder = (player, record)
 
     def creating_players_data(self, names):
-        """Create player data by given data to game.
+        """
+        Create player data by given data to game.
 
         If game has only winner, then it will use first way to add data to player.
         If game has places, player data will be created bu second way.
-        And the same with points."""
+        And the same with points.
+        """
         if self.winner:
             self.first_way(names)
         elif self.places:
@@ -210,7 +212,7 @@ class Player:
         self.frequency = {}
 
     def played(self, game_name):
-        """This add to player info about the game that he has played."""
+        """Function add to player info about the game that he has played."""
         if game_name in self.frequency:
             self.frequency[game_name] += 1
         else:
