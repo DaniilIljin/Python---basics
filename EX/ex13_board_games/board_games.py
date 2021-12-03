@@ -18,7 +18,6 @@ class Statistics:
     def creating_real_players(self):
         """."""
         for game in self.games:
-            a = game.players_data
             for player_data in game.players_data:
                 name = player_data[0]
                 if name in [player.name for player in self.all_players]:
@@ -50,8 +49,6 @@ class Statistics:
     def find_player(self, player_name):
         """."""
         for player in self.all_players:
-            a = player.name
-            b = player_name
             if player.name == player_name:
                 return player
 
