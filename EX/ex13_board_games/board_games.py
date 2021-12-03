@@ -92,12 +92,12 @@ class Statistics:
             elif path.split('/')[3] == 'most-wins':
                 return sorted(needed_players1, key=lambda player: player.games_and_wins[game_name])[-1].name
             elif path.split('/')[3] == 'most-frequent-winner':
-                return sorted(needed_players1, key=lambda player: player.wins()[game_name] / player.frequency[game_name])[-1].get_name()
+                return sorted(needed_players1, key=lambda player: player.games_and_wins[game_name] / player.frequency[game_name])[-1].name
             elif path.split('/')[3] == 'most-frequent-loser':
                 return sorted(needed_players2, key=lambda player: player.games_and_looses[game_name] / player.frequency[game_name])[-1].name
             elif path.split('/')[3] == 'most-losses':
                 return sorted(needed_players2, key=lambda player: player.games_and_looses[game_name])[
-                        -1].get_name()
+                        -1].name
             elif path.split('/')[3] == 'record-holder':
                 if path.split('/')[2] in [game.name for game in [game for game in self.games if game.points]]:
                     record_holders = [game.record_holder for game in self.games if game.name == game_name]
