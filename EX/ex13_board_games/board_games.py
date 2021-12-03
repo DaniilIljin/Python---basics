@@ -86,7 +86,7 @@ class Statistics:
             if path.split('/')[3] == 'amount':
                 return [game.name for game in self.games].count(game_name)
             elif path.split('/')[3] == 'player-amount':
-                list_of_game_players = [len(game.players_data) for game in self.games if game.name == game_name]
+                list_of_game_players = [len(game.players) for game in self.games if game.name == game_name]
                 return max(list_of_game_players, key=lambda element: list_of_game_players.count(element))
             elif path.split('/')[3] == 'most-wins':
                 return sorted(needed_players1, key=lambda player: player.games_and_wins[game_name])[-1].name
@@ -97,13 +97,16 @@ class Statistics:
             elif path.split('/')[3] == 'most-losses':
                 return sorted(needed_players2, key=lambda player: player.games_and_looses[game_name])[-1].name
             elif path.split('/')[3] == 'record-holder':
-                if path.split('/')[2] in [game.name for game in [game for game in self.games if game.points]]:
-                    record_holders = [game.record_holder for game in self.games if game.name == game_name]
-                    record = record_holders[0]
-                    for record_holder in record_holders:
-                        if int(record_holder[1]) > int(record[1]):
-                            record = record_holder
-                    return record[0].name
+                return self.record_holder_func(game_name)
+
+    def record_holder_func(self, game_name):
+        """."""
+        record_holders = [game.record_holder for game in self.games if game.name == game_name]
+        record = record_holders[0]
+        for record_holder in record_holders:
+            if int(record_holder[1]) > int(record[1]):
+                record = record_holder
+        return record[0].name
 
     def total_info(self, path):
         """."""
@@ -188,6 +191,7 @@ class Game:
             else:
                 players_list.append(None)
             self.players_data.append(players_list)
+
 
 class Player:
     """A player."""
