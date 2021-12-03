@@ -66,11 +66,11 @@ class Statistics:
     def players_info(self, path):
         """."""
         if path == '/players':
-            return [player.get_name() for player in self.all_players]
+            return [player.name for player in self.all_players]
         elif path.split('/')[2] in [player.name for player in self.all_players]:
             player = self.find_player(path.split('/')[3])
             if path.split('/')[3] == 'amount':
-                return sum([player.get_frequency()[game] for game in player.frequency])
+                return sum([player.frequency[game] for game in player.frequency])
             elif path.split('/')[3] == 'favourite':
                 return max(player.frequency, key=lambda game: player.frequency[game])
             elif path.split('/')[3] == 'won':
