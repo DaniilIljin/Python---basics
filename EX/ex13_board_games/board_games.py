@@ -3,7 +3,7 @@ import re
 
 
 class Statistics:
-    """Needed  class."""
+    """Statistics class."""
 
     def __init__(self, filename):
         """Initiate this class."""
@@ -16,7 +16,7 @@ class Statistics:
         self.creating_real_players()
 
     def creating_real_players(self):
-        """."""
+        """Create real objects Players() from their data."""
         for game in self.games:
             for player_data in game.players_data:
                 name = player_data[0]
@@ -40,20 +40,20 @@ class Statistics:
                         game.set_record_holder(player, player.games_and_points[game.name][-1])
 
     def adding_data_to_player(self, player, his_data, game_name):
-        """."""
+        """Add data to objekt Player() if hi played a game with points or places."""
         if his_data[1]:
             player.set_by_points(game_name, his_data[1])
         elif his_data[2]:
             player.set_by_place(game_name, his_data[2])
 
     def find_player(self, player_name):
-        """."""
+        """I created this to simplify my life and functions."""
         for player in self.all_players:
             if player.name == player_name:
                 return player
 
     def get(self, path: str):
-        """."""
+        """Get smth."""
         if self.games:
             if path[:7] == "/player":
                 return self.players_info(path)
@@ -63,7 +63,7 @@ class Statistics:
                 return self.total_info(path)
 
     def players_info(self, path):
-        """."""
+        """If is needed info about players."""
         if path == '/players':
             return [player.name for player in self.all_players]
         elif path.split('/')[2] in [player.name for player in self.all_players]:
@@ -76,7 +76,7 @@ class Statistics:
                 return sum([player.games_and_wins[game] for game in player.games_and_wins])
 
     def games_info(self, path):
-        """."""
+        """If needed info about games."""
         if path == "/games":
             return list(set([game.name for game in self.games]))
         elif path.split('/')[2] in [game.name for game in self.games]:
@@ -100,7 +100,7 @@ class Statistics:
                 return self.record_holder_func(game_name)
 
     def record_holder_func(self, game_name):
-        """."""
+        """To simplify previous function."""
         record_holders = [game.record_holder for game in self.games if game.name == game_name]
         record = record_holders[0]
         for record_holder in record_holders:
@@ -109,7 +109,7 @@ class Statistics:
         return record[0].name
 
     def total_info(self, path):
-        """."""
+        """If needed total info."""
         if path == "/total":
             return len(self.games)
         elif path[:7] == "/total/":
@@ -125,7 +125,7 @@ class Game:
     """Game."""
 
     def __init__(self, game_data: list):
-        """."""
+        """Initiate this class."""
         self.record_holder = None
         self.name = game_data[0]
         self.players = []
@@ -143,11 +143,15 @@ class Game:
         self.creating_players_data(game_data[1].split(','))
 
     def set_record_holder(self, player, record):
-        """."""
+        """Create a record holder."""
         self.record_holder = (player, record)
 
     def creating_players_data(self, names):
-        """."""
+        """Create player data by given data to game.
+
+        If game has only winner, then it will use first way to add data to player.
+        If game has places, player data will be created bu second way.
+        And the same with points."""
         if self.winner:
             self.first_way(names)
         elif self.places:
@@ -156,7 +160,7 @@ class Game:
             self.third_way(names)
 
     def first_way(self, names):
-        """."""
+        """Create player data by winner"""
         for name in names:
             players_list = [name, None]
             if self.winner == name:
@@ -166,7 +170,7 @@ class Game:
             self.players_data.append(players_list)
 
     def second_way(self):
-        """."""
+        """Create player data by places"""
         for index, name in enumerate(self.places):
             players_list = [None, index + 1]
             if self.places[0] == name:
@@ -178,7 +182,7 @@ class Game:
             self.players_data.append([name] + players_list)
 
     def third_way(self, names):
-        """."""
+        """Create player data by points"""
         places = [int(element) for element in self.points]
         places.sort()
         for index, name in enumerate(names):
@@ -197,7 +201,7 @@ class Player:
     """A player."""
 
     def __init__(self, name):
-        """."""
+        """Initiate this class."""
         self.name = name
         self.games_and_points = {}
         self.games_and_places = {}
@@ -206,28 +210,28 @@ class Player:
         self.frequency = {}
 
     def played(self, game_name):
-        """."""
+        """This add to player info about the game that he has played."""
         if game_name in self.frequency:
             self.frequency[game_name] += 1
         else:
             self.frequency[game_name] = 1
 
     def set_by_place(self, game_name, place):
-        """."""
+        """Add data to player if he has played a game with places."""
         if game_name in self.games_and_places:
             self.games_and_places[game_name] += [place]
         else:
             self.games_and_places[game_name] = [place]
 
     def set_by_points(self, game_name, points):
-        """."""
+        """Add data to player if he has played a game with points."""
         if game_name in self.games_and_points:
             self.games_and_points[game_name] += [points]
         else:
             self.games_and_points[game_name] = [points]
 
     def setting_player_status(self, game_name, status):
-        """."""
+        """Add data to player if he is a winner or looser."""
         if status == 'winner':
             if game_name in self.games_and_wins:
                 self.games_and_wins[game_name] += 1
