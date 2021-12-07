@@ -1,8 +1,6 @@
 
 from FollowerBot import FollowerBot
 
-robot = FollowerBot()
-
 
 def test_run(robot: FollowerBot):
     """
