@@ -6,7 +6,7 @@ robot = FollowerBot()
 
 def run(robot: FollowerBot):
     """
-    Make the robot move, doesnt matter how much, just as long as it has moved from the starting position.
+    Make the robot move, doesnt matter  how much, just as long as it has moved from the starting position.
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
