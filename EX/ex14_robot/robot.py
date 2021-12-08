@@ -28,14 +28,8 @@ def drive_to_line(robot: FollowerBot):
         if robot.get_line_sensors() == 0:
             robot.set_wheels_speed(5)
             robot.sleep(1)
-            total_time += 1
-            if total_time > 29:
-                break
             robot.set_wheels_speed(0)
             robot.sleep(1)
-            total_time += 1
-            if total_time > 29:
-                break
             robot.done()
             break
         else:
