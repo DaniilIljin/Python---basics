@@ -9,7 +9,7 @@ def test_run(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     robot.set_wheels_speed(50)
-    robot.sleep(0.01)
+    robot.sleep(2)
     robot.set_wheels_speed(6)
     robot.done()
 
