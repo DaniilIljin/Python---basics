@@ -2,7 +2,7 @@
 from FollowerBot import FollowerBot
 
 
-def run(robot: FollowerBot):
+def test_run(robot: FollowerBot):
     """
     Make the robot move, doesnt matter  how much, just as long as it has moved from the starting position.
 
@@ -23,19 +23,11 @@ def drive_to_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    while True:
-        robot.set_wheels_speed(5)
-        robot.sleep(1)
-        robot.set_wheels_speed(0)
-        robot.sleep(1)
-        robot.done()
-        if 0 in robot.get_line_sensors():
-            robot.set_wheels_speed(5)
-            robot.sleep(1)
-            robot.set_wheels_speed(0)
-            robot.sleep(1)
-            robot.done()
-            break
+    robot.set_wheels_speed(100)
+    robot.sleep(1)
+    robot.set_wheels_speed(0)
+    robot.sleep(1)
+    robot.done()
 
 
 def follow_the_line(robot: FollowerBot):
