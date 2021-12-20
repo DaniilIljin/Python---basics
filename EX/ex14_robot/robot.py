@@ -50,7 +50,7 @@ def follow_the_line(robot: FollowerBot):
     print(robot.get_position())
     robot.set_wheels_speed(100)
     robot.sleep(1)
-    for i in range(155):
+    for i in range(159):
         if robot.get_left_line_sensor() == robot.get_right_line_sensor() == 0:
             robot.set_wheels_speed(100)
             robot.sleep(0.05)
@@ -78,21 +78,20 @@ def follow_the_line(robot: FollowerBot):
             robot.set_left_wheel_speed(0)
             robot.set_right_wheel_speed(58)
             robot.sleep(0.5)
-            robot.set_wheels_speed(100)
-            robot.sleep(0.05)
-            print(robot.get_position())
             if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
-                robot.set_wheels_speed(-100)
-                robot.sleep(0.13)
+                robot.set_left_wheel_speed(0)
+                robot.set_right_wheel_speed(-58)
+                robot.sleep(0.5)
                 print(robot.get_position())
                 robot.set_left_wheel_speed(0)
                 robot.set_right_wheel_speed(58)
                 robot.sleep(1)
                 print(robot.get_position())
-                robot.set_wheels_speed(100)
-                robot.sleep(0.05)
-                print(robot.get_position())
             if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
+                robot.set_left_wheel_speed(0)
+                robot.set_right_wheel_speed(-58)
+                robot.sleep(1)
+                print(robot.get_position())
                 break
     robot.done()
 
