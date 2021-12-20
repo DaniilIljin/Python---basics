@@ -105,7 +105,7 @@ def the_true_follower(robot: FollowerBot):
     print(robot.get_position())
     robot.set_wheels_speed(20)
     robot.sleep(1)
-    for i in range(320):
+    for i in range(300):
         if i == 177:
             robot.set_right_wheel_speed(100)
             robot.set_left_wheel_speed(98)
@@ -147,9 +147,7 @@ def the_true_follower(robot: FollowerBot):
                 robot.set_right_wheel_speed(0)
                 robot.sleep(0.5)
                 print(robot.get_position())
-                break
     robot.done()
-
 
 if __name__ == '__main__':
     robot = FollowerBot(track_image='track.png', start_x=265, start_y=310)
