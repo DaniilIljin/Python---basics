@@ -102,9 +102,55 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    pass
+    print(robot.get_position())
+    robot.set_wheels_speed(20)
+    robot.sleep(1)
+    for i in range(320):
+        if i == 177:
+            robot.set_right_wheel_speed(100)
+            robot.set_left_wheel_speed(98)
+            robot.sleep(1)
+        elif 1024 not in robot.get_line_sensors() and 0 not in robot.get_line_sensors():
+            break
+        elif robot.get_left_line_sensor() == robot.get_right_line_sensor() == 0:
+            robot.set_wheels_speed(100)
+            robot.sleep(0.05)
+        elif 1024 in robot.get_left_line_sensors() and robot.get_right_line_sensor() == 0:
+            robot.set_left_wheel_speed(20)
+            robot.set_right_wheel_speed(100)
+            robot.sleep(0.05)
+            robot.set_wheels_speed(100)
+            robot.sleep(0.05)
+        elif robot.get_left_line_sensor() == 0 and 1024 in robot.get_right_line_sensors():
+            robot.set_left_wheel_speed(100)
+            robot.set_right_wheel_speed(20)
+            robot.sleep(0.05)
+            robot.set_wheels_speed(100)
+            robot.sleep(0.05)
+        elif robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
+            robot.set_wheels_speed(-100)
+            robot.sleep(0.07)
+            robot.set_left_wheel_speed(0)
+            robot.set_right_wheel_speed(58)
+            robot.sleep(0.5)
+            if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
+                robot.set_left_wheel_speed(0)
+                robot.set_right_wheel_speed(-58)
+                robot.sleep(0.5)
+                print(robot.get_position())
+                robot.set_left_wheel_speed(58)
+                robot.set_right_wheel_speed(0)
+                robot.sleep(0.5)
+                print(robot.get_position())
+            if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
+                robot.set_left_wheel_speed(-58)
+                robot.set_right_wheel_speed(0)
+                robot.sleep(0.5)
+                print(robot.get_position())
+                break
+    robot.done()
 
 
 if __name__ == '__main__':
-    robot = FollowerBot(track_image='track.png', start_x=162, start_y=306)
-    follow_the_line(robot)
+    robot = FollowerBot(track_image='track.png', start_x=265, start_y=310)
+    the_true_follower(robot)
