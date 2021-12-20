@@ -29,12 +29,12 @@ def drive_to_line(robot: FollowerBot):
     while True:
         if 0 in robot.get_line_sensors():
             robot.set_wheels_speed(25)
-            robot.sleep(1)
+            robot.sleep(0.5)
             robot.set_wheels_speed(0)
             robot.done()
             break
         print(robot.get_position())
-        robot.set_wheels_speed(14)
+        robot.set_wheels_speed(13)
         robot.sleep(1)
         print(robot.get_position())
 
