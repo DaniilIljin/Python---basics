@@ -34,7 +34,7 @@ def drive_to_line(robot: FollowerBot):
             robot.done()
             break
         print(robot.get_position())
-        robot.set_wheels_speed(18)
+        robot.set_wheels_speed(15)
         robot.sleep(1)
         print(robot.get_position())
 
