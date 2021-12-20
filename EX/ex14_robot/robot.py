@@ -103,50 +103,96 @@ def the_true_follower(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     print(robot.get_position())
-    robot.set_wheels_speed(20)
-    robot.sleep(1)
-    for i in range(261):
-        if i == 177:
-            robot.set_right_wheel_speed(100)
-            robot.set_left_wheel_speed(98)
-            robot.sleep(1)
-        elif i == 260:
-            robot.set_right_wheel_speed(90)
-            robot.set_left_wheel_speed(100)
-            robot.sleep(0.07)
-            robot.done()
-            break
-        elif robot.get_left_line_sensor() == robot.get_right_line_sensor() == 0:
+    robot.set_wheels_speed(100)
+    robot.sleep(0.1)
+    for i in range(3000):
+        if i == 997 or i == 1980:
             robot.set_wheels_speed(100)
-            robot.sleep(0.05)
-        elif 1024 in robot.get_left_line_sensors() and robot.get_right_line_sensor() == 0:
+            robot.sleep(0.8)
+        elif i == 1492:
             robot.set_left_wheel_speed(20)
             robot.set_right_wheel_speed(100)
-            robot.sleep(0.05)
+            robot.sleep(0.01)
+            robot.set_left_wheel_speed(-100)
+            robot.set_right_wheel_speed(100)
+            robot.sleep(0.3)
+        elif robot.get_left_line_sensor() == robot.get_right_line_sensor() == 0:
             robot.set_wheels_speed(100)
-            robot.sleep(0.05)
-        elif robot.get_left_line_sensor() == 0 and 1024 in robot.get_right_line_sensors():
+            robot.sleep(0.01)
+        elif robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() == 0:
+            robot.set_left_wheel_speed(20)
+            robot.set_right_wheel_speed(100)
+            robot.sleep(0.01)
+        elif robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() != 0:
             robot.set_left_wheel_speed(100)
             robot.set_right_wheel_speed(20)
-            robot.sleep(0.05)
-            robot.set_wheels_speed(100)
-            robot.sleep(0.05)
+            robot.sleep(0.01)
         elif robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
             robot.set_wheels_speed(-100)
-            robot.sleep(0.07)
-            robot.set_left_wheel_speed(0)
-            robot.set_right_wheel_speed(58)
-            robot.sleep(0.5)
+            robot.sleep(0.015)
+            robot.set_left_wheel_speed(-100)
+            robot.set_right_wheel_speed(100)
+            robot.sleep(0.15)
+            robot.set_wheels_speed(100)
+            robot.sleep(0.05)
             if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
-                robot.set_left_wheel_speed(0)
-                robot.set_right_wheel_speed(-58)
-                robot.sleep(0.5)
-                print(robot.get_position())
-                robot.set_left_wheel_speed(58)
-                robot.set_right_wheel_speed(0)
-                robot.sleep(0.5)
-                print(robot.get_position())
+                robot.set_wheels_speed(-100)
+                robot.sleep(0.05)
+                robot.set_left_wheel_speed(-100)
+                robot.set_right_wheel_speed(100)
+                robot.sleep(0.3)
+                robot.set_wheels_speed(100)
+                robot.sleep(0.05)
+
+    # for i in range(400):
+    #     if i == 141:
+    #         robot.set_right_wheel_speed(100)
+    #         robot.set_left_wheel_speed(98)
+    #         robot.sleep(1)
+    #     elif i == 223:
+    #         robot.set_wheels_speed(100)
+    #         robot.sleep(0.1)
+    #         robot.set_right_wheel_speed(50)
+    #         robot.set_left_wheel_speed(0)
+    #         robot.sleep(1.35)
+    #         robot.set_wheels_speed(20)
+    #         robot.sleep(1)
+    #     elif i == 268:
+    #         robot.set_right_wheel_speed(5)
+    #         robot.set_left_wheel_speed(25)
+    #         robot.sleep(0.5)
+    #     elif robot.get_left_line_sensor() == robot.get_right_line_sensor() == 0:
+    #         robot.set_wheels_speed(100)
+    #         robot.sleep(0.01)
+    #     elif robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() == 0:
+    #         robot.set_left_wheel_speed(20)
+    #         robot.set_right_wheel_speed(100)
+    #         robot.sleep(0.05)
+    #         robot.set_wheels_speed(100)
+    #         robot.sleep(0.05)
+    #     elif robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() != 0:
+    #         robot.set_left_wheel_speed(100)
+    #         robot.set_right_wheel_speed(20)
+    #         robot.sleep(0.05)
+    #         robot.set_wheels_speed(100)
+    #         robot.sleep(0.05)
+    #     elif robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
+    #         robot.set_wheels_speed(-100)
+    #         robot.sleep(0.07)
+    #         robot.set_left_wheel_speed(0)
+    #         robot.set_right_wheel_speed(58)
+    #         robot.sleep(0.5)
+    #         if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
+    #             robot.set_left_wheel_speed(0)
+    #             robot.set_right_wheel_speed(-58)
+    #             robot.sleep(0.5)
+    #             print(robot.get_position())
+    #             robot.set_left_wheel_speed(58)
+    #             robot.set_right_wheel_speed(0)
+    #             robot.sleep(0.5)
+    #             print(robot.get_position())
     robot.done()
+
 
 if __name__ == '__main__':
     robot = FollowerBot(track_image='track.png', start_x=265, start_y=310)
