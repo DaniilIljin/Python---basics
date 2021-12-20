@@ -105,15 +105,16 @@ def the_true_follower(robot: FollowerBot):
     print(robot.get_position())
     robot.set_wheels_speed(20)
     robot.sleep(1)
-    for i in range(265):
+    for i in range(261):
         if i == 177:
             robot.set_right_wheel_speed(100)
             robot.set_left_wheel_speed(98)
             robot.sleep(1)
         elif i == 260:
-            robot.set_right_wheel_speed(98)
+            robot.set_right_wheel_speed(90)
             robot.set_left_wheel_speed(100)
-            robot.sleep(0.08)
+            robot.sleep(0.07)
+            robot.done()
             break
         elif robot.get_left_line_sensor() == robot.get_right_line_sensor() == 0:
             robot.set_wheels_speed(100)
