@@ -49,8 +49,8 @@ def follow_the_line(robot: FollowerBot):
     """
     print(robot.get_position())
     robot.set_wheels_speed(100)
-    robot.sleep(0.1)
-    for i in range(350):
+    robot.sleep(0.01)
+    for i in range(320):
         if robot.get_left_line_sensor() == robot.get_right_line_sensor() == 0:
             robot.set_wheels_speed(100)
             robot.sleep(0.05)
