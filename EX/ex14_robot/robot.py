@@ -48,7 +48,7 @@ def follow_the_line(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     print(robot.get_position())
-    robot.set_wheels_speed(100)
+    robot.set_wheels_speed(50)
     robot.sleep(1)
     for i in range(190):
         if robot.get_left_line_sensor() == robot.get_right_line_sensor() == 0:
