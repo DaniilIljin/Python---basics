@@ -83,13 +83,13 @@ def follow_the_line(robot: FollowerBot):
                 robot.set_right_wheel_speed(-58)
                 robot.sleep(0.5)
                 print(robot.get_position())
-                robot.set_left_wheel_speed(0)
-                robot.set_right_wheel_speed(58)
+                robot.set_left_wheel_speed(58)
+                robot.set_right_wheel_speed(0)
                 robot.sleep(0.5)
                 print(robot.get_position())
             if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
-                robot.set_left_wheel_speed(0)
-                robot.set_right_wheel_speed(-58)
+                robot.set_left_wheel_speed(-58)
+                robot.set_right_wheel_speed(0)
                 robot.sleep(0.5)
                 print(robot.get_position())
                 break
