@@ -143,6 +143,10 @@ def the_true_follower(robot: FollowerBot):
                 robot.sleep(0.3)
                 robot.set_wheels_speed(100)
                 robot.sleep(0.05)
+                if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() != 0:
+                    robot.set_wheels_speed(-100)
+                    robot.sleep(0.05)
+                    break
     robot.done()
 
 
