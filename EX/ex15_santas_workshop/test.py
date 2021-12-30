@@ -13,9 +13,7 @@ def test_children_creation():
     """Testing creation of class object Child."""
     s = santas_workshop.Santas_factory('testing_3.csv', 'testing_1.csv', 'testing_2.csv')
     s.create_children(s.nice_list, 'nice')
-    a = [[child_.name, child_.status] for child_ in s.children]
     for child in s.nice_list:
-        b = [child_.name for child_ in s.children]
         assert child[0] in [child_.name for child_ in s.children]
 
 
@@ -45,7 +43,6 @@ def test_create_presents():
     s.create_children(s.naughty_list, 'naughty')
     s.create_presents()
     for child in s.children:
-        a = child.name
         if child.status == 'naughty':
             assert child.wishes[0] in [present.name for present in s.presents]
         else:

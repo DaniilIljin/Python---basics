@@ -6,13 +6,15 @@ import json
 
 
 class Santas_factory:
-    """This is Santa`s factory"""
+    """This is Santa`s factory."""
 
     def __init__(self, wish_list_csv_file, nice_list_csv_file, naughty_list_csv_file):
-        """At factory initialisation factory receives a wish_list, a nice_list and a naughty_list.
+        """
+        At factory initialisation factory receives a wish_list, a nice_list and a naughty_list.
 
         Also factory creates a list 'self.children', where in the future it will hold info about children,
-         and a list 'self.presents', where it will hold presents, which have to be made. """
+         and a list 'self.presents', where it will hold presents, which have to be made.
+        """
         self.nice_list = self.recieve_info_from_file(nice_list_csv_file)
         self.naughty_list = self.recieve_info_from_file(naughty_list_csv_file)
         self.wish_list = self.recieve_info_from_file(wish_list_csv_file)
@@ -40,10 +42,12 @@ class Santas_factory:
                     self.children.append(new_child)
 
     def find_childs_wishes_by_name(self, name):
-        """To create child finder to connect child with his wishes.
+        """
+        To create child finder to connect child with his wishes.
 
          I decided, that every child may have max 3 presents,
-        and function takes 3 first of wishes or less."""
+        and function takes 3 first of wishes or less.
+        """
         for childs_wishes in self.wish_list:
             if childs_wishes[0] == name:
                 if len(childs_wishes) > 1:
@@ -56,9 +60,11 @@ class Santas_factory:
                     return wishes[:4]
 
     def create_presents(self):
-        """To create presents in the warehouse.
+        """
+        To create presents in the warehouse.
 
-        Nice child receive all 3 presents, but naughty one only one. :( ."""
+        Nice child receive all 3 presents, but naughty one only one. :( .
+        """
         for child in self.children:
             if child.status == "nice":
                 if child.wishes:
@@ -81,7 +87,6 @@ class Santas_factory:
                                       final_dict['production_time'],
                                       final_dict['weight_in_grams'])
                 self.presents += [new_present]
-
 
 
 class Child:
