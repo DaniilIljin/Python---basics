@@ -34,9 +34,11 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(1, 2, 3) => False
     close_far(4, 1, 3) => True
     """
-    return (a - b == 1 or a - b == -1 or a - b == 0) and a - c != 1 and a - c != -1 and a - c != 0 and b - c != 1\
-           and b - c != -1 and b - c != 0 or\
-           a - b != 1 and a - b != -1 and a - b != 0 and b - c != 1 and b - c != -1 and b - c != 0 \
+    return (a - b == 1 or a - b == -1 or a - b == 0) and a - c != 1 \
+           and a - c != -1 and a - c != 0 and b - c != 1\
+           and b - c != -1 and b - c != 0 \
+           or a - b != 1 and a - b != -1 and a - b != 0 \
+           and b - c != 1 and b - c != -1 and b - c != 0 \
            and (a - c == 1 or a - c == -1 or a - c == 0)
 
 
@@ -303,7 +305,6 @@ class Hotel:
         else:
             return None
 
-
     def get_available_rooms(self) -> list:
         """Return a list of available (not booked) rooms."""
         return [room for room in self.rooms if not room.booked]
@@ -354,7 +355,6 @@ class Hotel:
         """
         if self.get_feature_profits():
             list = [[f, self.get_feature_profits()[f]] for f in self.get_feature_profits()]
-            f = sorted(list, key=lambda x: (x[1], x[0]))[-1][0]
             return sorted(list, key=lambda x: (x[1], x[0]))[-1][0]
         else:
             None
