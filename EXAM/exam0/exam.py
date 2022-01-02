@@ -95,9 +95,10 @@ def tic_tac_toe(game: list) -> int:
     diagonals[0].extend([game[0][0], game[1][1], game[2][2]])
     diagonals[1].extend([game[0][2], game[1][1], game[2][0]])
     for i in range(3):
+        a = columns[i].count(2)
         if game[i].count(1) == 3 or game[i].count(2) == 3:
             winner_by_row = game[i][0]
-        elif columns[i].count(1) == 3 or game[i].count(2) == 3:
+        elif columns[i].count(1) == 3 or columns[i].count(2) == 3:
             winner_by_column = columns[i][0]
         elif i == 0 or i == 1:
             if diagonals[i].count(1) == 3 or diagonals[i].count(2) == 3:
@@ -332,11 +333,11 @@ if __name__ == '__main__':
     # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 1100))
     # print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))
     # print(rainbows("rainbowobniar"))
-    print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]),
-    tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]),
-    tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]),
-    tic_tac_toe([[0, 0, 1], [0, 1, 0], [1, 0, 0]]))
-    tic_tac_toe([[0, 0, 1], [0, 1, 0], [1, 0, 0]])
+    # print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]),
+    # tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]),
+    # tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]),
+    # tic_tac_toe([[2, 0, 0], [2, 0, 0], [2, 0, 0]]))
+    tic_tac_toe([[2, 0, 0], [2, 0, 0], [2, 0, 0]])
     # hotel = Hotel()
     # room1 = Room(1, 100)
     # room1.add_feature("tv")
