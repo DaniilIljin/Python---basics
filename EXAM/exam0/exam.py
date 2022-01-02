@@ -58,7 +58,10 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     get_names_from_results("ago 123,peeter 11,kusti riin 14", 12) => ["ago", "kusti riin"]
     """
     list_of_names_and_scores = [person.split(' ') for person in results_string.split(',')]
-    return [person[0] for person in list_of_names_and_scores if int(person[1]) >= min_result]
+    for e in list_of_names_and_scores:
+        if len(e) < 2:
+            list_of_names_and_scores.remove(e)
+    return [' '.join(person[:-1]) for person in list_of_names_and_scores if int(person[-1]) >= min_result]
 
 
 def tic_tac_toe(game: list) -> int:
@@ -333,9 +336,11 @@ if __name__ == '__main__':
     # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 1100))
     # print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))
     # print(rainbows("rainbowobniar"))
-    print(close_far(1, 2, 10))
-    print(close_far(1, 2, 3))
-    print(close_far(4, 1, 3))
+    print(get_names_from_results("ago 123,peeter 11", 0),
+    get_names_from_results("ago 123,peeter 11,33", 10),
+    get_names_from_results("ago 123,peeter 11", 100),
+    get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11),
+    get_names_from_results("ago 123,peeter 11,kusti riin 14", 12))
     # hotel = Hotel()
     # room1 = Room(1, 100)
     # room1.add_feature("tv")
