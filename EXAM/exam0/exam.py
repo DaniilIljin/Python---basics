@@ -85,32 +85,18 @@ def tic_tac_toe(game: list) -> int:
     :param game
     :return: winning player id
     """
-    winner_by_column = None
-    winner_by_row = None
-    winner_by_diagonal = None
-    columns = [[], [], []]
-    for i in range(3):
-        for row in game:
-            columns[i] += [row[i]]
-    diagonals = [[], []]
-    diagonals[0].extend([game[0][0], game[1][1], game[2][2]])
-    diagonals[1].extend([game[0][2], game[1][1], game[2][0]])
+    columns = [[game[0][0], game[1][0], game[2][0]], [game[0][1], game[1][1], game[2][1]],
+               [game[0][2], game[1][2], game[2][2]]]
+    diagonals = [[game[0][0], game[1][1], game[2][2]], [game[0][2], game[1][1], game[2][0]]]
     for i in range(3):
         if game[i].count(1) == 3 or game[i].count(2) == 3:
-            winner_by_row = game[i][0]
+            return game[i][0]
         elif columns[i].count(1) == 3 or columns[i].count(2) == 3:
-            winner_by_column = columns[i][0]
+            return columns[i][0]
         elif i == 0 or i == 1:
             if diagonals[i].count(1) == 3 or diagonals[i].count(2) == 3:
-                winner_by_diagonal = diagonals[i][0]
-    if winner_by_row:
-        return winner_by_row
-    elif winner_by_column:
-        return winner_by_column
-    elif winner_by_diagonal:
-        return winner_by_diagonal
-    else:
-        return 0
+                return diagonals[i][0]
+    return 0
 
 
 def rainbows(field: str, lower=False) -> int:
