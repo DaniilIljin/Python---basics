@@ -241,7 +241,10 @@ class Room:
 
     def __init__(self, number: int, price: int):
         """Constructor."""
-        pass
+        self.number = number
+        self.price = price
+        self.features = []
+        self.booked = False
 
     def add_feature(self, feature: str) -> bool:
         """
@@ -252,19 +255,22 @@ class Room:
         - the room is booked.
         Otherwise, add the feature to the room and return True
         """
-        pass
+        if feature in self.features or self.booked:
+            return False
+        else:
+            self.features.append(feature)
 
     def get_features(self) -> list:
         """Return all the features of the room."""
-        pass
+        return self.features
 
     def get_price(self) -> int:
         """Return the price."""
-        pass
+        return self.price
 
     def get_number(self) -> int:
         """Return the room number."""
-        pass
+        return self.number
 
 
 class Hotel:
@@ -272,7 +278,7 @@ class Hotel:
 
     def __init__(self):
         """Constructor."""
-        pass
+        self.rooms = []
 
     def add_room(self, room: Room) -> bool:
         """
@@ -281,7 +287,11 @@ class Hotel:
         If a room with the given number already exists, do not add a room and return False.
         Otherwise add the room to hotel and return True.
         """
-        pass
+        if room.number in self.rooms:
+            return False
+        else:
+            self.rooms.append(room)
+            return True
 
     def book_room(self, required_features: list) -> Optional[Room]:
         """
@@ -291,19 +301,32 @@ class Hotel:
         If there are several with the same amount of matching features, return the one with the smallest room number.
         If there is no available rooms, return None
         """
-        pass
+        list_of_suitable_rooms = []
+        for room in self.get_available_rooms():
+            counter = 0
+            for feature in required_features:
+                if feature in room.features:
+                    counter += 1
+            list_of_suitable_rooms.append([room, counter])
+        if list_of_suitable_rooms:
+            room = sorted(list_of_suitable_rooms, key=lambda x: (-x[1], x[0].number))[0][0]
+            room.booked = True
+            return room
+        else:
+            return None
+
 
     def get_available_rooms(self) -> list:
         """Return a list of available (not booked) rooms."""
-        pass
+        return [room for room in self.rooms if not room.booked]
 
     def get_rooms(self) -> list:
         """Return all the rooms (both booked and available)."""
-        pass
+        return self.rooms
 
     def get_booked_rooms(self) -> list:
         """Return all the booked rooms."""
-        pass
+        return [room for room in self.rooms if room.booked]
 
     def get_feature_profits(self) -> dict:
         """
@@ -323,7 +346,14 @@ class Hotel:
         'd': 200
         }
         """
-        pass
+        new_dict = {}
+        for room in self.get_booked_rooms():
+            for feature in room.features:
+                if feature in new_dict:
+                    new_dict[feature] += room.price
+                else:
+                    new_dict[feature] = room.price
+        return new_dict
 
     def get_most_profitable_feature(self) -> Optional[str]:
         """
@@ -334,11 +364,14 @@ class Hotel:
         If there are several with the same max value, return the feature which is alphabetically lower (a < z)
         If there are no features booked, return None.
         """
-        pass
+        if self.get_feature_profits():
+            list = [[f, self.get_feature_profits()[f]] for f in self.get_feature_profits()]
+            return sorted(list, key=lambda x: (x[1], x[0]))[-1][0]
+        else:
+            None
 
 
 if __name__ == '__main__':
-    print(get_top_student_with_credit_points())
     # print(find_capital_letters('kkkkkkkkk'))
     # print(close_far(1, 2, 10))
     # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 1100))
@@ -349,31 +382,31 @@ if __name__ == '__main__':
     # tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]),
     # tic_tac_toe([[2, 0, 0], [2, 0, 0], [2, 0, 0]]))
     tic_tac_toe([[2, 0, 0], [2, 0, 0], [2, 0, 0]])
-    # hotel = Hotel()
-    # room1 = Room(1, 100)
-    # room1.add_feature("tv")
-    # room1.add_feature("bed")
-    # room2 = Room(2, 200)
-    # room2.add_feature("tv")
-    # room2.add_feature("sauna")
-    # hotel.add_room(room1)
-    # hotel.add_room(room2)
-    # # TODO: try to add room with existing number, try to add existing feature to room
-    # assert hotel.get_rooms() == [room1, room2]
-    # assert hotel.get_booked_rooms() == []
-    #
-    # assert hotel.book_room(["tv", "president"]) == room1
-    # assert hotel.get_available_rooms() == [room2]
-    # assert hotel.get_booked_rooms() == [room1]
-    #
-    # assert hotel.book_room([]) == room2
-    # assert hotel.get_available_rooms() == []
-    #
-    # assert hotel.get_feature_profits() == {
-    #     'tv': 300,
-    #     'bed': 100,
-    #     'sauna': 200
-    # }
-    # assert hotel.get_most_profitable_feature() == 'tv'
-    #
-    # # TODO: try to add a room so that two or more features have the same profit
+    hotel = Hotel()
+    room1 = Room(1, 100)
+    room1.add_feature("tv")
+    room1.add_feature("bed")
+    room2 = Room(2, 200)
+    room2.add_feature("tv")
+    room2.add_feature("sauna")
+    hotel.add_room(room1)
+    hotel.add_room(room2)
+    # TODO: try to add room with existing number, try to add existing feature to room
+    assert hotel.get_rooms() == [room1, room2]
+    assert hotel.get_booked_rooms() == []
+
+    assert hotel.book_room(["tv", "president"]) == room1
+    assert hotel.get_available_rooms() == [room2]
+    assert hotel.get_booked_rooms() == [room1]
+
+    assert hotel.book_room([]) == room2
+    assert hotel.get_available_rooms() == []
+
+    assert hotel.get_feature_profits() == {
+        'tv': 300,
+        'bed': 100,
+        'sauna': 200
+    }
+    assert hotel.get_most_profitable_feature() == 'tv'
+
+    # TODO: try to add a room so that two or more features have the same profit
