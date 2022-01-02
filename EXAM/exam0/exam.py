@@ -96,7 +96,6 @@ def tic_tac_toe(game: list) -> int:
     diagonals[0].extend([game[0][0], game[1][1], game[2][2]])
     diagonals[1].extend([game[0][2], game[1][1], game[2][0]])
     for i in range(3):
-        a = columns[i].count(2)
         if game[i].count(1) == 3 or game[i].count(2) == 3:
             winner_by_row = game[i][0]
         elif columns[i].count(1) == 3 or columns[i].count(2) == 3:
@@ -223,7 +222,7 @@ def add_result_to_student(student: Student, grades_count: int, new_grade: int, c
 
     Return the modified student object.
     """
-    new_aver_gr = round((student.average_grade * grades_count + new_grade) / grades_count + 1, 3)
+    new_aver_gr = round((student.average_grade * grades_count + new_grade) / (grades_count + 1), 3)
     student.average_grade = new_aver_gr
     student.credit_points += credit_points
     return student
@@ -369,6 +368,7 @@ class Hotel:
         """
         if self.get_feature_profits():
             list = [[f, self.get_feature_profits()[f]] for f in self.get_feature_profits()]
+            f = sorted(list, key=lambda x: (x[1], x[0]))[-1][0]
             return sorted(list, key=lambda x: (x[1], x[0]))[-1][0]
         else:
             None
