@@ -168,8 +168,9 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     If there are no students with enough credit points, return None.
     If several students have the same average score, return the first.
     """
-    needed_student = max(students, key=lambda student: student.average_grade)
-    if needed_student.credit_points >= min_credit_points:
+    new_list = [i for i in students if i.credit_points >= min_credit_points]
+    if new_list:
+        needed_student = max(new_list, key=lambda student: student.average_grade)
         return needed_student
     else:
         return None
@@ -394,5 +395,11 @@ if __name__ == '__main__':
         'sauna': 200
     }
     assert hotel.get_most_profitable_feature() == 'tv'
+    c = []
+    u = Student('u', 3.5, 40)
+    a = Student('a', 4.0, 20)
+    b = Student('B', 1.0, 10)
+    c.extend([u, a, b])
+    print(get_top_student_with_credit_points(c, 20))
 
     # TODO: try to add a room so that two or more features have the same profit
