@@ -182,10 +182,13 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     If there are no students with enough credit points, return None.
     If several students have the same average score, return the first.
     """
-    needed_student = max(students, key=lambda student: student.average_grade)
-    if needed_student:
-        if needed_student.credit_points >= min_credit_points:
-            return needed_student
+    if students:
+        needed_student = max(students, key=lambda student: student.average_grade)
+        if needed_student:
+            if needed_student.credit_points >= min_credit_points:
+                return needed_student
+            else:
+                return None
         else:
             return None
     else:
@@ -341,6 +344,7 @@ class Hotel:
 
 
 if __name__ == '__main__':
+    print(get_top_student_with_credit_points())
     # print(find_capital_letters('kkkkkkkkk'))
     # print(close_far(1, 2, 10))
     # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 1100))
