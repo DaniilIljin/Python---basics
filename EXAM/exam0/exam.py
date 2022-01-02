@@ -34,8 +34,9 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(1, 2, 3) => False
     close_far(4, 1, 3) => True
     """
-    return (a - b == 1 or a - b == -1 or a - b == 0) and a - c != 1 and a - c != -1 and a - c != 0 or\
-           a - b != 1 and a - b != -1 and a - b != 0 and (a - c == 1 or a - c == -1 or a - c == 0)
+
+    return (a - b == 1 or a - b == -1 or a - b == 0) and a - c != 1 and a - c != -1 and a - c != 0 and b - c != 1 and b - c != -1 and b - c != 0 or\
+           a - b != 1 and a - b != -1 and a - b != 0 and b - c != 1 and b - c != -1 and b - c != 0 and (a - c == 1 or a - c == -1 or a - c == 0)
 
 
 def get_names_from_results(results_string: str, min_result: int) -> list:
@@ -327,11 +328,14 @@ class Hotel:
 
 
 if __name__ == '__main__':
-    print(find_capital_letters('kkkkkkkkk'))
+    # print(find_capital_letters('kkkkkkkkk'))
+    # print(close_far(1, 2, 10))
+    # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 1100))
+    # print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))
+    # print(rainbows("rainbowobniar"))
     print(close_far(1, 2, 10))
-    print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 1100))
-    print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))
-    print(rainbows("rainbowobniar"))
+    print(close_far(1, 2, 3))
+    print(close_far(4, 1, 3))
     # hotel = Hotel()
     # room1 = Room(1, 100)
     # room1.add_feature("tv")
