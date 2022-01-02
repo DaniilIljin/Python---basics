@@ -644,3 +644,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         elif dict_['death'] != '-':
             dict_['death'] = dict_['death'].strftime('%d.%m.%Y')
     write_list_of_dicts_to_csv_file(report_filename, all_sorted_data)
+
+
+if __name__ == '__main__':
+    print(read_csv_file('test1.csv'))

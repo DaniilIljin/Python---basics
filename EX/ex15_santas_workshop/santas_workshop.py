@@ -23,14 +23,13 @@ class Santas_factory:
 
     def recieve_info_from_file(self, filename):
         """To receive info from file."""
-        if filename:
-            new_list = []
-            with open(filename) as csv_file:
-                csv_reader = csv.reader(csv_file, delimiter=',')
-                for row in csv_reader:
-                    new_list.append(row)
-                if new_list:
-                    return new_list
+        new_list = []
+        with open(filename) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            for row in csv_reader:
+                new_list.append(row)
+            if new_list:
+                return new_list
 
     def create_children(self, list_of_children, status):
         """To create child(info about him)."""
