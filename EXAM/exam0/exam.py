@@ -34,9 +34,10 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(1, 2, 3) => False
     close_far(4, 1, 3) => True
     """
-
-    return (a - b == 1 or a - b == -1 or a - b == 0) and a - c != 1 and a - c != -1 and a - c != 0 and b - c != 1 and b - c != -1 and b - c != 0 or\
-           a - b != 1 and a - b != -1 and a - b != 0 and b - c != 1 and b - c != -1 and b - c != 0 and (a - c == 1 or a - c == -1 or a - c == 0)
+    return (a - b == 1 or a - b == -1 or a - b == 0) and a - c != 1 and a - c != -1 and a - c != 0 and b - c != 1\
+           and b - c != -1 and b - c != 0 or\
+           a - b != 1 and a - b != -1 and a - b != 0 and b - c != 1 and b - c != -1 and b - c != 0 \
+           and (a - c == 1 or a - c == -1 or a - c == 0)
 
 
 def get_names_from_results(results_string: str, min_result: int) -> list:
@@ -130,6 +131,7 @@ def rainbows(field: str, lower=False) -> int:
     """
     rainbows = re.findall(r'([rR][aA][iI][nN][Bb][Oo][wW])|([wW][Oo][Bb][nN][iI][aA][Rr])', field)
     return len(rainbows)
+
 
 def longest_substring(text: str) -> str:
     """
@@ -259,6 +261,7 @@ class Room:
             return False
         else:
             self.features.append(feature)
+            return True
 
     def get_features(self) -> list:
         """Return all the features of the room."""
@@ -287,7 +290,7 @@ class Hotel:
         If a room with the given number already exists, do not add a room and return False.
         Otherwise add the room to hotel and return True.
         """
-        if room.number in self.rooms:
+        if room.number in [r.number for r in self.rooms]:
             return False
         else:
             self.rooms.append(room)
