@@ -131,7 +131,7 @@ def mirror_ends(s: str) -> str:
             return mirror_ends(s[1:-1])
 
 
-def prime_factorization(number: int) -> int:
+def prime_factorization(number: int) -> Dict[int, int]:
     """
     Given a natural number greater than 1, return it's prime factorization.
 
@@ -157,7 +157,12 @@ def prime_factorization(number: int) -> int:
     :param number: a number greater than 1
     :return: dict of prime factors and their counts.
     """
-    pass
+    d = []
+    for i in range(number):
+        if number % i + 1 == 0:
+            d.append(i + 1)
+    if 1 in d and number in d and len(d) == 2:
+        return {number: 1}
 
 
 class Candy:
@@ -285,7 +290,7 @@ class CandyShop:
             new_dict[filling] = []
             for candy in self.candies:
                 if candy.filling == filling:
-                    new_dict[filling] += [candy]
+                    new_dict[filling] += [candy.name]
         return new_dict
 
 
@@ -473,7 +478,7 @@ if __name__ == '__main__':
     assert mirror_ends("abc") == "ac"
     assert mirror_ends("abca") == "bc"
     assert mirror_ends("abcba") == ""
-    print(mirror_ends("abc"), mirror_ends("abca"), mirror_ends("abcba"), mirror_ends("abAAca"), mirror_ends("aba"))
+    print(mirror_ends("abcdcba"), mirror_ends("abca"), mirror_ends("abcba"), mirror_ends("abAAca"), mirror_ends("aba"))
     #
     # assert prime_factorization(1960) == {2: 3, 5: 1, 7: 2}
 
@@ -482,7 +487,7 @@ if __name__ == '__main__':
     candy2 = Candy('candy2', 'caramel')
     candy3 = Candy('candy3', 'nut')
     candy4 = Candy('candy4', 'chocolate')
-    candy5 = Candy('candy4', 'vanilla')
+    candy5 = Candy('candy5', 'vanilla')
     candy6 = Candy('candy6', 'vanilla')
     candy7 = Candy('candy7', 'nut')
     candy8 = Candy('candy8', 'chocolate')
@@ -492,6 +497,7 @@ if __name__ == '__main__':
     candy_shop.add_candies(candies)
 
     # NB! there are candy variable names in comments, not instance name parameter values!!!
+    print([c.filling for c in candy_shop.sort_candies_by_filling()])
 
     print(candy_shop.get_candies_by_filling('chocolate'))  # [candy1, candy4, candy8]
     print(candy_shop.get_least_popular_candy_name_and_filling())  # {name: candy2, filling: caramel}
