@@ -122,7 +122,10 @@ def mirror_ends(s: str) -> str:
     mirror_ends("abAAca") => "bc"
     mirror_ends("") => ""
     """
-    pass
+    if s == '':
+        return ''
+    if s[0] != s[-1]:
+        return s[0] + mirror_ends(s[1:-1]) + s[-1]
 
 
 def prime_factorization(number: int) -> int:
@@ -396,15 +399,15 @@ if __name__ == '__main__':
         [59, 61, 33, 81, 24],
         [90, 37, 3, 6, 32],
     ], [5, 21, 90, 32]) == (True, False, False)
-    #
-    # assert bingo([
-    #     [5, 7, 11, 15, 21],
-    #     [22, 25, 26, 27, 9],
-    #     [34, 2, 48, 54, 58],
-    #     [59, 61, 33, 81, 24],
-    #     [90, 37, 3, 6, 32],
-    # ], [5, 21, 90, 32, 25, 48, 81, 27, 61, 91]) == (True, True, False)
-    #
+
+    assert bingo([
+        [5, 7, 11, 15, 21],
+        [22, 25, 26, 27, 9],
+        [34, 2, 48, 54, 58],
+        [59, 61, 33, 81, 24],
+        [90, 37, 3, 6, 32],
+    ], [5, 21, 90, 32, 25, 48, 81, 27, 61, 91]) == (True, True, False)
+
     # assert mirror_ends("abc") == "ac"
     # assert mirror_ends("abca") == "bc"
     # assert mirror_ends("abcba") == ""
