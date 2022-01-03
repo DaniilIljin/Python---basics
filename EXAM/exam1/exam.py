@@ -128,7 +128,7 @@ def mirror_ends(s: str) -> str:
         if s[0] != s[-1]:
             return s[0] + mirror_ends(s[1:-1]) + s[-1]
         else:
-            mirror_ends(s[1:-1])
+            return mirror_ends(s[1:-1])
 
 
 def prime_factorization(number: int):
