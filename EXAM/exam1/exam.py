@@ -157,7 +157,14 @@ def prime_factorization(number: int):
     :param number: a number greater than 1
     :return: dict of prime factors and their counts.
     """
-    pass
+    d = []
+    for i in range(number):
+        if number % i + 1 == 0:
+            d.append(i + 1)
+    if 1 in d and number in d and len(d) == 2:
+        new_dict = {}
+        new_dict[number] = 1
+        return new_dict
 
 
 class Candy:
