@@ -131,7 +131,7 @@ def mirror_ends(s: str) -> str:
             return mirror_ends(s[1:-1])
 
 
-def prime_factorization(number: int) -> Dict[int, int]:
+def prime_factorization(number: int):
     """
     Given a natural number greater than 1, return it's prime factorization.
 
@@ -157,13 +157,7 @@ def prime_factorization(number: int) -> Dict[int, int]:
     :param number: a number greater than 1
     :return: dict of prime factors and their counts.
     """
-    d = []
-    for i in range(number):
-        if number % i + 1 == 0:
-            d.append(i + 1)
-    if 1 in d and number in d and len(d) == 2:
-        new_dict = {number: 1}
-        return new_dict
+    pass
 
 
 class Candy:
