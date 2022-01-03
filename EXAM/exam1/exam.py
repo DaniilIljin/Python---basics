@@ -122,10 +122,13 @@ def mirror_ends(s: str) -> str:
     mirror_ends("abAAca") => "bc"
     mirror_ends("") => ""
     """
-    if s == '':
+    if s == '' or len(s) == 1:
         return ''
-    if s[0] != s[-1]:
-        return s[0] + mirror_ends(s[1:-1]) + s[-1]
+    else:
+        if s[0] != s[-1]:
+            return s[0] + mirror_ends(s[1:-1]) + s[-1]
+        else:
+            return mirror_ends(s[1:-1])
 
 
 def prime_factorization(number: int) -> int:
@@ -408,9 +411,9 @@ if __name__ == '__main__':
         [90, 37, 3, 6, 32],
     ], [5, 21, 90, 32, 25, 48, 81, 27, 61, 91]) == (True, True, False)
 
-    # assert mirror_ends("abc") == "ac"
-    # assert mirror_ends("abca") == "bc"
-    # assert mirror_ends("abcba") == ""
+    assert mirror_ends("abc") == "ac"
+    assert mirror_ends("abca") == "bc"
+    assert mirror_ends("abcba") == ""
     #
     # assert prime_factorization(1960) == {2: 3, 5: 1, 7: 2}
     #
