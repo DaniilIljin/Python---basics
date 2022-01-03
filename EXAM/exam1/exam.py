@@ -88,8 +88,13 @@ def bingo(matrix: list, numbers: list) -> tuple:
             continue
         else:
             win1 = False
-    for diagonal in diagonals:
-        for num in diagonal:
+    for num in diagonals[0]:
+        if num in numbers:
+            continue
+        else:
+            win2 = False
+    if not win2:
+        for num in diagonals[1]:
             if num in numbers:
                 continue
             else:
