@@ -159,7 +159,7 @@ def prime_factorization(number: int):
     """
     d = []
     for i in range(number):
-        if number % i + 1 == 0:
+        if number % (i + 1) == 0:
             d.append(i + 1)
     if 1 in d and number in d and len(d) == 2:
         new_dict = {}
@@ -510,7 +510,7 @@ if __name__ == '__main__':
     #                                                  nut: [candy3, candy7],
     #                                                  vanilla: [candy5, candy6]}
     # Teacher, grade, student
-    mari = Student("Mari Maa")
+    mari = Student("Mari Maaghtdyj")
     jyri = Student("Jyri Jogi")
     teele = Student("Teele Tee")
     cl = Class("Anna", [mari, jyri, teele])
