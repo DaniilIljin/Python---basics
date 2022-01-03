@@ -77,7 +77,29 @@ def bingo(matrix: list, numbers: list) -> tuple:
     :param numbers: list of winning numbers (size always at least 4)
     :return: tuple of booleans (corners, diagonals, full_game)
     """
-    pass
+    corners = [matrix[0][0], matrix[0][4], matrix[4][0], matrix[4][4]]
+    diagonals = [[matrix[0][0], matrix[1][1], matrix[2][2], matrix[3][3], matrix[4][4]]]
+    diagonals += [[matrix[0][4], matrix[1][3], matrix[2][2], matrix[3][1], matrix[4][0]]]
+    win1 = True
+    win2 = True
+    win3 = True
+    for num in corners:
+        if num in numbers:
+            continue
+        else:
+            win1 = False
+    for diagonal in diagonals:
+        for num in diagonal:
+            if num in numbers:
+                continue
+            else:
+                win2 = False
+    for num in numbers[0] + numbers[1] + numbers[2] + numbers[3] + numbers[4]:
+        if num in numbers:
+            continue
+        else:
+            win3 = False
+    return tuple([win1, win2, win3])
 
 
 def mirror_ends(s: str) -> str:
