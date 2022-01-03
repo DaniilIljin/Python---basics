@@ -359,7 +359,7 @@ class Student:
         for assignment in self.grades:
             grade = self.grades[assignment].value
             weight = self.grades[assignment].weight
-            if self.grades[assignment].value == '!':
+            if grade == '!':
                 grade = 1
             summ += grade * weight
             total_weight += weight
@@ -424,11 +424,11 @@ class Class:
         max_length = max([len(st.name) for st in self.students])
         if max_length >= 4:
             final_str = '--' + '-' * max_length + '-' * 16 + '\n'
-            final_str += '| Name' + (max_length - 4) * ' ' + ' | Final grade |\n'
+            final_str += '| ' + 'Name'.ljust(max_length, " ") + ' | Final grade |\n'
             final_str += '--' + '-' * max_length + '-' * 16 + '\n'
             for student in self.students:
                 final_str += '| ' + student.name.ljust(max_length, ' ') +\
-                             f' |      {student.calculate_weighted_average()}      |\n'
+                             f' |{str(student.calculate_weighted_average()).center(13, " ")}|\n'
             final_str += '--' + '-' * max_length + '-' * 16 + '\n'
             return final_str
         else:
@@ -436,7 +436,7 @@ class Class:
             final_str += '| Name | Final grade |\n'
             for student in self.students:
                 final_str += '| ' + student.name.ljust(4, ' ') +\
-                             f' |      {student.calculate_weighted_average()}      |\n'
+                             f' |{str(student.calculate_weighted_average()).center(13, " ")}|\n'
             final_str += '--' + '-' * max_length + '-' * 16 + '\n'
             return final_str
 
@@ -520,6 +520,8 @@ if __name__ == '__main__':
     print()
 
     mari.grade(Grade(5, 1, "TK", "30/11/2020"))
+    print(mari.calculate_weighted_average())
+    print(mari.grades)
     jyri.grade(Grade(4, 1, "TK", "30/11/2020"))
     teele.grade(Grade(3, 1, "TK", "30/11/2020"))
 
