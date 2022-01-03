@@ -157,7 +157,8 @@ def prime_factorization(number: int) -> int:
     :param number: a number greater than 1
     :return: dict of prime factors and their counts.
     """
-    pass
+    # for i in range(i):
+
 
 
 class Candy:
@@ -179,7 +180,7 @@ class CandyShop:
 
     def __init__(self):
         """CandyShop class constructor."""
-        pass
+        self.candies = []
 
     def add_candies(self, candies: list):
         """
@@ -188,7 +189,7 @@ class CandyShop:
         :param candies: list of candies to add
         :return:
         """
-        pass
+        self.candies.extend(candies)
 
     def get_candies(self) -> list:
         """
@@ -196,7 +197,7 @@ class CandyShop:
 
         :return: list of all candies
         """
-        pass
+        return self.candies
 
     def get_candies_by_filling(self, filling: str) -> list:
         """
@@ -204,7 +205,7 @@ class CandyShop:
 
         :return: list
         """
-        pass
+        return [candy for candy in self.candies if candy.filling == filling]
 
     def sort_candies_by_filling(self) -> list:
         """
@@ -215,7 +216,7 @@ class CandyShop:
 
         :return: sorted list of candies
         """
-        pass
+        return sorted(self.candies, key=lambda x: x.filling)
 
     def get_most_popular_candy_name_and_filling(self) -> dict:
         """
@@ -229,7 +230,7 @@ class CandyShop:
 
         :return: dict with name and filling of most pop candy
         """
-        pass
+        return max(self.candies, key=lambda x: (x.filling, x.name))
 
     def get_least_popular_candy_name_and_filling(self) -> dict:
         """
@@ -243,7 +244,7 @@ class CandyShop:
 
         :return: dict with name and filling of least pop candy
         """
-        pass
+        return  min(self.candies, key=lambda x: (x.filling, x.name))
 
     def collect_candies_by_filling(self) -> dict:
         """
@@ -255,7 +256,14 @@ class CandyShop:
 
         :return: dict of candies divided by filling
         """
-        pass
+        new_dict = {}
+        all_fillings = set([candy.filling for candy in self.candies])
+        for filling in all_fillings:
+            new_dict[filling] = []
+            for candy in self.candies:
+                if candy.filling == filling:
+                    new_dict[filling] += [candy]
+        return new_dict
 
 
 class Grade:
