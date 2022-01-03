@@ -122,7 +122,6 @@ def mirror_ends(s: str) -> str:
     mirror_ends("abAAca") => "bc"
     mirror_ends("") => ""
     """
-    a = s
     if s == '' or len(s) == 1:
         return ''
     else:
@@ -427,6 +426,19 @@ class Class:
             final_str = '--' + '-' * max_length + '-' * 16 + '\n'
             final_str += '| Name' + (max_length - 4) * ' ' + ' | Final grade |\n'
             final_str += '--' + '-' * max_length + '-' * 16 + '\n'
+            for student in self.students:
+                final_str += '| ' + student.name.ljust(max_length, ' ') +\
+                             f' |      {student.calculate_weighted_average()}      |\n'
+            final_str += '--' + '-' * max_length + '-' * 16 + '\n'
+            return final_str
+        else:
+            final_str = '-' * 22 + '\n'
+            final_str += '| Name | Final grade |\n'
+            for student in self.students:
+                final_str += '| ' + student.name.ljust(4, ' ') +\
+                             f' |      {student.calculate_weighted_average()}      |\n'
+            final_str += '--' + '-' * max_length + '-' * 16 + '\n'
+            return final_str
 
 
 if __name__ == '__main__':
