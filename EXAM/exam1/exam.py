@@ -122,6 +122,7 @@ def mirror_ends(s: str) -> str:
     mirror_ends("abAAca") => "bc"
     mirror_ends("") => ""
     """
+    a = s
     if s == '' or len(s) == 1:
         return ''
     else:
@@ -190,7 +191,7 @@ class CandyShop:
         :return:
         """
         for candy in candies:
-            if candy.name not in [c.name for c in self.candies]:
+            if candy not in self.candies:
                 self.candies.append(candy)
 
     def get_candies(self) -> list:
@@ -232,8 +233,8 @@ class CandyShop:
 
         :return: dict with name and filling of most pop candy
         """
-        candy = max(self.candies, key=lambda x: (x.filling, x.name))
-        return {candy.name: candy.filling}
+        candy = max(self.candies, key=lambda x: (x.name, x.filling))
+        return {'name': candy.name, 'filling': candy.filling}
 
     def get_least_popular_candy_name_and_filling(self) -> dict:
         """
@@ -248,7 +249,7 @@ class CandyShop:
         :return: dict with name and filling of least pop candy
         """
         candy = min(self.candies, key=lambda x: (x.filling, x.name))
-        return {candy.name: candy.filling}
+        return {'name': candy.name, 'filling': candy.filling}
 
     def collect_candies_by_filling(self) -> dict:
         """
@@ -438,7 +439,7 @@ if __name__ == '__main__':
     assert mirror_ends("abc") == "ac"
     assert mirror_ends("abca") == "bc"
     assert mirror_ends("abcba") == ""
-    print(mirror_ends("abc"), mirror_ends("abca"), mirror_ends("abcba"))
+    print(mirror_ends("abc"), mirror_ends("abca"), mirror_ends("abcba"),mirror_ends("abAAca"), mirror_ends("aba"))
     #
     # assert prime_factorization(1960) == {2: 3, 5: 1, 7: 2}
 
@@ -446,11 +447,11 @@ if __name__ == '__main__':
     candy1 = Candy('candy1', 'chocolate')
     candy2 = Candy('candy2', 'caramel')
     candy3 = Candy('candy3', 'nut')
-    candy4 = Candy('candy1', 'chocolate')
-    candy5 = Candy('candy2', 'vanilla')
-    candy6 = Candy('candy2', 'vanilla')
-    candy7 = Candy('candy3', 'nut')
-    candy8 = Candy('candy1', 'chocolate')
+    candy4 = Candy('candy4', 'chocolate')
+    candy5 = Candy('candy4', 'vanilla')
+    candy6 = Candy('candy6', 'vanilla')
+    candy7 = Candy('candy7', 'nut')
+    candy8 = Candy('candy8', 'chocolate')
 
     candies = [candy1, candy2, candy3, candy4, candy5, candy6, candy7, candy8]
 
