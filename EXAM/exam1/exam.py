@@ -10,7 +10,7 @@ def split_string_into_ints(numbers: str) -> list:
     split_string_into_ints("0") => [0]
     split_string_into_ints("-1,-2,3") => [-1, -2, 3]
     """
-    pass
+    return [int(number) for number in numbers.split(",")]
 
 
 def sum_of_multiples(limit: int, multiplier: int) -> int:
@@ -24,7 +24,16 @@ def sum_of_multiples(limit: int, multiplier: int) -> int:
     sum_of_multiples(10, 1) -> 45
     sum_of_multiples(5, 5) -> 0
     """
-    pass
+    if limit <= multiplier:
+        return 0
+    else:
+        nub_of_multiplies = limit // multiplier
+        if limit % multiplier == 0:
+            nub_of_multiplies -= 1
+        summ = 0
+        for i in range(nub_of_multiplies):
+            summ += multiplier * (i + 1)
+        return summ
 
 
 def mix_string(s1: str, s2: str) -> str:
