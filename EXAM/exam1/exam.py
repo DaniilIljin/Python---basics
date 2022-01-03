@@ -205,7 +205,7 @@ class CandyShop:
 
         :return: list
         """
-        return [candy for candy in self.candies if candy.filling == filling]
+        return [candy.name for candy in self.candies if candy.filling == filling]
 
     def sort_candies_by_filling(self) -> list:
         """
@@ -230,7 +230,8 @@ class CandyShop:
 
         :return: dict with name and filling of most pop candy
         """
-        return max(self.candies, key=lambda x: (x.filling, x.name))
+        candy = max(self.candies, key=lambda x: (x.filling, x.name))
+        return {candy.name: candy.filling}
 
     def get_least_popular_candy_name_and_filling(self) -> dict:
         """
@@ -244,7 +245,8 @@ class CandyShop:
 
         :return: dict with name and filling of least pop candy
         """
-        return  min(self.candies, key=lambda x: (x.filling, x.name))
+        candy = min(self.candies, key=lambda x: (x.filling, x.name))
+        return {candy.name: candy.filling}
 
     def collect_candies_by_filling(self) -> dict:
         """
@@ -424,31 +426,31 @@ if __name__ == '__main__':
     assert mirror_ends("abcba") == ""
     #
     # assert prime_factorization(1960) == {2: 3, 5: 1, 7: 2}
-    #
-    # candy_shop = CandyShop()
-    # candy1 = Candy('candy1', 'chocolate')
-    # candy2 = Candy('candy2', 'caramel')
-    # candy3 = Candy('candy3', 'nut')
-    # candy4 = Candy('candy1', 'chocolate')
-    # candy5 = Candy('candy2', 'vanilla')
-    # candy6 = Candy('candy2', 'vanilla')
-    # candy7 = Candy('candy3', 'nut')
-    # candy8 = Candy('candy1', 'chocolate')
-    #
-    # candies = [candy1, candy2, candy3, candy4, candy5, candy6, candy7, candy8]
-    #
-    # candy_shop.add_candies(candies)
-    #
-    # # NB! there are candy variable names in comments, not instance name parameter values!!!
-    #
-    # print(candy_shop.get_candies_by_filling('chocolate'))  # [candy1, candy4, candy8]
-    # print(candy_shop.get_least_popular_candy_name_and_filling())  # {name: candy2, filling: caramel}
-    # print(candy_shop.get_most_popular_candy_name_and_filling())  # {name: candy1, filling: chocolate}
-    # print(candy_shop.sort_candies_by_filling())  # [candy2, candy1, candy4, candy8, candy7, candy3, candy6, candy5]
-    # print(candy_shop.collect_candies_by_filling())  # {chocolate: [candy1, candy4, candy8],
-    # #                                                  caramel: [candy2],
-    # #                                                  nut: [candy3, candy7],
-    # #                                                  vanilla: [candy5, candy6]}
+
+    candy_shop = CandyShop()
+    candy1 = Candy('candy1', 'chocolate')
+    candy2 = Candy('candy2', 'caramel')
+    candy3 = Candy('candy3', 'nut')
+    candy4 = Candy('candy1', 'chocolate')
+    candy5 = Candy('candy2', 'vanilla')
+    candy6 = Candy('candy2', 'vanilla')
+    candy7 = Candy('candy3', 'nut')
+    candy8 = Candy('candy1', 'chocolate')
+
+    candies = [candy1, candy2, candy3, candy4, candy5, candy6, candy7, candy8]
+
+    candy_shop.add_candies(candies)
+
+    # NB! there are candy variable names in comments, not instance name parameter values!!!
+
+    print(candy_shop.get_candies_by_filling('chocolate'))  # [candy1, candy4, candy8]
+    print(candy_shop.get_least_popular_candy_name_and_filling())  # {name: candy2, filling: caramel}
+    print(candy_shop.get_most_popular_candy_name_and_filling())  # {name: candy1, filling: chocolate}
+    print(candy_shop.sort_candies_by_filling())  # [candy2, candy1, candy4, candy8, candy7, candy3, candy6, candy5]
+    print(candy_shop.collect_candies_by_filling())  # {chocolate: [candy1, candy4, candy8],
+    #                                                  caramel: [candy2],
+    #                                                  nut: [candy3, candy7],
+    #                                                  vanilla: [candy5, candy6]}
     #
     # # Teacher, grade, student
     # mari = Student("Mari Maa")
