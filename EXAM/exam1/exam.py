@@ -99,7 +99,7 @@ def bingo(matrix: list, numbers: list) -> tuple:
                 continue
             else:
                 win2 = False
-    for num in numbers[0] + numbers[1] + numbers[2] + numbers[3] + numbers[4]:
+    for num in matrix[0] + matrix[1] + matrix[2] + matrix[3] + matrix[4]:
         if num in numbers:
             continue
         else:
@@ -385,17 +385,17 @@ if __name__ == '__main__':
     assert sum_of_multiples(10, 1) == 45
     assert sum_of_multiples(5, 5) == 0
 
-    # assert mix_string("AAA", "bbb") == "AbAbAb"
-    # assert mix_string("AA", "") == "AA"
-    # assert mix_string("mxdsrn", "ie tig") == "mixed string"
-    #
-    # assert bingo([
-    #     [5, 7, 11, 15, 21],
-    #     [22, 25, 26, 27, 9],
-    #     [34, 2, 48, 54, 58],
-    #     [59, 61, 33, 81, 24],
-    #     [90, 37, 3, 6, 32],
-    # ], [5, 21, 90, 32]) == (True, False, False)
+    assert mix_string("AAA", "bbb") == "AbAbAb"
+    assert mix_string("AA", "") == "AA"
+    assert mix_string("mxdsrn", "ie tig") == "mixed string"
+
+    assert bingo([
+        [5, 7, 11, 15, 21],
+        [22, 25, 26, 27, 9],
+        [34, 2, 48, 54, 58],
+        [59, 61, 33, 81, 24],
+        [90, 37, 3, 6, 32],
+    ], [5, 21, 90, 32]) == (True, False, False)
     #
     # assert bingo([
     #     [5, 7, 11, 15, 21],
