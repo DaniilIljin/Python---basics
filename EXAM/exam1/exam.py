@@ -330,7 +330,7 @@ class Student:
         grades for the same assignment are kept in the Grade object previous grades dictionary).
         Note that this function is only used when a student does an assignment for the first time.
         """
-        self.grades[grade.assignment] = grade.value
+        self.grades[grade.assignment] = grade
 
     def redo_assignment(self, new_grade: int, assignment: str, date: str):
         """
@@ -356,14 +356,15 @@ class Student:
         Also make sure not to miss out when a grade is noted as "!". If there is no attempt to redo this, then "!"
         should be equivalent to grade "1".
         """
-        # summ = 0
-        # all_weights = set()
-        # for assignment in self.grades:
-        #     for
-        #     a = grade
-        #     summ += grade.weight
-        #     all_weights.add(grade.weight)
-        # return summ // sum(all_weights)
+        summ = 0
+        counter = 0
+        u = self.grades
+        for assignment in self.grades:
+            a = self.grades[assignment]
+            summ += self.grades[assignment].weight
+            counter += 1
+        return summ // counter
+
 
 class Class:
     """Class."""
@@ -459,7 +460,7 @@ if __name__ == '__main__':
     assert mirror_ends("abc") == "ac"
     assert mirror_ends("abca") == "bc"
     assert mirror_ends("abcba") == ""
-    print(mirror_ends("abc"), mirror_ends("abca"), mirror_ends("abcba"),mirror_ends("abAAca"), mirror_ends("aba"))
+    print(mirror_ends("abc"), mirror_ends("abca"), mirror_ends("abcba"), mirror_ends("abAAca"), mirror_ends("aba"))
     #
     # assert prime_factorization(1960) == {2: 3, 5: 1, 7: 2}
 
@@ -487,32 +488,32 @@ if __name__ == '__main__':
     #                                                  caramel: [candy2],
     #                                                  nut: [candy3, candy7],
     #                                                  vanilla: [candy5, candy6]}
-    # # Teacher, grade, student
-    # mari = Student("Mari Maa")
-    # jyri = Student("Jyri Jogi")
-    # teele = Student("Teele Tee")
-    # cl = Class("Anna", [mari, jyri, teele])
-    # mari.grade(Grade(5, 3, "KT", "01/09/2020"))
-    # gr = Grade("!", 3, "KT", "01/09/2020")
-    # jyri.grade(gr)
-    # teele.grade(Grade(4, 3, "KT", "01/09/2020"))
-    #
-    # print(f"Jyri keskmine hinne on {jyri.calculate_weighted_average()}.")  # 1
-    #
-    # jyri.redo_assignment(3, "KT", "14/09/2020")
-    # print(len(gr.previous_grades))  # 1
-    #
-    # print(f"Jyri keskmine hinne on nyyd {jyri.calculate_weighted_average()}.")  # 3
-    # print()
-    #
-    # mari.grade(Grade(5, 1, "TK", "30/11/2020"))
-    # jyri.grade(Grade(4, 1, "TK", "30/11/2020"))
-    # teele.grade(Grade(3, 1, "TK", "30/11/2020"))
-    #
-    # print(f"Teele keskmine hinne on {teele.calculate_weighted_average()}.")  # 4
-    # print(cl.get_grade_sheet())
-    # print()
-    #
-    # tuuli = Student("Tuuli Karu")
-    # cl.add_student(tuuli)
-    # print(len(cl.students))  # 4
+    # Teacher, grade, student
+    mari = Student("Mari Maa")
+    jyri = Student("Jyri Jogi")
+    teele = Student("Teele Tee")
+    cl = Class("Anna", [mari, jyri, teele])
+    mari.grade(Grade(5, 3, "KT", "01/09/2020"))
+    gr = Grade("!", 3, "KT", "01/09/2020")
+    jyri.grade(gr)
+    teele.grade(Grade(4, 3, "KT", "01/09/2020"))
+
+    print(f"Jyri keskmine hinne on {jyri.calculate_weighted_average()}.")  # 1
+
+    jyri.redo_assignment(3, "KT", "14/09/2020")
+    print(len(gr.previous_grades))  # 1
+
+    print(f"Jyri keskmine hinne on nyyd {jyri.calculate_weighted_average()}.")  # 3
+    print()
+
+    mari.grade(Grade(5, 1, "TK", "30/11/2020"))
+    jyri.grade(Grade(4, 1, "TK", "30/11/2020"))
+    teele.grade(Grade(3, 1, "TK", "30/11/2020"))
+
+    print(f"Teele keskmine hinne on {teele.calculate_weighted_average()}.")  # 4
+    print(cl.get_grade_sheet())
+    print()
+
+    tuuli = Student("Tuuli Karu")
+    cl.add_student(tuuli)
+    print(len(cl.students))  # 4
