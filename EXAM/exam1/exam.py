@@ -233,7 +233,17 @@ class CandyShop:
 
         :return: dict with name and filling of most pop candy
         """
-        candy = max(self.candies, key=lambda x: (x.name, x.filling))
+        popularity1 = {}
+        popularit2 = {}
+        names_set = set([c.name for c in self.candies])
+        fillings_set = set([f.filling for f in self.candies])
+        names = [c.name for c in self.candies]
+        fillings = [f.filling for f in self.candies]
+        for n in names_set:
+            popularity1[n] = names.count(n)
+        for f in fillings_set:
+            popularit2[f] = fillings.count(f)
+        candy = max(self.candies, key=lambda x: popularity1[x.name] + popularit2[x.filling])
         return {'name': candy.name, 'filling': candy.filling}
 
     def get_least_popular_candy_name_and_filling(self) -> dict:
@@ -248,7 +258,17 @@ class CandyShop:
 
         :return: dict with name and filling of least pop candy
         """
-        candy = min(self.candies, key=lambda x: (x.filling, x.name))
+        popularity1 = {}
+        popularit2 = {}
+        names_set = set([c.name for c in self.candies])
+        fillings_set = set([f.filling for f in self.candies])
+        names = [c.name for c in self.candies]
+        fillings = [f.filling for f in self.candies]
+        for n in names_set:
+            popularity1[n] = names.count(n)
+        for f in fillings_set:
+            popularit2[f] = fillings.count(f)
+        candy = min(self.candies, key=lambda x: popularity1[x.name] + popularit2[x.filling])
         return {'name': candy.name, 'filling': candy.filling}
 
     def collect_candies_by_filling(self) -> dict:
