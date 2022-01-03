@@ -370,7 +370,7 @@ class Student:
                 grade = 1
             summ += grade * weight
             total_weight += weight
-        return summ // total_weight
+        return round(summ / total_weight)
 
 
 class Class:
@@ -522,6 +522,7 @@ if __name__ == '__main__':
     print(f"Jyri keskmine hinne on {jyri.calculate_weighted_average()}.")  # 1
 
     jyri.redo_assignment(3, "KT", "14/09/2020")
+    print(jyri.grades['KT'].value)
     print(len(gr.previous_grades))  # 1
 
     print(f"Jyri keskmine hinne on nyyd {jyri.calculate_weighted_average()}.")  # 3
