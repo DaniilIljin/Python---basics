@@ -357,13 +357,15 @@ class Student:
         should be equivalent to grade "1".
         """
         summ = 0
-        counter = 0
-        u = self.grades
+        total_weight = 0
         for assignment in self.grades:
-            a = self.grades[assignment]
-            summ += self.grades[assignment].weight
-            counter += 1
-        return summ // counter
+            grade = self.grades[assignment].value
+            weight = self.grades[assignment].weight
+            if self.grades[assignment].value == '!':
+                grade = 1
+            summ += grade * weight
+            total_weight += weight
+        return summ // total_weight
 
 
 class Class:
