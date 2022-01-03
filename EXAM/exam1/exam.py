@@ -189,7 +189,9 @@ class CandyShop:
         :param candies: list of candies to add
         :return:
         """
-        self.candies.extend(candies)
+        for candy in candies:
+            if candy.name not in [c.name for c in self.candies]:
+                self.candies.append(candy)
 
     def get_candies(self) -> list:
         """
@@ -286,7 +288,9 @@ class Grade:
         This function should save the previous grade in a dictionary previous_grades, where key is the date and value
         is the value of the grade. Value and date should be updated.
         """
-        pass
+        self.previous_grades[self.date] = self.value
+        self.value = new_grade
+        self.date = date
 
 
 class Student:
@@ -305,7 +309,7 @@ class Student:
         grades for the same assignment are kept in the Grade object previous grades dictionary).
         Note that this function is only used when a student does an assignment for the first time.
         """
-        pass
+        self.grades[grade.assignment] = grade.value
 
     def redo_assignment(self, new_grade: int, assignment: str, date: str):
         """
@@ -314,7 +318,7 @@ class Student:
         This function is only used when an assignment has been attempted at least once before. Keep in mind that you
         need to also keep the history of grades, not create a new grade!
         """
-        pass
+        self.grades[assignment].change_grade(new_grade, date)
 
     def calculate_weighted_average(self):
         """
@@ -331,8 +335,14 @@ class Student:
         Also make sure not to miss out when a grade is noted as "!". If there is no attempt to redo this, then "!"
         should be equivalent to grade "1".
         """
-        pass
-
+        # summ = 0
+        # all_weights = set()
+        # for assignment in self.grades:
+        #     for
+        #     a = grade
+        #     summ += grade.weight
+        #     all_weights.add(grade.weight)
+        # return summ // sum(all_weights)
 
 class Class:
     """Class."""
@@ -344,15 +354,15 @@ class Class:
 
     def add_student(self, student: Student):
         """Add student to the class."""
-        pass
+        self.students.append(student)
 
     def add_students(self, students: list):
         """Add several students to the class."""
-        pass
+        self.students.extend(students)
 
     def remove_student(self, student: Student):
         """Remove student from the class."""
-        pass
+        self.students.remove(student)
 
     def get_grade_sheet(self):
         """
@@ -389,7 +399,11 @@ class Class:
         ---------------------------------------
 
         """
-        pass
+        max_length = max([len(st.name) for st in self.students])
+        if max_length >= 4:
+            final_str = '--' + '-' * max_length + '-' * 16 + '\n'
+            final_str += '| Name' + (max_length - 4) * ' ' + ' | Final grade |\n'
+            final_str += '--' + '-' * max_length + '-' * 16 + '\n'
 
 
 if __name__ == '__main__':
@@ -424,6 +438,7 @@ if __name__ == '__main__':
     assert mirror_ends("abc") == "ac"
     assert mirror_ends("abca") == "bc"
     assert mirror_ends("abcba") == ""
+    print(mirror_ends("abc"), mirror_ends("abca"), mirror_ends("abcba"))
     #
     # assert prime_factorization(1960) == {2: 3, 5: 1, 7: 2}
 
@@ -451,7 +466,6 @@ if __name__ == '__main__':
     #                                                  caramel: [candy2],
     #                                                  nut: [candy3, candy7],
     #                                                  vanilla: [candy5, candy6]}
-    #
     # # Teacher, grade, student
     # mari = Student("Mari Maa")
     # jyri = Student("Jyri Jogi")
