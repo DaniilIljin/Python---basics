@@ -12,20 +12,34 @@ def is_prime_number(number: int) -> bool:
     :param number: the number for check.
     :return: boolean True if number is a prime number or False if number is not a prime number.
     """
-    if number != 1 and number != 0:
-        for i in range(2, number):
-            if number % i == 0:
-                return False
+    # if number != 1 and number != 0:
+    #     for i in range(2, number):
+    #         if number % i == 0:
+    #             return False
+    #     return True
+    # else:
+    #     return False
+    if number == 1:
+        return False
+    elif number == 2:
+        return True
+    elif number == 3:
         return True
     else:
-        return False
+        x = int(number ** 0.5)
+        for i in range(x + 1):
+            i += 2
+            if number % i == 0:
+                return False
+            else:
+                continue
+        return True
 
 
-print(is_prime_number(169))
-# if __name__ == '__main__':
-#     print(is_prime_number(2))  # -> True
-#     print(is_prime_number(89))  # -> True1
-#     print(is_prime_number(23))  # -> True
-#     print(is_prime_number(4))  # -> False
-#     print(is_prime_number(7))  # -> True
-#     print(is_prime_number(88))  # -> False
+if __name__ == '__main__':
+    print(is_prime_number(2))  # -> True
+    print(is_prime_number(89))  # -> True1
+    print(is_prime_number(23))  # -> True
+    print(is_prime_number(4))  # -> False
+    print(is_prime_number(7))  # -> True
+    print(is_prime_number(88))  # -> False
