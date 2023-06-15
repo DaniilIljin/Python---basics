@@ -597,7 +597,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     Birth 01.01.1940, death 01.01.2020 - age: 80
     Birth 02.01.1940, death 01.01.2020 - age: 79
 
-    If there is no birth date, then the age is -1.
+    If there is no birthdate, then the age is -1.
 
     When calculating age, dates can be compared.
 
@@ -644,7 +644,3 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         elif dict_['death'] != '-':
             dict_['death'] = dict_['death'].strftime('%d.%m.%Y')
     write_list_of_dicts_to_csv_file(report_filename, all_sorted_data)
-
-
-if __name__ == '__main__':
-    print(read_csv_file('test1.csv'))

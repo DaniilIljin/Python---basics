@@ -230,3 +230,5 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     for element1 in must_be_checked:
         data.extend(element1)
     return count_strings(data, pos, result)
+if __name__ == '__main__':
+    print(count_strings([['a'], 'b', ['a', ['b']]]))  # {'a': 2, 'b': 2}

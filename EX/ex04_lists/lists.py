@@ -14,7 +14,7 @@ def generate_list(amount: int, data_type: str) -> list:
         elif data_type == 'list':
             new_list.append([element])
         elif data_type == 'tuple':
-            new_list.append((element, ))
+            new_list.append(element, )
         elif data_type == 'dict':
             new_list.append(dict(element=element))
         elif data_type == 'float':
@@ -101,3 +101,4 @@ if __name__ == '__main__':
     print(
         generate_combined_list_unique_advanced([(2, 'float'), (3, 'dict')]))  # [{3: "abd"}, {"a": "a"}, {}, 3.14, 3.15]
     print()
+

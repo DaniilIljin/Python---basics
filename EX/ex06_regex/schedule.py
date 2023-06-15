@@ -1,7 +1,6 @@
 """Create schedule from the given file."""
 import re
 
-
 def create_schedule_file(input_filename: str, output_filename: str) -> None:
     """Create schedule file from the given input file."""
 
